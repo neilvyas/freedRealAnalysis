@@ -1,0 +1,112 @@
+\documentclass{notes}
+
+\title{Real Analysis 1}
+\subtitle{Dr. Freed}
+\author{Neil Vyas}
+\class{M 365C}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+%TODO: definitions are
+A Theorem is a proven statement in mathematics.
+A Lemma is a smaller result on the way to proving a Theorem.
+A Proposition is a smaller result that isn't deserving of the title ``Theorem.''
+A Corollary is a result that follows easily from another Theorem.
+
+\section{Number Systems}
+\subsection{The Integers} % Lecture 1 - Jan 19th, 2016
+Natural Numbers $\N$, $\Z^{>0} = \{1, 2, 3, \ldots\}$ equipped with the operation of addition.
+Addition is a binary operation that is \emph{commutative} and \emph{associative.} Note that the 
+identity element is zero, which is not in $\N$. \\
+
+Non-negative integers $\Z^{\geq 0} = \{0 , 1, 2, \ldots\}$ is equipped with the same operation as 
+$\N$, but also has the identity element 0. \\
+
+The integers $\Z = \{\ldots, -1, 0, 1, \ldots\}$ are a countably infinite set that include inverse
+elements for each integer. \\
+
+\begin{aside}{Cardinalities}
+Is $\Z$ bigger than $\Z^{\geq 0}$? How can we answer this question? We will approach it by examining 
+some functions between the sets. We say that these sets are equal in ``size'' if we have a \emph{bijection}
+between them; remember that a function is a bijection if it is both \emph{injective} and \emph{surjective}\\
+
+The canonical inclusion is injective but not surjective, but we can still easily construct a bijection.
+Consider that we really can find two equivalence classes of ``equal'' size in each set: in $\Z$, we have
+the equivalence relation of sign, and in $\N$, we have the equivalence relation of even-ness. So send
+the even numbers to half them, and the odd numbers to the negative numbers. \\
+\end{aside}
+
+Note that the integers equipped with addition and multiplication are just missing multiplicative inverses;
+addition and multiplication are both associative, commutative, and have an identity element. We can
+introduce a bigger number system to contain these multiplicative inverses, which we will call the rationals:
+$$\Q = \{\frac{a}{b} \mid a, b \in \Z, b \neq 0\}.$$ 
+
+How can we represent or describe $\Q$, starting from $\Z$? It looks like we can just do $\Z\times\Z^{\times}$, 
+but this won't be correct since many points will be ``the same'' rational number. \\
+
+%TODO
+%put the defns of commutativity, associativity, identity, inverses here
+%put the defns of rings and fields here
+
+So $\Q$ is a field, and $\Z$ is a ring. \\
+
+But $\Q$ still isn't big enough. What does this mean? For example, consider algebraic equations: relations
+between elements of the field given by the operations of the field. We say $\Q$ isn't ``big enough'' 
+because there are certain algebraic equations that do not admit rational solutions. \\
+
+%TODO: format this
+Let's consider the equation $x^2 = a$, for some $a\in\Q$. If $a = 4$, then we're golden, but what if 
+$a = 2$? \\
+
+\begin{theorem}
+  There does not exist $x\in\Q \st x^2 = 2$. \\
+\end{theorem}
+
+We're going to prove the following lemmas on the way to proving this result:
+
+\begin{lemma}
+  $x\in\Q \Rightarrow \exists a,b\in\Z \text{ not even } \st x = \frac{a}{b}.$
+\end{lemma}
+
+\begin{proof}
+  Since $x\in\Q$, we can choose $a,b\in\Z$ with $b > 0$ and minimal. Then if $a,b$ are both even, $b$ is
+  not minimal, since we can halve both $a$ and $b$, but this is a contradiction. \\
+\end{proof}
+
+\begin{lemma}
+  $a\in\Z, a^2 \text{ even} \Rightarrow a \text{ even}.$
+\end{lemma}
+
+\begin{proof}
+The contrapositive is $a\text{ odd}\Rightarrow a^2\text{ odd},$ so let's try and prove that. Suppose
+$a\in\Z$ and $a$ is odd. Then $\exists k\in\Z \st a = 2k + 1$. So 
+\begin{align*}
+  a^2 &= (2k + 1)^2 \\
+  &= 4k^2 + 4k + 1 \\
+  &= 2(2k^2 + 2k) + 1,
+\end{align*}
+and thus $a^2$ is odd. 
+\end{proof}
+
+So let's prove the theorem now. 
+
+\begin{proof}
+  Suppose not. That is, suppose TODO. Write $x = \frac{a}{b}, a,b\in\Z,
+  b >0$, with not both $a,b$ even. Since $x^2 = 2$, we have $a^2 = 2b^2$, so by the lemma, since $a^2$ 
+  is even, $a$ is even. But then $b^2$ must be even, since we can write $a = 2a^\prime$, and the result
+  follows from there. So then both $a$ and $b$ are even, which is a contradiction. \\
+\end{proof}
+
+\section{Sequences}
+We say a sequence is a function from $\N\to\Q$. Consider $$a_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots$$ 
+Note that this is a function of the number of terms (in $\N$), and each term is in $\Q$. But this sequence
+is ``converging'' to $e$, which is not in $\Q$. Additionally, consider the following sequence:
+$$b_n = (1 + \frac{1}{n})^n.$$
+Note that both these sequences converge to $e$, but the second converges much faster.\\
+
+We will define the real numbers $\R$ in a similar manner, with these limit processes.
+
+\end{document}
