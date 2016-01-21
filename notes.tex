@@ -11,10 +11,12 @@
 \tableofcontents
 
 %TODO: definitions are
-A Theorem is a proven statement in mathematics.
-A Lemma is a smaller result on the way to proving a Theorem.
-A Proposition is a smaller result that isn't deserving of the title ``Theorem.''
+\begin{aside}{Theorems, Lemmas, etc.}
+A Theorem is a proven statement in mathematics. \\
+A Lemma is a smaller result on the way to proving a Theorem. \\
+A Proposition is a smaller result that isn't deserving of the title ``Theorem.'' \\
 A Corollary is a result that follows easily from another Theorem.
+\end{aside}
 
 \section{Number Systems}
 \subsection{The Integers} % Lecture 1 - Jan 19th, 2016
@@ -108,5 +110,51 @@ $$b_n = (1 + \frac{1}{n})^n.$$
 Note that both these sequences converge to $e$, but the second converges much faster.\\
 
 We will define the real numbers $\R$ in a similar manner, with these limit processes.
+
+%lecture 2
+\section{Relations}
+\subsection{Orderings}
+%defn
+Let $S$ be a set. Then a \emph{relation} $R$ is a subset of $S\times S$. An \emph{order} is a relation
+$R$ with the following properties: (for $x,y\in\R$)
+\begin{enumerate}
+\item $x,y\in S,$ exactly one of $x = y, x < y, x> y$ holds. Note that equality is in $S\times S$, not
+  equality in the sense of our relation.
+\item $x,y,z\in S, x<y, y<z \Rightarrow x<z$ \emph{(transitivity)}
+\end{enumerate}
+
+A set $S$ with an order is called an \emph{ordered set}. For example, $\Z\times\Z$ equipped with the
+lexicographical ordering is an ordered set. However, we can see that $$(a,b) < (a', b') \Leftrightarrow
+a + b < a' + b'$$ is not an ordering on $\Z\times\Z$ by considering the points $(3,2)$ and $(2,3)$. 
+
+\subsection{Ordered Fields}
+%defn ordered field
+Let $F$ be a field equipped with an order $R$. Then $F$ is an \emph{ordered field} iff for $x,y,z\in F$, 
+we have 
+\begin{enumerate}
+    \item $y < z \Rightarrow x+ y < x + z$
+    \item $x > 0, y>0 \Rightarrow xy > 0$.
+\end{enumerate}
+Examples of ordered fields include $\Q$ with the usual ordering, Note that $\C$ is not an ordered field,
+since $i^2 = -1$, which violates the second condition.
+
+\begin{theorem}
+  Let $F$ be an ordered field. Then 
+  \begin{enumerate}
+    \item $x > 0 \Rightarrow -x < 0$
+    \item $x > 0, y<z \Rightarrow xy < xz$
+    \item $x,y < 0 \Rightarrow xy > 0$
+    \item $x < 0, y < z \Rightarrow xy > xz$
+    \item $x\neq 0 \Rightarrow x^2 > 0$
+    \item $1 > 0$
+    \item $0 < x < y \Rightarrow 0 < \frac{1}{y} < \frac{1}{x}$
+    \item $x,y < 0 \Rightarrow xy > 0$
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Get this from the book!
+\end{proof}
+
 
 \end{document}
