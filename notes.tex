@@ -138,7 +138,7 @@ we have
 Examples of ordered fields include $\Q$ with the usual ordering, Note that $\C$ is not an ordered field,
 since $i^2 = -1$, which violates the second condition.
 
-\begin{theorem}
+\begin{proposition}
   Let $F$ be an ordered field. Then 
   \begin{enumerate}
     \item $x > 0 \Rightarrow -x < 0$
@@ -150,11 +150,57 @@ since $i^2 = -1$, which violates the second condition.
     \item $0 < x < y \Rightarrow 0 < \frac{1}{y} < \frac{1}{x}$
     \item $x,y < 0 \Rightarrow xy > 0$
   \end{enumerate}
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
   Get this from the book!
 \end{proof}
 
+\subsection{Complete Fields}
+Note that we showed that $\Q$ is ``incomplete,'' since we had algebraic equations that had no solutions
+in $\Q$ as well as sequences that did not converge in $\Q$. Now, we'll try to show this same statement 
+using just the concept of order. \\
+
+%defn
+Let $S$ be an ordered set. 
+\begin{enumerate}
+  \item If $E\subset S, \beta\in S,$ and $\forall x\in E, x\leq\beta,$ then $\beta$ is an \emph{upper bound}
+    of $E$. If such a $\beta$ exists, we say that $E$ is \emph{bounded above}.
+  \item If $\alpha\in S$ is an upper bound of $E\subset S$ and $\forall \gamma < \alpha, \gamma$ is not
+    an upper bound of $E$, we say that $\alpha$ is the \emph{least upper bound} of $E$.
+  \item If $\forall E\subset S$ bounded above there exists a least upper bound, we say that $S$ has the
+    \emph{least upper bound property}.
+\end{enumerate}
+The least upper bound is called the supremum, denoted $\sup$, while the greatest lower bound is called the
+infimum, denoted $\inf$. \\
+
+Consider $$E = \{x\in\Q \mid x^2 < 2 \} \subset S = \Q.$$ Note that this set is obviously bounded, above
+and below. But $\sup E$ and $\inf E$ are not attained, since $\sqrt{2}\notin\Q$. Let's make this more
+rigorous. \\
+
+\begin{proposition}
+  Write $\Q = E\cup E'$, where $E$ is as above and $E' = \{x\in\Q \mid x^2 > 2\}$. Then $E$ is bounded
+  above and below but neither $\sup E$ nor $\inf E$ are attained, and $E'$ is unbounded.
+\end{proposition}
+
+\begin{proof}
+  Suppose $\beta$ is an upper bound for $E$, and let $$\gamma = \frac{2\beta + 2}{\beta + 2}.$$ Then
+  $$\gamma^2 - 2 = 2\frac{\beta^2 - 2}{(\beta + 2)^2}.$$ Since $\beta^2 > 2$ since it is an upper bound,
+  we have that the whole expression is positive, and so we have that $\gamma^2 > 2 \Rightarrow \gamma$ is 
+  an upper bound. Now 
+  \begin{align*}
+    \beta - \gamma &= \beta - 2\frac{\beta + 1}{\beta + 2} \\
+                   &= \frac{\beta^2 + 2\beta - 2\beta - 2}{\beta + 2} \\
+                   &= \frac{\beta^2 - 2}{\beta^2 + 2},
+  \end{align*}
+  so $\gamma < \beta$, which means that $\beta$ is not a least upper bound. Since $\beta$ is generic,
+  there can be no least upper bound.
+\end{proof}
+
+\begin{theorem}
+  There exists an ordered field $\R$ with the least upper bound property. Furthermore, $\Q\subset\R$
+  as a subfield, i.e. there is an injective function $I:\Q\to\R$ which is compatible with the axoims
+  of an ordered field, and $\R$ is unique.
+\end{theorem}
 
 \end{document}
