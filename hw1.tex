@@ -56,17 +56,24 @@ common factor - 3. This is a contradiction, since we supposed that $m,n$ had no 
       \emph{1} & 0 & 1 \\
     \end{tabular}
   \end{center}
+  Let's show that this is a field. We can just make multiplication and addition associative and commutative, since we
+  control the definition, and we can do the same for the distributive property. It is evident from the
+  tables that each element has a unique additive and multiplicative identity, and that addition and 
+  multiplication are closed operations. So, we have satisfied all the axoims of a field with this 
+  construction.
 
   \item We need to complete the field from (a), which we can do by considering the roots of the polynomial
     $x^2 + x + 1$; let's call one root of this polynomial $a$. Then note that $1 + a$ is also a solution,
     since we still have $1 + 1 = 0$, and 
     \begin{align*}
       (1 + a)^2 + (1 + a) + 1 &= 1^2 + a^2 + \bar{2}a + 1 + a + 1 \\
-                              &= a^2 + a + 1.
+                              &= a^2 + a + 1,
     \end{align*}
+    where an overbar denotes the equivalence class of an integer in $\Z/2\Z$. \\
+
     So then we can work out the tables, using the distributive property of a field, and the fact that 
     the non-zero elements of the field form a group; the only group with three elements is the cyclic 
-    group $\Z/3\Z$. So we have
+    group $\Z/3\Z$. So we have 
    \begin{center}
      \begin{tabular}{c|c|c|c|c}
        $+$ & \emph{0} & \emph{1} & \emph{$a$} & \emph{$1+a$} \\
@@ -86,6 +93,10 @@ common factor - 3. This is a contradiction, since we supposed that $m,n$ had no 
       \emph{$1+a$} & 0 & $1+a$ & 1 & $a$ 
     \end{tabular}
   \end{center}
+  Again, let's show that this is a field. As above, we simply make multiplication and addition associative
+  and commutative, and we make multiplication distribute over addition in the standard way. From the tables,
+  we see that every element is uniquely invertible in both operations, and that $F$ is closed with respect
+  to both operations. So, again, we have satisfied the axoims of a field with this construction.
 
 \item 
     For (a), we can always solve this equation, since $$0^3 = 0, 1^3 = 1.$$ 
