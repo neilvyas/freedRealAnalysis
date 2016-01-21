@@ -8,7 +8,69 @@
   Prove that there is no rational number $x$ such that $x^2 = 3.$
 }
 
-\question[2]{}
+\question[2]{
+  \begin{qparts}
+  \item Construct a field $F$ with two elements. 
+  \item Construct a field $F$ with four elements.
+  \item For these fields, given $a\in F$, can we always solve $x^3 = a$?
+  \end{qparts}
+}
+
+\begin{qparts}
+  \item This field is just the integers mod 2, or $\Z/2\Z.$ So our addition and multiplication tables
+    are 
+   \begin{center}
+    \begin{tabular}{c|c|c}
+      $+$ & \emph{0} & \emph{1} \\
+      \hline 
+      \emph{0} & 0 & 1 \\
+      \emph{1} & 1 & 0 \\
+    \end{tabular}
+
+    \begin{tabular}{c|c|c}
+      $\times$ & \emph{0} & \emph{1} \\
+      \hline 
+      \emph{0} & 0 & 0 \\
+      \emph{1} & 0 & 1 \\
+    \end{tabular}
+  \end{center}
+
+  \item We need to complete the field from (a), which we can do by considering the roots of the polynomial
+    $x^2 + x + 1$; let's call one root of this polynomial $a$. Then note that $1 + a$ is also a solution,
+    since we still have $1 + 1 = 0$, and 
+    \begin{align*}
+      (1 + a)^2 + (1 + a) + 1 &= 1^2 + a^2 + \bar{2}a + 1 + a + 1 \\
+                              &= a^2 + a + 1.
+    \end{align*}
+    So then we can work out the tables, using the distributive property of a field, and the fact that 
+    the non-zero elements of the field form a group; the only group with three elements is the cyclic 
+    group $\Z/3\Z$. So we have
+   \begin{center}
+     \begin{tabular}{c|c|c|c|c}
+       $+$ & \emph{0} & \emph{1} & \emph{$a$} & \emph{$1+a$} \\
+      \hline 
+      \emph{0} & 0 & 1 & $a$ & $1+a$ \\
+      \emph{1} & 1 & 0 & $1 + a$ & $a$ \\
+      \emph{$a$} & $a$ & $1+a$ & 0 & 1 \\
+      \emph{$1+a$} & $1+a$ & $a$ & 1 & 0 
+    \end{tabular}
+
+    \begin{tabular}{c|c|c|c|c}
+      $\times$ & \emph{0} & \emph{1} & \emph{$a$} & \emph{$1+a$} \\
+      \hline 
+      \emph{0} & 0 & 0 & 0 & 0 \\
+      \emph{1} & 0 & 1 & $a$ & $1+a$ \\
+      \emph{$a$} & 0 & $a$ & $1+a$ & 1 \\
+      \emph{$1+a$} & 0 & $1+a$ & 1 & $a$ 
+    \end{tabular}
+  \end{center}
+
+\item 
+    For (a), we can always solve this equation, since $$0^3 = 0, 1^3 = 1.$$ 
+    For (b), consider $x^2 = a$, where $a$ is the $a$ we defined and not the $a$ from the question. Note that
+    we can't actually solve this, which we can check by plugging in every value for $x$: $$0^3 = 0,
+    1^3 = 1, a^3 = 1, (1+a)^3 = 1.$$
+\end{qparts}
 
 \question[Rudin, 1.3]{
 }
