@@ -1,0 +1,143 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\begin{document}
+\header{Real Analysis I}{Homework 2}
+
+\section*{Rudin}
+%1,4,5,7,16,17
+\begin{question}[1]
+  If $r$ is rational, $r\neq 0$, and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
+\end{question}
+
+\begin{question}[4]
+  Let $E$ be a non-empty subset of an ordered set; suppose that $\alpha$ is a lower bound of $E$ and
+$\beta$ an upper bound. Prove that $\alpha\leq\beta$.
+\end{question}
+\begin{proof}
+  This proof relies on the transitivity of $\leq$.
+\end{proof}
+
+\begin{question}[5]
+  Let $A$ be a nonempty set of real numbers which is bounded below. Let $-A$ be the set of all numbers
+  $-x$, where $x\in A$. Prove that $$\inf A = -\sup(-A).$$
+\end{question}
+
+\begin{question}[7]
+  Fix $b > 1$, $y > 0$, and prove that there is a unique real $x$ such that $b^x = y$, by completing
+  the following outline.
+  \begin{qparts}
+    \item For any positive integer $n$, $b^n - 1 \geq n(b-1)$.
+    \item Hence $b - 1 \geq n(b^{1/n} - 1$. 
+    \item If $t > 1$ and $n > (b-1)/(t-1)$, then $b^{1/n} < t$.
+    \item If $w$ is such that $b^w < y$, then $b^{w + (1/n)} > y$ for sufficiently large $n$; to see this,
+      apply part (c) with $t = yb^{-w}$. 
+    \item If $b^w > y$, then $b^{w - (1/n)} > y$ for sufficiently large $n$.
+    \item Let $A$ be the set of all $w$ such that $b^w < y$, and show that $x = \sup A$ satisfies $b^x 
+      = y$. 
+    \item Prove that this $x$ is unique.
+  \end{qparts}
+\end{question}
+
+\begin{question}[16]
+  Suppose $k\geq 3, x,y\in\R^k, |x - y| = d > 0$, and $r > 0$. Prove that 
+  \begin{qparts}
+    \item If $2r > d$, there are infinitely many $z\in\R^k$ such that $$|z-x| = |z - y| = r.$$
+    \item If $2r = d$, there is exactly one such $z$.
+    \item If $2r < d$, there is no such $z$.
+  \end{qparts}
+  How must these statements be modified if $k$ is 2 or 1?
+\end{question}
+
+\begin{question}[17]
+  Prove that $$|x + y|^2 + |x - y|^2 = 2|x|^2 + 2|y|^2,$$ if $x,y\in\R^k$. Interpret this geometrically,
+  as a statement about parallelograms.
+\end{question}
+\begin{proof}
+  Let $x,y\in\R^k$. Then we have
+  \begin{align*}
+    |x+y|^2 + |x-y|^2 &= (x+y)^2 + (x-y)^2 \\
+                      &= (x^2 + 2xy + y^2) + (x^2 - 2xy + y^2) \\
+                      &= 2x^2 + 2y^2 \\
+                      &= 2|x|^2 + 2|y|^2.
+  \end{align*}
+\end{proof}
+
+
+\section*{Other Questions}
+\begin{question}[1]
+  Show that the rational numbers $\Q$ form an ordered field that satisfies the Archimedean property.
+What property of $\R$ is not satisfied by $\Q$?
+\end{question}
+
+\begin{proof}
+  TODO PROVE THIS
+\end{proof}
+
+\begin{theorem}
+  While $\R$ satisfies the \emph{least-upper bound} property, $\Q$ does not.
+\end{theorem}
+\begin{proof}
+  We omit here the proof that $\R$ satisfies the least upper bound property. To prove the latter claim,
+it suffices to find a subset of $\Q$ that does not have a least upper bound in $\Q$. Consider the set
+$$E = \{x\in\Q \mid x^2 < 2 \}.$$ We have already shown this result in class, so I'll reproduce it 
+here. \\
+
+Suppose $\beta$ is an upper bound for $E$, and let $$\gamma = \frac{2\beta + 2}{\beta + 2}.$$ Then
+$$\gamma^2 - 2 = 2\frac{\beta^2 - 2}{(\beta + 2)^2}.$$ Since $\beta^2 > 2$ since it is an upper bound,
+we have that the whole expression is positive, and so we have that $\gamma^2 > 2 \Rightarrow \gamma$ is 
+an upper bound. Now 
+\begin{align*}
+  \beta - \gamma &= \beta - 2\frac{\beta + 1}{\beta + 2} \\
+                 &= \frac{\beta^2 + 2\beta - 2\beta - 2}{\beta + 2} \\
+                 &= \frac{\beta^2 - 2}{\beta^2 + 2},
+\end{align*}
+so $\gamma < \beta$, which means that $\beta$ is not a least upper bound. Since $\beta$ is generic,
+there can be no least upper bound.
+\end{proof}
+
+\begin{question}[2]
+  A \emph{real polynomial} $p$ has the form $p(x) = p_nx^n + p_{n-1}x^{n-1} + \ldots + p_0$ for $p_0,
+\ldots, p_n\in\R$ and some $n\in\Z^{\geq0}$. Unless $p$ is the zero polynomial we assume $p_n\neq 0$ 
+and we say that $p$ has degree $n$. A real \emph{rational function} $p/q$ is the ratio of two polynomials
+where $q$ is not identically zero. Let $F$ be the set of real rational functions. \\
+
+\begin{qparts}
+  \item Give $F$ the structure of a field; verify the field axoims.
+  \item Define $q/q >0$ iff $$\frac{q}{q}(x) = \frac{q(x)}{q(x)} = \frac{q_nx^n + \ldots q_0}{q_mx^m
+ + \ldots q_0}$$ satisfies $p_n/q_m > 0.$ Why is this well defined? Now, for $f,g\in F$ we say $f > g
+\iff f- g > 0$. Prove that with this definition $F$ is an ordered field (Hint: You must prove that $F$
+is an ordered set).
+  \item Does $F$ satisfy the Archimedean property? Prove or disprove.
+\end{qparts}
+\end{question}
+
+
+
+\begin{question}[3]
+  Suppose $X,Y$ are sets. Define a function $X \to Y$ using set theory. Also, define function composition.
+\end{question}
+
+
+
+\begin{question}[4]
+  Consider the function 
+  \begin{align*}
+    f: (-1, 1) &\to \R \\
+             x &\mapsto x^2.
+  \end{align*}
+  \begin{qparts}
+    \item What are the domain, codomain, and range of $f$? 
+    \item Is $f$ injective? surjective? bijective?
+    \item What is $f([-1/3, 1/2])?$
+    \item What is $f^{-1}(\{3,4,5\})$?
+    \item How does the cardinality of $f^{-1}(y)$ depend on $y\in\R$?
+    \item Is $f(1)$ defined?
+  \end{qparts}
+\end{question}
+\begin{qparts}
+  \item $f(1)$ is not defined, since the domain of $f$ is the open interval $(-1, 1)$, which does not
+        contain 1.
+\end{qparts}
+
+\end{document}
