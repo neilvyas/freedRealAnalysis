@@ -9,26 +9,56 @@
 \begin{question}[1]
   If $r$ is rational, $r\neq 0$, and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
 \end{question}
+\begin{proof}
+  Suppose not. That is, suppose that $r\neq 0\in\Q, x\notin\Q$, and $r+x$ and $rx\in\Q$; our aim is to
+  show that this implies that $x\in\Q$, a contradiction. Since $r\in\Q$, we have that $\exists m,n
+  \in\Z, n\neq 0 \st \frac{m}{n} = r$, and similarly, we have $\frac{a}{b} = r + x$ and $\frac{p}{q}
+  = rx$. So then we have 
+  \begin{align*}
+    (r + x) - r &= \frac{a}{b} - \frac{m}{n} \\
+                &= \frac{an - mb}{nb} \\
+                &= x, 
+  \end{align*}
+  and so we've arrived at a contradiction for $r+x$, which means that $r+x\notin\Q$, i.e $r+x$ is irrational,
+  since $an-mb \in \Z, np\neq 0\in\Z$ because $\Z$ is closed under addition and multiplication and 
+  $x,y\in\Z \neq 0 \Rightarrow xy\neq 0$. Similarly, we have
+  \begin{align*}
+    rx / r &= \frac{p}{q} / \frac{m}{n} \\
+           &= \frac{pn}{qm} \\
+           &= x,
+  \end{align*}
+  and so we've arrived at a contradiction for $rx$, which means that $rx$ is irrational. This is because
+  $pn\in\Z, qm\in\Z\neq 0$ since $r\neq 0 \Rightarrow m\neq 0$ and the definition of $q$, where $q\neq 0$.\\
+
+  So we have the result.
+\end{proof}
 
 \begin{question}[4]
   Let $E$ be a non-empty subset of an ordered set; suppose that $\alpha$ is a lower bound of $E$ and
 $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
 \end{question}
 \begin{proof}
-  This proof relies on the transitivity of $\leq$.
+  %This proof relies on the transitivity of $\leq$.
+  Let $\alpha, \beta, E$ be as in the question. Since $E$ is non-empty, let $x\in E$. Then by definition,
+  $x\leq\beta$ and $\alpha\leq x$. Note that the definition of transitivity we rely on holds only for
+  elements all in $E$, but this question isn't feasible without this natural step, since we have only 
+  the axioms of an ordered set to use. So then by the transitivity of $\leq$, we have that 
+  $$\alpha\leq x, x\leq\beta \Rightarrow \alpha\leq\beta.$$
 \end{proof}
 
 \begin{question}[5]
   Let $A$ be a nonempty set of real numbers which is bounded below. Let $-A$ be the set of all numbers
   $-x$, where $x\in A$. Prove that $$\inf A = -\sup(-A).$$
 \end{question}
+\begin{proof}
+\end{proof}
 
 \begin{question}[7]
   Fix $b > 1$, $y > 0$, and prove that there is a unique real $x$ such that $b^x = y$, by completing
   the following outline.
   \begin{qparts}
     \item For any positive integer $n$, $b^n - 1 \geq n(b-1)$.
-    \item Hence $b - 1 \geq n(b^{1/n} - 1$. 
+    \item Hence $b - 1 \geq n(b^{1/n} - 1)$. 
     \item If $t > 1$ and $n > (b-1)/(t-1)$, then $b^{1/n} < t$.
     \item If $w$ is such that $b^w < y$, then $b^{w + (1/n)} > y$ for sufficiently large $n$; to see this,
       apply part (c) with $t = yb^{-w}$. 
@@ -38,6 +68,13 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
     \item Prove that this $x$ is unique.
   \end{qparts}
 \end{question}
+\begin{proof}
+  \begin{qparts}
+  \item We conclude this by simply exponentiating the inequality in (a) by $\frac{1}{n}$, noting that
+    since $\frac{1}{n} > 0$, the direction of the inequality is preserved.
+  \item 
+  \end{qparts}
+\end{proof}
 
 \begin{question}[16]
   Suppose $k\geq 3, x,y\in\R^k, |x - y| = d > 0$, and $r > 0$. Prove that 
@@ -112,13 +149,12 @@ is an ordered set).
 \end{qparts}
 \end{question}
 
-
-
 \begin{question}[3]
   Suppose $X,Y$ are sets. Define a function $X \to Y$ using set theory. Also, define function composition.
 \end{question}
-
-
+A \emph{function} is a set $f = \{(x,y)\} \subset X\times Y$ where each $x\in X$ is associated to at most one 
+$y\in Y$. We say that a function is injective iff for $(x, y), (x', y')\in f$, we have that $y' = y \Rightarrow
+x' = x$, and surjective iff $\forall y\in Y, \exists x\in X \st (x,y)\in f$.
 
 \begin{question}[4]
   Consider the function 
