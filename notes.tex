@@ -203,4 +203,67 @@ rigorous. \\
   of an ordered field, and $\R$ is unique.
 \end{theorem}
 
+%lecture 3
+\begin{theorem}[Archimedean Property for $\R$]
+  $x,y\in\R, x > 0 \Rightarrow \exists n\in\Z^{>0} \st nx > y$.
+\end{theorem}
+\begin{proof}
+  Let $E = \{nx\mid n\in\Z^{>0}\}$. Suppose not. That is, suppose that $\forall n\in\Z^{>0}, y > nx$. 
+  Thus, $y$ is an upper bound of $E$. By the least upper bound property of $\R$, let $\alpha = \sup E$.
+  Then $\alpha - x < \alpha$ is not an upper bound for $E$. Thus, $\exists n\in\Z^{>0}\st nx > \alpha
+  - x$. So we have that $$(n+1)x = nx + x > \alpha,$$ using the distributive property and the fact that
+  $x > 0$, so we can add it to both sides and preserve the direction of the inequality. But since 
+  $(n+1)\in\Z^{>0}$, we have that $\alpha$ is not an upper bound. 
+\end{proof}
+So we say that $\R$ is an \emph{Archimedean Field}.
+
+\begin{theorem}[$\Q$ Dense in $\R$]
+  $x,y\in\R, x < y \Rightarrow \exists r\in\Q \st x < r < y$.
+\end{theorem}
+This should be obvious, since we can just generate a rational from an irrational by truncation. So,
+we just need to truncate far enough into the expansion to ensure that the truncation lies in the 
+interval.Anyway, let's make this rigorous.
+\begin{proof}
+  Let $x,y$ be as above. Then we seek $m,n\in\Z, n\neq 0 \st x < \frac{m}{n} < y$. In order to get 
+  more precision in the number of decimal places, we have to find $n$ large enough. So, we need that
+  $$\frac{1}{n} < y-x,$$ i.e. choose $n$ sufficiently large that this condition holds. Note that we 
+  can find such an $n$ because of the Archimedean property; now it only remains to find an appropriate
+  $m$. We need $m$ to satisfy $nx < m$ and $m < ny$, both of which are separately satisfiable by the
+  Archimedean property. \\
+
+  Let's try and satisfy both separately and show that we can ``merge'' them into a single $m$. Let's 
+  start with $m_2 < ny$. Since the Archimedean property lets us produce ``bigger'' numbers, let's 
+  negate this inequality, yielding $-m_2 > -ny$. Now, by the Archimedean property, we have $m_1, 
+  -m_2 > 0$ that satisfy both conditions and $m2 < 0 < m1$. Let $$M = \{m\in\Z\mid m_2 \leq m \geq m_1\}$$.
+  Note that this set is non-empty and finite. However, we can't characterize the $m$ to pick from this
+  set in terms of $m_1, m_2$ because we have no real constraints on $m_1$ and $m_2$, so they can be
+  arbitrarily large or small. \\
+
+  So we'll just specify an algorithm to find $m\in M$. Choose $m\in E \st m > nx \wedge (m - 1 \leq 
+  nx \vee m = m_2)$.  Note that we can find this $m$ by starting at $\frac{m_2}{n}$ and incrementing
+  by $\frac{1}{n}$. \\
+
+  Does this work? We need to show that $x < \frac{m}{n} < y$; let's start with the $ < y$ direction.
+  Given our conditions for $m$, we have that 
+  \begin{align*}
+    m - 1 &\leq nx \Rightarrow \\
+    m &\leq nx + 1 \Rightarrow \\
+    \frac{m}{n} &\leq x + \frac{1}{n} \\
+                &< x + (y - x) \\
+                &= y.
+  \end{align*}
+  We get the other direction for free from the conditions on $m$.
+\end{proof}
+
+\section{Spaces}
+$\R^n$ is a \emph{vector space}, while $\E^n$ is a \emph{Euclidean space}. A Euclidean space is a 
+vector space with the additional structure of an \emph{inner product}, $\left<\cdot, \cdot\right>:
+\R^n\times\R^n\to\R$. The standard inner product is $\left<x, y\right> = \sum_{i=1}^n x_iy_i$. Any 
+inner product must satisfy \emph{positivity}, \emph{reflexivity}, and \emph{symmetry}. Inner products
+are \emph{linear}. \\
+
+With this notion of inner product, we can go on to define some other useful properties of vectors,
+like the length of a vector and the angle between two vectors. We can also derive a canonical \emph{norm}
+as the length, with $||x||^2 = \left<x,x\right>$, which satisfies the \emph{triangle inequality}.
+
 \end{document}
