@@ -40,9 +40,7 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
 \begin{proof}
   %This proof relies on the transitivity of $\leq$.
   Let $\alpha, \beta, E$ be as in the question. Since $E$ is non-empty, let $x\in E$. Then by definition,
-  $x\leq\beta$ and $\alpha\leq x$. Note that the definition of transitivity we rely on holds only for
-  elements all in $E$, but this question isn't feasible without this natural step, since we have only 
-  the axioms of an ordered set to use. So then by the transitivity of $\leq$, we have that 
+  $x\leq\beta$ and $\alpha\leq x$. So then by the transitivity of $\leq$, we have that 
   $$\alpha\leq x, x\leq\beta \Rightarrow \alpha\leq\beta.$$
 \end{proof}
 
@@ -51,6 +49,19 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
   $-x$, where $x\in A$. Prove that $$\inf A = -\sup(-A).$$
 \end{question}
 \begin{proof}
+  Grant that negation of sign flips the direction of inequalities, which is a prior result. \\
+
+  Suppose that $A$ is as above and that $\inf A$ exists; let $y = \inf A$. Then for any upper bound of 
+  $A, \gamma$, we have that $\gamma \leq y$. Now negate everything. We must check that $-y$ is an upper
+  bound for $-A$ and that for any $\beta$ an upper bound of $-A$, we have that $-y \leq \beta$. $-y$
+  is obviously an upper bound for $-A$, since we have that $y \leq a\in A \Rightarrow -y \geq -a\in 
+  -A$. \\
+  
+  To prove the next statement about \emph{least} upper bound, we observe that any upper bound
+  for $-A$ is a lower bound for $A$ by the same argument above, and vice versa. Then, note that this
+  implies that $y \geq \gamma \Rightarrow -y \leq -\gamma$. So we have that $-y$ is the \emph{least} 
+  upper bound, and thus the $\sup -A$, by negating the expression and working in terms of our original 
+  set $A$.
 \end{proof}
 
 \begin{question}[7]
@@ -70,9 +81,21 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
 \end{question}
 \begin{proof}
   \begin{qparts}
+  \item (Induction on $n$) Let $n = 1$; note that the expression in question becomes $b - 1 \leq b -
+    1$, which is true. Now suppose that $k \geq 1\in\Z, b^k - 1 \geq k(b - 1)$. We want to show that
+    the result holds for $k + 1$. As a notational convenience, rewrite the inductive hypothesis
+    (IH) as $b^k -1 - k(b - 1) \geq 0$. So then we have 
+    \begin{align*}
+      b^{k+1} - 1 - (k + 1)(b - 1) &= b^{k+1} - 1 - k(b - 1) - (b - 1) \\
+                                   &= bb^{k} - k(b-1) - b \\
+                                   &= b^k -\frac{k}{b}(b - 1) -1 \note{(divide by $b$, since $b > 0$)} \\
+                                   &> b^k -1 -k(b - 1) \note{(since $b > 1$)} \\
+                                   &\geq 0 \note{(by the IH),}
+    \end{align*}
+    so we have the claim.
   \item We conclude this by simply exponentiating the inequality in (a) by $\frac{1}{n}$, noting that
     since $\frac{1}{n} > 0$, the direction of the inequality is preserved.
-  \item 
+  \item TODO FINISH THIS
   \end{qparts}
 \end{proof}
 
@@ -106,9 +129,62 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
   Show that the rational numbers $\Q$ form an ordered field that satisfies the Archimedean property.
 What property of $\R$ is not satisfied by $\Q$?
 \end{question}
-
+\begin{proposition}
+  $\Q$ forms an ordered field with the ordering $$\frac{a}{b} > \frac{a'}{b'} \iff ab' > a'b,$$
+  for $a,b,a',b'\in\Z$ and $b,b' \neq 0$.
+\end{proposition}
 \begin{proof}
-  TODO PROVE THIS
+  We have already shown $\Q$ to be a field and I really do not want to verify all those axioms
+  again, so we'll just check the two axioms for orderings. So let $x,y,z\in\Q$; by definition, we
+  can write $$x = \frac{a}{b}, y = \frac{m}{n}, z = \frac{p}{q},$$ for $a,b,m,n,p,q\in\Z$ and $b, n,
+  q \neq 0$. Further, suppose that $$x, y > 0, y < z.$$ \\
+  
+  Then for the first axoim we need to show that $$y < z \Rightarrow x + y < x + z.$$ Suppose $y <
+  z$. Now,
+  \begin{align*}
+    x + y &= \frac{a}{b} + \frac{m}{n} \\
+          &= \frac{na + mb}{bn} \\
+    x + z &= \frac{pb + aq}{bq}.
+  \end{align*}
+  Now, we want to compare $x+y$ and $x+z$, so let's just do it!
+  \begin{align*}
+    x+ y \stackrel{?}{<} x + z &\cong \frac{na + mb}{bn} \stackrel{?}{<} \frac{pb + aq}{bq} \\
+                               &\iff (na + mb)(bq) \stackrel{?}{<} (pb + aq)(bn) \\
+                               &\cong qban + qb^2m \stackrel{?}{<} bnaq + b^2np \\
+                               &\cong mq \stackrel{?}{<} np,
+  \end{align*}
+  where the last step involves subtraction of the same quantity ($qban$) from both sides, and also 
+  division of both sides by $b^2$; note that neither of these operations affect the direction of any
+  inequalities since the first operation is permissible in integer equations and $b^2 > 0
+  \Rightarrow b^{-2} > 0$. \\
+
+  But note that $y < z \Rightarrow mq < np,$ and we assumed $y < z$, so we have the first axoim. \\
+
+  Now let's confirm that the second axoim holds, that is, $$x > 0, y > 0 \Rightarrow xy > 0.$$
+  Suppose $x,y >0$ are as above. Then $xy = \frac{am}{nb}$. Note that since $x,y\in\Q > 0$, we have 
+  that $a,b,m,n > 0$, so $\frac{am}{nb} > 0$.
+\end{proof}
+\begin{theorem}{Archimedean Property of $\Q$}
+  $$x,y\in\Q, x > 0 \Rightarrow \exists n\in\Z^{>0} \st nx > y.$$
+\end{theorem}
+\begin{proof}
+  Let $x,y$ be as in the theorem's statement. If $x \geq y$, then pick $n = 2$ and we're done, so
+  suppose further that $x < y$. Now, since $x,y$ are rational, we have that $x = \frac{a}{b}, y =
+  \frac{p}{q}$ for some $a,b,p,q \in\Z$ with $b,q\neq 0$. Let's characterize $n\st nx>y$, and then 
+  show that it satisfies the conditions imposed in the theorem. Note that, from our definition of
+  an ordering on $\Q$, we have that 
+  \begin{align*}
+    nx > y &\Rightarrow n\left(\frac{a}{b}\right) > \frac{p}{q} \\
+           &\Rightarrow \frac{na}{b} > \frac{p}{q} \\
+           &\Leftrightarrow naq > bp \\
+           &\Rightarrow n > \frac{bp}{aq}.
+  \end{align*}
+  Since we have that $x\neq 0$, $a \neq 0$, and we already had that $b,q\neq 0$ by definition, so 
+  we have that $$n' = \frac{bp}{aq}\in\Q.$$ Now, pick $n\in\Z^{>0}$ minimal such that $n > n'$, i.e.
+  $n = \ceil{n'}$. \\
+
+  Since $x > 0$, we never have to worry about some negative signs flipping the directions of a bunch
+  of those inequalities.
 \end{proof}
 
 \begin{theorem}
@@ -140,8 +216,8 @@ and we say that $p$ has degree $n$. A real \emph{rational function} $p/q$ is the
 where $q$ is not identically zero. Let $F$ be the set of real rational functions. \\
 
 \begin{qparts}
-  \item Give $F$ the structure of a field; verify the field axoims.
-  \item Define $q/q >0$ iff $$\frac{q}{q}(x) = \frac{q(x)}{q(x)} = \frac{q_nx^n + \ldots q_0}{q_mx^m
+  \item Give $F$ the structure of a field; verify the field axioms.
+  \item Define $p/q >0$ iff $$\frac{p}{q}(x) = \frac{p(x)}{q(x)} = \frac{p_nx^n + \ldots p_0}{q_mx^m
  + \ldots q_0}$$ satisfies $p_n/q_m > 0.$ Why is this well defined? Now, for $f,g\in F$ we say $f > g
 \iff f- g > 0$. Prove that with this definition $F$ is an ordered field (Hint: You must prove that $F$
 is an ordered set).
@@ -152,9 +228,14 @@ is an ordered set).
 \begin{question}[3]
   Suppose $X,Y$ are sets. Define a function $X \to Y$ using set theory. Also, define function composition.
 \end{question}
-A \emph{function} is a set $f = \{(x,y)\} \subset X\times Y$ where each $x\in X$ is associated to at most one 
-$y\in Y$. We say that a function is injective iff for $(x, y), (x', y')\in f$, we have that $y' = y \Rightarrow
-x' = x$, and surjective iff $\forall y\in Y, \exists x\in X \st (x,y)\in f$.
+A \emph{function} is a set $f = \{(x,y)\} \subset X\times Y$ where each $x\in X$ is associated to at
+most one $y\in Y$. Note that we use the standard definition of equality on tuples. We say that a
+function is injective iff for $(x, y), (x', y')\in f$, we have that $y' = y \Rightarrow x' = x$, and
+surjective iff $\forall y\in Y, \exists x\in X \st (x,y)\in f$. \\
+
+\emph{Function composition} is an associative non-commutative operation $\circ: F\times F' \to F''$,
+where $F$ is the set of functions from $X\to Y$, $F'$ is the set of functions from $Y\to Z$, and
+$F''$ is the set of functions from $X\to Z$. 
 
 \begin{question}[4]
   Consider the function 
@@ -172,6 +253,17 @@ x' = x$, and surjective iff $\forall y\in Y, \exists x\in X \st (x,y)\in f$.
   \end{qparts}
 \end{question}
 \begin{qparts}
+  \item The domain of $f$ is $(-1, 1)$, the codomain of $f$ is $\R$, and the range, or image, of $f$
+        is $[0, 1)$.
+  \item $f$ is neither injective, surjective, nor bijective. $f$ is not injective, since $f(-0.5) =
+        f(0.5)$, but $-0.5 \neq 0.5$. $f$ is not surjective, since it doesn't hit every point of $\R$;
+        consider 19. Thus, $f$ is not bijective.
+  \item $f([-1/3, 1/2]) = [1/6, 1/4]$, if overloading the definition of $f$ is permissible; to apply
+        $f$ to an interval, we apply it to each point in the interval.
+  \item $f^{-1}$ is not defined at these points, since none of these points are in the range.
+  \item If $y$ is not in the range of $f$, then the fibre has size 0, since $f$ is undefined. If $y
+        = 0$, then the fibre of $f$ has size one, and if $y \neq 0$ and $y$ is in the range, the fibre
+        has size 2.
   \item $f(1)$ is not defined, since the domain of $f$ is the open interval $(-1, 1)$, which does not
         contain 1.
 \end{qparts}
