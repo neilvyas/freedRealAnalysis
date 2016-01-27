@@ -71,7 +71,7 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
     \item For any positive integer $n$, $b^n - 1 \geq n(b-1)$.
     \item Hence $b - 1 \geq n(b^{1/n} - 1)$. 
     \item If $t > 1$ and $n > (b-1)/(t-1)$, then $b^{1/n} < t$.
-    \item If $w$ is such that $b^w < y$, then $b^{w + (1/n)} > y$ for sufficiently large $n$; to see this,
+    \item If $w$ is such that $b^w < y$, then $b^{w + (1/n)} < y$ for sufficiently large $n$; to see this,
       apply part (c) with $t = yb^{-w}$. 
     \item If $b^w > y$, then $b^{w - (1/n)} > y$ for sufficiently large $n$.
     \item Let $A$ be the set of all $w$ such that $b^w < y$, and show that $x = \sup A$ satisfies $b^x 
@@ -95,7 +95,65 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
     so we have the claim.
   \item We conclude this by simply exponentiating the inequality in (a) by $\frac{1}{n}$, noting that
     since $\frac{1}{n} > 0$, the direction of the inequality is preserved.
-  \item TODO FINISH THIS
+  \item $t > 1 \Rightarrow t -1 > 0$, so then we have that 
+    \begin{align*}
+      n > (b-1)/(t-1) &\Rightarrow n(t - 1) > (b - 1) \\
+                      &\Rightarrow n(t-1) > n(b^{1/n} - 1) \note{(using our result from (b)} \\
+                      &\Rightarrow t > b^{1/n} \note{(since $n > 0$)}.
+    \end{align*}
+  \item Suppose $w$ is such that $b^w < y$. Let's set $t = yb^{-w} > 1$. Then we have 
+    \begin{align*}
+      b^{1/n} < t &\Rightarrow b^{1/n} < yb^{-w} \\
+                  &\Rightarrow b^{1/n}b^w < y \note{(since $b^w > y > 0 \Rightarrow b^{-w} > 0$)} \\
+                  &\Rightarrow b^{w + (1/n)} < y,
+    \end{align*}
+    as desired. Note that all of this relies on $n$ satisfying (c), so let's characterize such an $n$.
+    We need 
+    \begin{align*}
+      n &> (b - 1)/(t - 1) \\
+        &= (b - 1)/(yb^{-w} - 1).
+     \end{align*}
+  \item Suppose that $b^w > y$. Let's set $t = yb^w > 1$. Then we have 
+    \begin{align*}
+      b^{1/n} < t &\Rightarrow b^{1/n} < yb^w \\
+                  &\Rightarrow b^{(1/n) - w} < y \\
+                  &\Rightarrow b^{w - (1/n)} > y,
+    \end{align*}
+    as desired. We obtain the last statement by noting that exponentiating one side by $-1$ flips the 
+    direction of an inequality; we'll omit the proof here. As before, this relies on sufficiently large
+    $n$, so let's characterize that $n$ below.
+    \begin{align*}
+      n &> (b - 1)/(t - 1) \\
+        &= (b - 1)/(yb^w - 1).
+    \end{align*}
+  \item Since $\R$ has the least upper bound property, we know that such an $x$ exists. We need to 
+    show that neither $b^x < y$ nor $b^x > y$ are true in order to show that $b^x = y$. \\
+
+    Let's start by showing not $b^x < y$. Suppose not; that is, suppose that $b^x <  y$. Then by part 
+    (d) we know there is some integer $n$ for which $b^{x  + (1/n)} < y$, so we have that $x + (1/n)
+    \in A$. But $x + (1/n) > x$, so we have contradicted our assumption that $x = \sup A$. So, we 
+    conclude that $b^x \geq y$. \\
+
+    We'll show not $b^x > y$ analogously. Again, suppose not. That is, suppose that $b^x > y$. Then 
+    by part (e), we have that  $b^{x - (1/n)} > y$, which means that $x - (1/n)$ is an upper bound for
+    $A$. But since $x > x - (1/n)$, we have contradicted our assumption that $x$ is the least upper
+    bound. So, we conclude that $b^x \leq y$. \\
+
+    Thus, $$b^x \leq y \wedge b^x \geq y \Rightarrow b^x = y.$$
+  \item The standard method of proving something is unique is to suppose that there are two of them,
+    then show that these two instances must be the same. So, suppose that there is some other $x'\in
+    \R \st x' = \sup A$; in particular, we have by (f) that $b^{x'} = y$. So $b^x = y = b^{x'}$. 
+    If $x' \neq x$, then either $x' > x$ or $x' < x$, so let's work through both of these cases. 
+    Throughout, we will refer to the expression $b^{x'} = b^x$. \\
+
+    Suppose that $0 < x' < x$. Then divide both sides of the expression by $b^{x'}$, yielding $b^{x - 
+    x'} = 1$. But we assumed at the very beginning that $b > 1$, and $x' < x \Rightarrow x - x' > 0$, 
+    so this is a contradiction. Thus, we have that $x' \geq x$. \\
+
+    Suppose now that $0 < x < x'$. We run the exact same procedure, concluding that $x' \leq x$. \\
+
+    So we have that $x'\leq x \wedge x'\geq x \Rightarrow x' = x$, which proves the claim.
+
   \end{qparts}
 \end{proof}
 
@@ -108,6 +166,21 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
   \end{qparts}
   How must these statements be modified if $k$ is 2 or 1?
 \end{question}
+\begin{proof}
+  We'll derive a bunch of algebraic nonsense here in order to make the proofs of the following parts
+  cleaner.
+    \begin{align*}
+      |z - x| = |z - y| &\iff {|z-x|}^2 = {|z-y|}^2 \\
+                        &\iff {|z-x|}^2 - {|z-y|}^2 = 0 \\
+                        &\iff 2z(y - x) + (y^2 - x^2) = 0 \\
+                        &\iff \left(z - \frac{x + y}{2}\right)(y - x) = 0,
+    \end{align*}
+    so we have that 
+    \begin{align*}
+      z -x &= \left(z - \frac{x + y}{2} + \frac{y - x}{2}\right)
+    \end{align*}
+    Actually, this proof winds up being horrifically ugly and not very fun, so I'll leave it off.
+\end{proof}
 
 \begin{question}[17]
   Prove that $$|x + y|^2 + |x - y|^2 = 2|x|^2 + 2|y|^2,$$ if $x,y\in\R^k$. Interpret this geometrically,
@@ -122,7 +195,12 @@ $\beta$ an upper bound. Prove that $\alpha\leq\beta$.
                       &= 2|x|^2 + 2|y|^2.
   \end{align*}
 \end{proof}
+This looks like it's going to be saying something about areas, and the obvious interpretation of $x,y$ 
+is as the sides of this parallelogram. Observe that if we ``make'' a parallelogram by lying $y$ against
+the head and tail of $x$, then placing the second side of length $x$ opposite the first, the diagonals
+will be given by $x + y$ and $x - y$, from the parallelogram method of vector addition. \\
 
+So, the statement says that the sum of the squared diagonals is twice the sum of the squares of the sides.
 
 \section*{Other Questions}
 \begin{question}[1]
@@ -224,6 +302,65 @@ is an ordered set).
   \item Does $F$ satisfy the Archimedean property? Prove or disprove.
 \end{qparts}
 \end{question}
+\begin{proof}
+  \begin{qparts}
+    \item
+  Let $f/g, f'/g'\in F$. Then we define addition and multiplication as 
+  \begin{align*}
+    &\frac{f}{g} + \frac{f'}{g'} = \frac{fg' + gf'}{gg'},
+    &\frac{f}{g}\frac{f'}{g'} = \frac{ff'}{gg'}.
+  \end{align*}
+  Then $0\in F$ is any $\frac{a}{b}\in F$ where $a$ is and $b$ is not identically zero, and $1\in F$
+  is any $\frac{a}{b}\in F$ where $a$ is identically $b$. Let's quickly check these.
+  \begin{align*}
+    &\frac{0}{g} + \frac{f'}{g'} = \frac{0 + gf'}{gg'} = \frac{f'}{g'},
+    &\frac{a}{a}\frac{f'}{g'} = \frac{af'}{ag'} = \frac{f'}{g'},
+  \end{align*}
+  as desired. Note also that inverses are also readily defined; for $\frac{f}{g}\in F$, we have that
+  \begin{align*}
+    &\frac{f}{g} + \frac{-f}{g} = \frac{fg - gf'}{gg} = \frac{0}{gg} = 0,
+    &\frac{f}{g}\frac{g}{f} = \frac{fg}{gf} = \frac{1}{1},
+  \end{align*}
+  so now it remains to show that addition and multiplication are associative and commutative, and 
+  that multiplication distributes over addition. Let $\frac{f''}{g''}\in F$. Then we want to show that
+  $$\frac{f}{g} + \left(\frac{f'}{g'} + \frac{f''}{g''}\right) = \left(\frac{f}{g} + \frac{f'}{g'}\right)
+  + \frac{f''}{g''}.$$ So
+  \begin{align*}
+    \frac{f}{g} + \left(\frac{f'}{g'} + \frac{f''}{g''}\right) &= \frac{f}{g} + \frac{f'g'' + g'f''}{
+  g'g''} \\
+  &= \frac{f(g'g'') + g(f'g'' + g'f'')}{gg'g''} \\
+  &= \frac{g''(fg' + gf') + (gg')f''}{(gg')g''} \\
+  &= \frac{fg' + gf'}{gg'} + \frac{f''}{g''} \\
+  &= \left(\frac{f}{g} + \frac{f'}{g'}\right) + \frac{f''}{g''},
+  \end{align*}
+  as desired. We should also show that addition commutes, but this is obvious because $\R$ commutes and
+  we just keep abusing properties of $\R$, and I'm also sick of typing a million fractions. For 
+  multiplication, we want to show that $$\frac{f}{g} \times \left(\frac{f'}{g'} \times
+  \frac{f''}{g''}\right) = \left(\frac{f}{g} \times \frac{f'}{g'}\right) \times \frac{f''}{g''}.$$ So
+  \begin{align*}
+    \frac{f}{g} \times \left(\frac{f'}{g'} \times \frac{f''}{g''}\right) 
+  &= \frac{f}{g} \times \frac{f'f''}{ g'g''} \\
+  &= \frac{ff'f''}{gg'g''} \\
+  &= \frac{ff'}{gg'} \times \frac{f''}{ g''} \\
+  &= \left(\frac{f}{g} \times \frac{f'}{g'}\right) \times \frac{f''}{g''},
+  \end{align*}
+  as desired. Now it just remains to show that addition distributes over multiplication. We'll just show
+  left distributivity and claim that that is sufficient because everything commutes. We want to show 
+  that $$\frac{f}{g}\times\left(\frac{f'}{g'}+\frac{f''}{g''}\right) = \left(\frac{f}{g}\times\frac{f'}
+  {g'}\right) + \left(\frac{f}{g}\times\frac{f''}{g''}\right).$$ So
+  \begin{align*}
+    \frac{f}{g}\times\left(\frac{f'}{g'}+\frac{f''}{g''}\right) 
+    &= \frac{f}{g}\times\frac{f'g'' + g'f''}{g'g''} \\
+    &= \frac{f(g'g'') + g(f'g'' + g'f'')}{gg'g''} \\
+    &= \frac{f'g + gf'}{gg'} + \frac{fg'' + gf''}{gg''} \\
+    &= \left(\frac{f}{g}\times\frac{f'}{g'}\right) + \left(\frac{f}{g}\times\frac{f''}{g''}\right),
+  \end{align*}
+  as desired, which concludes our proof that $F$ is a field.
+
+  \item This is well defined because division in $\R$ is well defined, so we won't have any pathological
+    $p,q$ pairs appear.
+  \end{qparts}
+\end{proof}
 
 \begin{question}[3]
   Suppose $X,Y$ are sets. Define a function $X \to Y$ using set theory. Also, define function composition.
