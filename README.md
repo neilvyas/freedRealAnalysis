@@ -17,7 +17,7 @@ FAQ
 ---
 
 *Q: How do I build output?*  
-A: Make sure you have [my LaTeX classes and packages](www.github.com/neilvyas/latex) installed properly,
+A: Make sure you have [my LaTeX classes and packages](https://github.com/neilvyas/latex) installed properly,
 then use `pdflatex` to compile source files. I use
 [rubber](http://tex.blogoverflow.com/2011/12/building-documents-with-rubber/) to make the build
 process painless, and have a `Makefile` for commonly used commands.
