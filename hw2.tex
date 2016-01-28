@@ -358,7 +358,24 @@ is an ordered set).
   as desired, which concludes our proof that $F$ is a field.
 
   \item This is well defined because division in $\R$ is well defined, so we won't have any pathological
-    $p,q$ pairs appear.
+    $p,q$ pairs appear (I don't really understand what's being asked here).\\
+
+    We need to first show that exactly one of $(<,>,=)$ holds and that our order is \emph{transitive}.
+    Note that since we've defined the order wholly in terms of operations on $\R$, we get the first 
+    point for free. So it remains to show that $\frac{f}{g} < \frac{f'}{g'} \wedge \frac{f'}{g'} <
+    \frac{f''}{g''} \Rightarrow \frac{f}{g} < \frac{f''}{g''}$. Suppose the antecedent.\\
+
+    I see how to do this proof but I really hate type-setting fractions, so I'm going to leave it off.
+
+  \item No, this isn't an Archimedean field, which should be apparent since the definition only deals 
+    with the leading coefficients, leaving off a whole lot of important information. Consider 
+    $$ 1- \frac{1}{x} = \frac{x - 1}{x} > 0,$$ since both leading coefficients are 1. This example 
+    will prove that $F$ is Archimedean; we just have to show that $\frac{1}{x}, 1 > 0$ and that 
+    $\forall n\Z^{>0}, 1 > n\frac{1}{x}$. The former point is obvious, since the leading coefficients
+    in both $\frac{1}{x}$ and 1 are both positive. To show the second point, we just use our expansion
+    from before, noting that $$1 - n\frac{1}{x} = \frac{x - n}{x} > 0,$$ again since the leading coefficients
+    are both 1 and hence positive. So, we have produced a counterexample for the Archimedean property
+    in $F$.
   \end{qparts}
 \end{proof}
 
