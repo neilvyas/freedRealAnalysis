@@ -258,13 +258,88 @@ interval.Anyway, let's make this rigorous.
 
 \section{Spaces}
 $\R^n$ is a \emph{vector space}, while $\E^n$ is a \emph{Euclidean space}. A Euclidean space is a 
-vector space with the additional structure of an \emph{inner product}, $\left<\cdot, \cdot\right>:
-\R^n\times\R^n\to\R$. The standard inner product is $\left<x, y\right> = \sum_{i=1}^n x_iy_i$. Any 
+vector space with the additional structure of an \emph{inner product}, $\ip{\cdot}{\cdot}:
+\R^n\times\R^n\to\R$. The standard inner product is $\ip{x}{y} = \sum_{i=1}^n x_iy_i$. Any 
 inner product must satisfy \emph{positivity}, \emph{reflexivity}, and \emph{symmetry}. Inner products
 are \emph{linear}. \\
 
 With this notion of inner product, we can go on to define some other useful properties of vectors,
 like the length of a vector and the angle between two vectors. We can also derive a canonical \emph{norm}
-as the length, with $||x||^2 = \left<x,x\right>$, which satisfies the \emph{triangle inequality}.
+as the length, with $||x||^2 = \left<x,x\right>$, which satisfies the \emph{triangle inequality}. \\
+
+We also have that $$\cos\theta = \frac{\ip{\xi}{\eta}}{||\xi||\ ||\eta||}.$$
+
+We say that two vectors $\xi, \eta$ are \emph{orthogonal} $\iff \ip{\xi}{\eta} = 0$. \\
+
+So an inner product gives us a notion of \emph{geometry}: we have distance, angle, and length. \\
+
+%lecture 3
+There's some nonsense distinction between points and vectors, but I have never
+really seen this before, and it seems like its only use is semantic disambiguation, so I'm tempted
+to not include it with the tag ``I don't care.'' %\\
+
+\begin{defn}
+  A \emph{distance}, or a \emph{metric} $d: V \times V \to \R^{\geq 0}$ satisfies, for $p,q,r,\in V$
+  and $V$ a set, usually an inner product space,
+  \begin{enumerate}
+    \item $d(p,q) \geq 0$, or \emph{positivity};
+    \item $d(p,q) = 0 \iff p = q$, the \emph{identity of indiscernibles};
+    \item $d(p,q) = d(q,p)$, or \emph{symmetry};
+    \item $d(p,q) \leq d(p,r) + d(r,q)$, or the \emph{triangle inequality}.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  A \emph{metric space} is a set $V$ together with a metric $d: V \times V \to \R^{\geq 0}$.
+\end{defn}
+
+\begin{proposition}
+  A standard distance function for $p,q\in \E^n$ is $$d(p,q) = || p - q ||.$$
+\end{proposition}
+\begin{proof}
+  Mostly work from definitions.
+  \begin{enumerate}
+      \item blah
+      \item boooooring
+      \item bleh
+      \item We want to show that $$||\eta + \xi|| \leq |\eta|| + ||\eta||,$$ for $$r = p + \xi, q = 
+        r + \eta.$$ So
+        \begin{align*}
+          ||\eta + \xi||^2 &= \ip{\eta + \xi}{\eta + \xi} \\
+                           &= ||\xi||^2 + 2\ip{\xi}{\eta} + ||\eta||^2 \note{(bi-linearity of
+                                $\ip{\cdot}{\cdot}$)} \\
+                           &\leq ||\xi||^2 + 2||\xi||||\eta|| + ||\eta||^2 \note{(Cauchy-Schwartz)} \\
+                           &= \left(||\eta|| + ||\xi||\right)^2,
+        \end{align*}
+        and since norms are positive, we have that $$||\eta + \xi|| \leq ||\eta|| + ||\xi||,$$ as
+        desired.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}{Cauchy-Schwartz Inequality}
+  For any vectors $\xi, \eta$, we have that $$|\ip{\xi}{\eta}| \leq ||\eta|| ||\xi||.$$
+\end{theorem}
+\begin{proof}
+  \emph{(NB: The proof shown in class kinda sucks and doesn't generalize past 2 dimensions, so I'll
+  omit it here. There's a nice slick proof that I'll steal from my linear algebra notes or
+  something.)} \\
+
+  Since norms are non-negative, we will again work by squaring both sides, which is an equaivalent
+  statement. So we have to show $$|\ip{\xi}{\eta}|^2 \leq ||\eta||^2 ||\xi||^2.$$
+
+  Hint for a nicer proof: consider the projection of $\eta$ onto the subspace spanned by $\xi +
+  t\eta$.
+\end{proof}
+
+\begin{example}{Metric Spaces}
+  \begin{enumerate}
+      \item The empty set with the trivial metric.
+      \item Any set $X$ equipped with 
+        $$d_c(p,q) = \begin{cases} 0 &\text{ if } p=q \\ c\in\R^{>0} &\text{ if } p\neq q
+        \end{cases},$$ the discrete map.
+      \item The set of lines in $\E^n$ equipped with the smallest angle distance.  
+      \item The set of lines in $\E^n$ equipped with the unit rectangle distance (define this).
+  \end{enumerate}
+\end{example}
 
 \end{document}
