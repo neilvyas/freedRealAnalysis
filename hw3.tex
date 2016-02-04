@@ -1,0 +1,179 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\begin{document}
+\header{Real Analysis I}{Homework 3}
+
+Note for the grader: I can do all these problems just fine, I just ran into a severe time crunch this
+week because of involvement with student organizations, and my job. Sorry!
+
+\section*{Rudin Problems}
+% ch 2: 4,5,7,9,10 (except statement about compactness)
+\begin{question}[2]
+  A complex number $z$ is said to be \emph{algebraic} if there are integers $a_0,\dots,a_n$, not all
+zero, such that $$a_0z^n + a_1z^{n-1} + \dots + a_{n-1}z + a_n = 0.$$ Prove that the set of all 
+algebraic numbers is countable. \emph{Hint:} For every positive integer $N$ there are only finitely 
+many equations with $$n + |a_0| + |a_1| + \dots + |a_n| = N.$$
+\end{question}
+\begin{proof}
+  Grant the hint; actually, note that this is true because the sum constraint means that none of the
+  $a_i$ may be bigger than $N$ in magnitude, and since they have magnitude not all 0, there can't 
+  be more than $N$ of them. So we have that $1 \leq n \leq N$ and $0 \leq |a_i| \leq N$. Now we have 
+  to see how the hint connects to the problem.
+  \end{proof}
+
+\begin{question}[4]
+  Is the set of all irrational real numbers, denoted $\R\setminus\Q$, countable?
+\end{question}
+  Intuitively, it shouldn't be, since the rationals are countable via the argument given in class 
+(which was an injection from $\N\times\N\to\N$), so we should be able to find some justification 
+along these lines.
+\begin{proof}
+Suppose not, that is, suppose that $\R \setminus \Q$ is countable. Then consider $\R' = (\R \setminus
+\Q) \cup \Q$; note that this is isomorphic to/is $\R$. Since the union of countable sets is countable,
+via a result proved in class (intuitively, ``map'' one of the sets to the even numbers, and the other
+to the odd), we have that $\R$ is countable, a contradiction. So it must be that $\R\setminus\Q$ is
+uncountable.
+\end{proof}
+
+\begin{question}[5]
+  Construct a bounded set of real numbers with exactly three limit points.
+\end{question}
+\begin{proof}
+  We can just union some disjoint sets that converge to distinct real numbers using the standard method
+of constructing such sets; bounding them will also be trivial. Take $$A = \{\frac{1}{n} \mid n\in\N\}
+\bigcup \{-2 + \frac{1}{n} \mid n\in\N\} \bigcup \{2 + \frac{1}{n} \mid n\in\N \}.$$ So $A$ is bounded
+ by 42 and has the limit points 0, $-1$, and 1.
+\end{proof}
+
+\begin{question}[7]
+  Let $A_1, A_2, \ldots$ be subsets of a metric space.
+\begin{qparts}
+\item If $B_n = \bigcup_{i=1}^n A_i,$ prove that $\conj{B} = \bigcup_{i=1}^n \conj{A_i}.$
+\item If $B_n = \bigcup_{i=1}^\infty A_i,$ prove that $\conj{B} \supset \bigcup_{i=1}^n \conj{A_i}.$
+\end{qparts}
+Show, by example, that this inclusion can be proper.
+\end{question}
+\begin{proof}
+  By the definition of closure, we have that $\bigcup A_i \subset \bigcup \conj{A_i}$, since $A_i 
+  \subset \conj{A_i}$. So we have that $\conj{B} \subset $
+\end{proof}
+
+\begin{question}[9]
+Let $E^0$ denote the set of all interior points of a set $E$. 
+\begin{qparts}
+\item Prove that $E^0$ is always open.
+\item Prove that $E$ is open iff $E = E^0$.
+\item If $G\subset E$ and $G$ is open, prove that $G\subset E^0$.
+\item Prove that the complement of $E^0$ is the closure of the complement of $E$.
+\item Do $E$ and $\conj{E}$ always have the same interiors?
+\item Do $E$ and $E^0$ always have the same closures?
+\end{qparts}
+\end{question}
+\begin{proof}
+\begin{qparts}
+\item $E^0$ is open iff every point of $E^0$ is in the interior of $E^0$, so take $p\in E^0$; we want 
+to show that $p\in(E^0)^0$. Since we have $p\in E^0$, we have that every point 
+\end{qparts}
+\end{proof}
+
+\begin{question}[10]
+  Let $X$ be an infinite set. For $p, q \in X$, define 
+$$d(p,q) = \begin{cases} 1 &p = q \\ 0 &p\neq q.\end{cases}$$
+Prove that this is a metric. Which subsets of the resulting metric space are open? Which are closed?
+Which are compact?
+\end{question}
+\begin{proof}
+  Note that $\forall p,q\in X, d(p,q) \geq 0$, so we have that $d$ is positive. Note also that $d(p,
+q) = 0 \iff p = q,$ which we can obviously see from the definition. It remains only to check that the 
+triangle inequality holds, so let $p,q,s\in X$; we want to show that $$d(p,q) \leq d(p,s) + d(s,q).$$
+We will show the result by a case analysis.  \\
+
+Let's consider the case where $p=q$. So the LHS is zero, and by positivity we don't even have 
+to check the right side, since $d \geq 0$ and the sum of two non-negative real numbers is non-negative.
+Now, let's consider the case where $p\neq q$. Then the LHS is 1. On the RHS, if $s$ is distinct from
+both $p,q$, we have that the RHS is 2; otherwise if $s$ coincides with one of $p,q$, we have that the
+RHS is 1, so we have the desired result. Thus, $d$ satisifies the triangle inequality. \\
+
+For any $p\in X$, we have that $p$ is not a limit point. This is easy to see; pick any $e\in(0,1)$;
+we'll pick $1/42$. Then note that there exists a neighborhood $N_{1/42}(p)$ which contains no points
+$q\in X$ where $q\neq p$, since $q\neq \iff d(p,q) = 1 > 1/42$. So every subset $S$ of $X$ contains 
+no limit points and it is thus closed. So, since $X \setminus S$ is closed, as well, we have that 
+$S = X \setminus (X\setminus S)$ is open, since a set is closed iff its complement is open. So by 
+this arguement, it must be that in fact every subset $S\subset X$ is open. \\
+
+Any finite subset of $X$ is compact. 
+\end{proof}
+
+\section*{Other Problems}
+\begin{question}[1]
+  Let $S$ be the circle of unit radius in the Euclidean plane: 
+$$S = \{(x,y)\in\E^2\mid x^2 + y^2 = 1\}.$$
+\begin{qparts}
+\item Show that $S$ is uncountable.
+\item Define a metric on $S$ which makes it into a metric space. More precisely, define a metric such
+that if $U\subset\E^2$ is an open set, then $U\cap S$ is open.
+\end{qparts}
+\end{question}
+\begin{proof}
+  \begin{qparts}
+  \item We just need to show that any subset of $S$ is uncountable, so take $$S' = \{(x, 0) \mid 0\leq x
+    \leq 1 \}.$$ Note that this is now a subset of the real line $\R$, which is uncountable, so this
+    subset is uncountable. Thus, since $S'$ is uncountable, we have that $S$ is uncountable.
+  \item 
+  \end{qparts}
+\end{proof}
+
+\begin{question}[2]
+  Suppose $X$ is a metric space with metric $d$.
+\begin{qparts}
+\item Prove that $$d'(x,y) = \frac{d(x,y)}{1 + d(x,y)}, $$for $x,y\in X$ is also a metric on $X$.
+\item Show that $d$ and $d'$ are \emph{topologically equivalent}; that is, a set is $d$-open iff it is
+$d'$-open.
+\item Let $F$ be a finite set and $d$ a metric on $F$. What are the $d$-open sets? How does you answer
+depend on the choice of $d$? When are two metrics on $F$ topologically equivalent?
+\end{qparts}
+\end{question}
+\begin{proof}
+  \begin{qparts}
+    \item We need to show that $d'$ satisifies the three properties of a metric. Obviously, we have that
+      $d'$ is positive, since $d$ is positive and the ratio of two positive numbers is positive, and 
+      when $d$ is zero, $d'$ is well defined and is zero. To show the second property, we note that 
+      $d' = 0 \iff d = 0$, which is sufficient since $d$ has the desired property. Now we just have
+      to show that $d'$ satisifies the triangle inequality. \\
+
+      We want to show that $d'(x,z) \leq d'(x,y) + d'(y,z)$, and we know that $d$ satisifies the triangle
+      inequality. So, all that remains is working out a bunch of algebra!
+      \begin{align*}
+        d'(x,y) + d'(y,z) &= \frac{d(x,y)}{1 + d(x,y)} + \frac{d(y,z)}{1 + d(y,z)} \\
+                          &= \frac{d(x,y) + 2d(x,y)d(y,z) + d(y,z)}{1 + d(x,y)d(y,z) + d(x,y) + d(y,z)} \\
+                          &\geq \frac{d(x,z)}{1 + d(x,y)d(y,z) + d(x,y) + d(y,z)} \\
+                          &\geq \frac{d(x,z)}{1 + d(x,z)} \\
+                          &= d'(x,z),
+      \end{align*}
+      as desired.
+    \item Suppose we have a set $D$ that is $d$-open. Then for any $x\in D, \exists\varepsilon\in\R\st 
+      \forall y \st d(x,y) < \varepsilon, y\in D$. Now, we want to show that this set is also $d'$-open. 
+      So, we should show that distances scale well between $d$ and $d'$. That is, 
+      \begin{lemma}
+        $$d(x,y) < \varepsilon \iff \exists\delta > 0 \st d'(x,y) < \delta.$$
+      \end{lemma}
+      \begin{proof}
+        Suppose that $d(x,y) < \varepsilon$. Then 
+        \begin{align*}  
+          d'(x,y) &= \frac{d(x,y)}{1 + d(x,y)} \\
+                  &< \frac{\varepsilon}{1 + \varepsilon},
+        \end{align*}
+        so take $\delta > \frac{\varepsilon}{1 + \varepsilon}$.
+      \end{proof}
+      Now with the lemma, the proof of the result is simple; since $d(x,y) < \varepsilon, d'(x,y) < 
+      \delta \Rightarrow $ the $d$-open set is $d'$-open, and vice versa since the lemma has an $\iff.$
+
+    \item I'm not really sure how to answer this, since I think Dr. Freed didn't cover as much as he 
+      would have liked before this homework was due.
+  \end{qparts}
+\end{proof}
+
+
+
+\end{document}
