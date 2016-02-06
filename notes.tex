@@ -342,4 +342,30 @@ to not include it with the tag ``I don't care.'' %\\
   \end{enumerate}
 \end{example}
 
+%lecture 5
+\begin{proposition}
+  Let $X$ be the set of sequences $a_1, a_2, \ldots$, where $a_i \in \{0,1\}$. Then $X$ is uncountable.
+\end{proposition}
+\begin{proof}
+  By Cantor's diagonal argument.
+\end{proof}
+
+\begin{defn}
+  Let $(X,d)$ be a metric space, $E\subset X$ a subsapce, $p\in X$, $r\in\R^{>0}$. Then 
+  \begin{enumerate}
+    \item The \emph{open ball} of radius $r$ about $p$ is $$B_r(p) = \{ q\in X\mid d(p,q) < r.$$
+    \item The \emph{deleted ball} of radius $r$ about $p$ is $$B_r'(p) = B_r(p)\setminus\{p\}.$$
+    \item $E$ is \emph{open} if $$\forall p\in E, \exists \varepsilon > 0 \st B_\varepsilon(p) \subset E.$$
+    \item $E$ is \emph{closed} iff $E^c$ is open.
+    \item $E$ is \emph{bounded} if $\exists p\in X, R>0 \st E\subset B_R(p)$.
+    \item $E$ is \emph{dense} iff $\forall p\in X, \varepsilon > 0, B_r(p)\cap E$ is non-empty.
+    \item A point $p\in X$ is 
+      \begin{itemize}
+        \item an \emph{interior point} of $E$ iff $\exists \varepsilon > 0 \st B_\varepsilon(p) \subset E$.
+        \item a \emph{limit point} of $E$ iff $\forall r > 0, B_r'(p)\cap E$ is non-empty.
+        \item an \emph{isolated point} of $E$ if $\exists \varepsilon > 0 \st B_\varepsilon(p)\cap E = \{p\}$.
+      \end{itemize}
+  \end{enumerate}
+\end{defn}
+
 \end{document}
