@@ -368,4 +368,98 @@ to not include it with the tag ``I don't care.'' %\\
   \end{enumerate}
 \end{defn}
 
+%lecture 6
+\begin{theorem}
+  A set $E$ is closed iff it contains all its limit points.
+\end{theorem}
+
+\begin{theorem}
+  A finite set has no limit points.
+\end{theorem}
+\begin{proof}
+  Let $E$ be a finite set. Then let $x$ be a limit point of $E$. Then for all $r > 0$, $B_r(x)\cap
+  E$ is non-empty and hence $E$ contains an infinite number of points. So, we have the result.
+\end{proof}
+
+\begin{theorem}
+  Let $(X,d)$ be a metric space. Then
+  \begin{enumerate}
+    \item An arbitrary union of open sets is open.
+    \item An arbitrary intersection of closed sets is closed.
+    \item A finite intersection of open sets is open.
+    \item A finite union of closed sets is closed.  
+  \end{enumerate}
+\end{theorem}
+\begin{proof}\leavevmode
+  \begin{enumerate}
+  \item Let $\{G_\alpha\}_{\alpha\in A}$ be a collection of open subsets of $X$. Suppose that $x\in\bigcup_{
+  \alpha\in A}G_\alpha$. For some $a\in A$ we have that $x\in G_a$, and since $G_a$ is open $\exists r > 0$
+  with $B_r(x)\subset G_a$. Hence, $B_r(x)\subset \bigcup_{\alpha\in A}G_\alpha$. Since $x$ was arbitrary,
+  we have the claim.
+
+  \item Let $\{G_f\}_{f\in F}$ be a collection of open subsets of $X$ indexed by finite $F$. Suppose that 
+  $x\in\bigcap_{f\in F}G_f$. Then for each $f\in F$ we have that $x\in G_f$, and since $G_f$ is open
+  $\exists r_f>0$ such that $B_{r_f}(x) \subset G_f$. \\
+
+  Let $r = \min_{f\in F} r_f$. Then $B_r(x) \subset B_{r_f}(x) \subset G_f$ for all $f$. Thus, $B_r(x)
+  \subset \bigcap_{f\in F}G_f$.
+
+  \item Let $\{F_\alpha\}_{\alpha\in A}$ be a collection of closed sets. Then $\{F^c_\alpha\}_{\alpha
+  \in A}$ is a collection of open sets. By (a), $\bigcup_{\alpha\in A}F^c_\alpha$ is open. Hence
+  $$\left(\bigcup_{\alpha\in A}F^c_\alpha\right)^c = \bigcap_{\alpha\in A}\left(F_\alpha^c\right)^c
+  = \bigcap_{\alpha\in A}F_\alpha. $$
+  \end{enumerate} 
+\end{proof}
+
+\begin{defn}
+  Let $\conj{E}$, the closure of a set $E\subset X$, be given by $$\conj{E} = E \cup E',$$ where $E'$
+  is the set of limit points of $E\subset X$.
+\end{defn}
+\begin{theorem}\leavevmode
+  \begin{enumerate}
+    \item $\conj{E}$ is a closed set.
+    \item $E$ is closed iff $E = \conj{E}$.
+    \item $\conj{E}$ is the smallest closed set that contains $E$. That is, for a closed set $F$,
+    $$E\subset F \Rightarrow \conj{E}\subset F.$$
+  \end{enumerate}
+\end{theorem}
+
+\begin{defn}
+  Let $(X,d)$ be a metric space, and $K\subset X$. Then 
+  \begin{enumerate}
+    \item A \emph{cover} of $K$ is a collection $\{G_\alpha\}_{\alpha\in A}$ of subsets of $X$ such 
+      that $K \subset \bigcup_{\alpha\in A}G_\alpha$.
+    \item Further, this cover is an \emph{open cover} iff each $G_\alpha$ is open.  
+    \item $K$ is \emph{compact} iff every open cover of $K$ has a finite subcover. That is, if 
+      $\{G_\alpha\}$ is an open cover of $K$, then there exists a finite subset $F\subset A$ such that
+      $$K\subset \bigcup_{f\in F}G_f.$$
+  \end{enumerate}
+\end{defn}
+
+\begin{theorem}
+  $K\subset X$ is compact $\Rightarrow$ $K$ is closed.
+\end{theorem}
+\begin{proof}
+  Suppose that $K$ is compact. Let $x$ be a point in $K^c$. For each $y\in K$, take $r_y = \frac{1}{3}
+  d(x,y)$. Then $B_{r_y}(x)\cap B_{r_y}(y)$ is empty. Now, the collection of $B_{r_y}(y)$ forms an open
+  cover of $K$, since each point in $k$ is contained in at least one such ball (it is the center of 
+  one). Since $K$ is compact, we take a finite subcover, indexed by $F$ a finite set. \\
+
+  Now, take $$r = \min_{y\in F}r_y.$$ Then $B_r(x) \cap K$ is empty.
+\end{proof}
+
+\begin{theorem}
+  $K\subset X$ is compact iff every infinite subset $E\subset K$ has a limit point in $K$.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[Heine-Borel]
+  A set $K\subset\E^k$ is compact iff it is closed and bounded.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
 \end{document}
