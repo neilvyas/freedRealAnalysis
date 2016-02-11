@@ -449,6 +449,12 @@ to not include it with the tag ``I don't care.'' %\\
 \end{proof}
 
 \begin{theorem}
+  $K\subset X$ compact, $C\subset K$, $C$ closed in $X$ $\Rightarrow$ $C$ is compact.
+\end{theorem}
+\begin{corollary}
+  If $(X,d)$ is a compact metric space, $C\subset X$ is closed $\Rightarrow C$ is compact.
+\end{corollary}
+\begin{theorem}
   $K\subset X$ is compact iff every infinite subset $E\subset K$ has a limit point in $K$.
 \end{theorem}
 \begin{proof}
@@ -458,8 +464,86 @@ to not include it with the tag ``I don't care.'' %\\
 \begin{theorem}[Heine-Borel]
   A set $K\subset\E^k$ is compact iff it is closed and bounded.
 \end{theorem}
+
+\begin{lemma}
+  Let $\{I_n\}_{n=1}^\infty$ be a collection of closed intervals in $\R$ with $I_n = [a_n, b_n],
+  a_n < b_n$. Assume $I_{n+1} \subset I_n$ for all $n$. Then $$\bigcap_{n=1}^\infty I_n \neq \emptyset.$$
+\end{lemma}
 \begin{proof}
-  
+  The set $\{a_n\}_{n=1}^\infty$ is bounded above by $b_1$ and is nonempty, so there exists
+  $$x = \sup_n \{a_n\}.$$ Then $\forall n, a_n\leq x$, and for $m>n$ we have that
+  $a_n \leq a_m < b_m \leq b_n,$ so $b_m$ is an upper bound of $\{a_n\}_{n=1}^\infty$, and so 
+  $x\leq b_n$. So $$\forall n, x\in [a_n, b_n] = I_n.$$
 \end{proof}
 
+\begin{lemma}
+  $\{I_n\}$ is a sequence of nested rectangles $\in\E^2$, that is, $$I_n = [a_n^{(1)}, b_n^{(1)}]
+  \times [a_n^{(2)}, b_n^{(2)}].$$ Then $$\bigcap_{n=1}^\infty I_n = \emptyset.$$
+\end{lemma}
+\begin{proof}
+  By projecting each $I_n$ onto each axis and then applying the previous lemma.
+\end{proof}
+
+\begin{proposition}
+  A rectangle, or product of two closed intervals, in $\E^2$ is compact.
+\end{proposition}
+\begin{proof}
+  Suppose that $\{G_\alpha\}$ is an open cover. Suppose not; that is, suppose that there is no finite
+  subcover. We proceed by an iterative process. Divide the rectangle into finitely many pieces; then
+  if there is no finite subcover, one (WLOG) of these pieces must not have a finite subcover. Repeat
+  this iteratively, giving a sequence of nested rectangles that have nonempty intersection. Then by the 
+  previous lemma, the arbitrary intersection is nonempty; say that $p$ is contained in this intersection.
+  Then, since $p$ is in the rectangle, there exists (WLOG) some $\alpha_0\in A$ such that $p\in G_{\alpha_0}$.
+  But this is a contradiction, since for some rectangle in this iterative process, it is contained 
+  in $G_{\alpha_0}$ as well, because the rectangles are nested, which means it has a finite subcover.
+  So we have arrived at a contradiction, and thus this rectangle is compact. \\
+
+  For every WLOG, where we say ``one,'' it can be replaced by ``finitely many,'' which doesn't alter
+  the mechanism of the proof.
+\end{proof}
+
+
+\begin{proof}%theorem
+  $(\Leftarrow)$
+  $(\Rightarrow)$  
+\end{proof}
+
+
+\begin{theorem}
+  For $\{K_\alpha\}_{\alpha\in A}$ a collection of compact subsets of $X$, assume $\bigcap K_\alpha$
+  is not empty for all finite intersections. Then $$\bigcap_{\alpha\in A} K_\alpha \neq\emptyset.$$
+\end{theorem}
+\begin{proof}
+  Suppose not; that is, suppose that $\{K_\alpha\}_{\alpha\in A}$ is as above, but 
+  $\bigcap_{\alpha\in A} K_\alpha = \emptyset.$ Fix $\alpha_0\in A$. Then we have that $\{K_\alpha^c\}
+  _{\alpha\in A \neq \alpha_0}$ is an open cover of $K_{\alpha_0}$. This is because for each $\alpha$,
+  $K_\alpha^c$ is open (since $K_\alpha$ is closed), so this collection of sets is open, and it is a cover
+  of $K_{\alpha_0}$ since if $p\in K_{\alpha_0}$ is not in $\bigcup\{K_\alpha^c\}$, then $p\in K_\alpha,
+  \alpha\neq{\alpha_0}$, and so $p\in\bigcap_{\alpha\in A}K_\alpha$, which contradicts our assumption 
+  that this intersection is empty. Since we have an open cover and $K_{\alpha_0}$ is compact, we have a 
+  finite subcover $\{\alpha_1, \ldots, \alpha_n\}\subset A$ such that $K_{\alpha_0} \subset 
+  \left(K^c_{\alpha_1} \cup \ldots \cup K^c_{\alpha_n}\right)$. Thus, we have that $$K_{\alpha_1}
+  \cup \ldots \cup K_{\alpha_n} \subset K^c_{\alpha_0},$$ which means that $K_{\alpha_1} \cup \ldots
+  \cup K_{\alpha_n} \cup K_{\alpha_0} = \emptyset,$ which contradicts our initial assumption that
+  finite subcollections indexed by a $A$ have non-trivial intersection. So, we have the claim.
+\end{proof}
+
+\begin{corollary}
+  If $\{K_n\}^\infty_{n=1}$ is a sequence of nonempty compact subsets of $X$ and if $K_{n+1}\subset 
+  K_n$ for all $n$, then $$\bigcap_{n=1}^\infty K_n \neq \emptyset.$$
+\end{corollary}
+\begin{proof}
+  By the theorem, all finite intersections are nonempty, so the conclusion holds.
+\end{proof}
+
+\begin{corollary}
+  $K\subset X$ compact, $E\subset K$ is an infinite subset $\Rightarrow E$ has a limit point in $K$.
+\end{corollary}
+\begin{proof}
+  Suppose that there is no point of $K$ that is a limit point of $E$. Then $\forall p\in K, \exists
+  r_p >0 \st B_{r_p}(p) \cap E$ is finite. Then $\{B_{r_p}(p)\}_{p\in K}$ is an open cover of $K$. 
+  Since $K$ is compact, there exists a finite subcover $\{B_{r_p}(p_i)\}_{i=1}^n$. Then $E$ is also
+  covered by this finite subcover, and since the intersection of $E$ with every ball is finite, we 
+  have that $E$ is finite. This contradicts our assumption that $E$ is infinite, and so we have the claim.
+\end{proof}
 \end{document}
