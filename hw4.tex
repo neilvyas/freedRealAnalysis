@@ -1,0 +1,301 @@
+\documentclass{assignment}
+\usepackage{mymath}
+\usepackage{csquotes}
+
+\begin{document}
+\header{Real Analysis I}{Homework 4}
+
+\section*{Rudin Problems}
+\begin{question}[2.7*]
+  Let $A_1, A_2, \ldots$ be subsets of a metric space.
+\begin{qparts}
+\item If $B_n = \bigcup_{i=1}^n A_i,$ prove that $\conj{B} = \bigcup_{i=1}^n \conj{A_i}.$
+\item If $B_n = \bigcup_{i=1}^\infty A_i,$ prove that $\conj{B} \supset \bigcup_{i=1}^\infty \conj{A_i}.$
+\end{qparts}
+Show, by example, that this inclusion can be proper.
+\end{question}
+\begin{proof}\leavevmode
+  \begin{qparts}
+  \item $(\supset)$ Let $B_n$ be as above. Since for $i=1,\ldots, n$ we have that $A_i\subset B_n$,
+    we have that $\conj{A_i}\subset\conj{B_n}$, and so $\bigcup_{i=1}^n\conj{A_i} \subset \conj{B_n}.$ \\
+
+    $(\subset)$ Since $\conj{B_n} = B_n \cup B'_n$, it suffices to show that $B' \subset 
+    \bigcup_{i=1}^n \conj{A_i}.$ Let $p\in B_n$ be a limit point of $B_n$; that is, $p\in B_n, B'_n$. 
+    Let $N_m(p) = \{q\mid d(p,q) < 1/m\}$ be the $m$-neighborhood about $p$.
+    Then $\forall m\in\N, \exists q_m \in N_m(p)$ such that $q_m\in B-n$, since $p$ is a limit point
+    of $B_n$. By our definition of $N$, we have that $N_l \subset N_k$ for all $l\geq k$. So we have 
+    that for $l \geq k$, if $q_k\notin A_i$, then $q_l\notin A_i$. \\
+
+    In particular, for $i = 1,\ldots, n$ and some $k\in\N, l\geq k$, we have that $q_l\in A_i$, since
+    we consider finitely many $A$ and countably many $q$ (i,e., this $k$ must exist). Thus, $p$ is a 
+    limit point of $A_i$, and so $p\in\conj{A_i}$. So $\conj{B_n}\subset\bigcup_{i=1}^n A_i$.\\
+
+    Thus, we have the claim.
+
+  \item $\forall i, A_i \subset B = \bigcup_{j=1}^\infty A_j$. Thus $\conj{A_i} \subset \conj{B_n}$, 
+    for all $i$. So then we have the claim.
+    \end{qparts}
+\end{proof}
+Consider the following collection of sets $$B_n = \left(\frac{1}{n}, 1\right).$$ Then $(0,1) = \bigcup
+_{i=1}^\infty B_n.$ But 
+\begin{align*}
+  \conj{(0,1)} &= [0,1] \\
+               &\supset \bigcup_{i=1}^\infty \conj{(1/n, 1)} \\
+               &= \bigcup_{i=1}^\infty [1/n, 1] \\
+               &= (0,1],
+\end{align*}
+and so the inclusion is proper.
+
+\begin{question}[2.9]
+Let $E^0$ denote the set of all interior points of a set $E$. 
+\begin{qparts}
+\item Prove that $E^0$ is always open.
+\item Prove that $E$ is open iff $E = E^0$.
+\item If $G\subset E$ and $G$ is open, prove that $G\subset E^0$.
+\item Prove that the complement of $E^0$ is the closure of the complement of $E$.
+\item Do $E$ and $\conj{E}$ always have the same interiors?
+\item Do $E$ and $E^0$ always have the same closures?
+\end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+\begin{qparts}
+  \item Suppose that $p\in\E^0$, and hence $p$ is an interior point of $E$. Then $\exists\delta > 0$ 
+  such that $N_\delta(p) \subset E$, by definition, with $N$ open. Then $\forall x\in N_\delta(p),
+  \exists \varepsilon > 0 \st N_\varepsilon(x)\subset N_\delta(p) \subset E$, and so $x$ is an interior
+  point of $E$. Thus $N_\delta(p)\subset E^0$, and so $E^0$ is open.
+
+  \item $(\Rightarrow)$ Suppose that $E$ is open. Then $p\in E\Rightarrow \exists\delta >0 \st N_\delta(p)
+  \subset E$, and so $p\in E^0$. So then $E\subset E^0$. Conversely, $E^0\subset E$ obviously. So we 
+  have that $E=E^0$. \\
+  $(\Leftarrow)$ Suppose that $E^0 = E$. By part $(a)$ we have that $E^0$ is always open, so $E$ is 
+  open.
+
+  \item Let $p\in G$. Then, since $G$ is open, $\exists \delta > 0 \st N_\delta(p)\subset G\subset E$. 
+  So, we have that $p$ is an interior point of $E$, and thus $p\in E^0$. So $G\subset E^0$.
+
+  \item We want to show that $$(E^0)^c = \conj{E^c}.$$ $(\subset)$ Suppose that $p\in (E^0)^c$. Then,
+  since $p$ is not an interior point of $E$, we have that $\forall N(p),  N\cap E^c \neq \emptyset.$
+  So, either $p\in E^c$ or $\exists x\in N\cap E^c, x\neq p$, i.e $p\in E^c \cup (E^c)'$. Thus $p\in
+  \conj{E^c}.$ \\
+
+  $(\supset)$ You just perform the same argument, but with $p\in\conj{E^c}$ initially.
+
+  \item No. Consider $E = (-1, 0)\cup(0,1)$. Then $E^0 = E$, but $\conj{E}^0 = (-1, 1)$, so they are
+    different.
+
+  \item No. Take $E = \Q$, then $\conj{E} = \R$ but $\conj{E^0}$ is empty.
+  
+  \end{qparts}
+\end{proof}
+
+\begin{question}[2.11]
+For $x,y\in\R$, define $d(x,y)$ to be
+\begin{qparts}
+  \item $(x-y)^2,$ \\
+  \item $\sqrt{|x - y|},$ \\
+  \item $|x^2 - y^2|,$ \\
+  \item $|x - 2y|,$ \\
+  \item $\frac{|x-y|}{1 + |x - y|}.$ \\
+\end{qparts}
+Determine, for each of these, whether it is a metric or not.
+\end{question}
+\begin{proof}\leavevmode
+  \begin{qparts}
+  \item This isn't a metric, since it violates the triangle inequality. Consider $x=0, y=1, z=2$. 
+    Then $d(x,y) + d(y,z) = 2$ but $d(x,z) = 4$, and $2 \not\geq 4$.
+
+  \item Let $x=y$; obviously, $d(x,y) = 0$. Suppose $d(x,y) = 0$. Then $$\sqrt{|x-y|} = 0 \Rightarrow
+    |x - y| = 0 \Rightarrow x -y = 0 \Rightarrow x = y,$$ as desired. We take the principal root, so
+    $d$ is positive. $d$ is obviously symmetric, since $|\cdot, \cdot|$ is symmetric. Thus, it only
+    remains to check the triangle inequality.\\
+
+    Let $x,y,z\in\R$. Then note that $d(x,y) + d(y,z) \geq d(x,z) \iff (d(x,y) + d(y,z))^2 \geq d(x,z)^2,$ 
+    since $d$ is positive. Further, since $d$ is positive, note that $(d(x,y) + d(y,z))^2 \geq 
+    d(x,y)^2 + d(y,z)^2$. Thus, it suffices to prove the latter. But the latter is just the statement
+    $$|x - y| + |y - z| \geq |x - z|, $$ which is true since $|\cdot, \cdot|$ is itself a distance 
+    and thus obeys the triangle inequality.
+
+    \item Consider $x = 1, y=-1$. Then $x\neq y$ but $d(x,y) = 0$, and so we have that this $d$ is
+not a metric.
+
+    \item This is obviously not a metric since it isn't symmetric, i.e. $\exists x,y \st d(x,y) \neq 
+d(y,x)$. The counterexample we give is $x = 1, y = 2$. Then $d(x,y) = 3$ but $d(y,x) = 0$;
+additionally, we see that this $d$ violates positivity as well.
+
+    \item From an earlier homework, we had that $$d'(x,y) = \frac{d(x,y)}{1 + d(x,y)}$$ is a metric
+iff $d(x, y)$ is a metric, and we have that $d(x,y) = |x-y|$ is a metric since it is the canonical
+metric on $\R$, so we have that this is a metric.  
+  \end{qparts}
+\end{proof}
+
+\begin{question}[2.13]
+  Construct a compact set of real numbers whose limit points form a countable set.
+\end{question}
+\begin{proof}
+  Consider the set $\{0\}$. 
+\end{proof}
+\begin{proof}
+  We have that a set in $\R$ is compact iff it is bounded and closed. \\
+
+  Consider the set $$E = \left\{\frac{1}{n} + \frac{1}{m}\ \middle|\ n,m\in\N \right\}.$$ Then the limit
+  points are $E' = \left\{\frac{1}{n}\mid n\in\N\right\},$ which is obviously countable. This set is
+  closed, since it contains all its limit points, and bounded, obviously, so it is compact. 
+\end{proof}
+
+\begin{question}[2.14]
+  Give an example of an open cover of the segment $(0,1)$ which has no finite subcover.
+\end{question}
+\begin{proof}
+  Let's just use the obvious one. Consider the collection of sets given by
+  $$B_n = \left(\frac{1}{n}, 1\right).$$ Then $\bigcup_{n\in\N}B_n$ is a cover of $(0,1)$, but for any
+  finite $m$, the maximum index number in a finite subcollection, we have that $\frac{1}{m}\in(0,1)$,
+  but not in the union of the finite subcollection. So this open cover has no finite subcover.
+\end{proof}
+
+\begin{question}[2.15]
+  Show that Theorem 2.36 and its Corollary become false (in $\R$, for example) if the word
+``compact'' is replaced by ``closed'' or ``bounded.''
+\end{question}
+\begin{displayquote}
+  \textbf{Theorem 2.36} \\
+  If $\{K_a\}$ is a collection of compact subsets of a metric space $X$ such that the intersection of
+every finite subcollection of $\{K_a\}$ is nonempty, then $\bigcap K_a$ is nonempty. \\
+
+  \textbf{Corollary}\\
+If $\{K_n\}$ is a sequence of nonempty compact sets such that $K_n \supset K_{n+1}$, then $\bigcap_1
+^\infty K_n$ is not empty.  
+\end{displayquote}
+The following proofs have a nice dichotomy of ``running away'' in the first case and ``collapsing to
+nothing'' in the second.
+\begin{proof}
+  Replace the word ``compact'' by ``closed'' in the above theorem. Then consider the sequence of closed
+  sets given by $$C_n = [n, \infty), n\in\N.$$ Note that each $C_n$ is closed since its complement is 
+  open. So the intersection of every finite subcollection is nonempty, since $$\bigcap_i^j C_i = 
+  [N, \infty),$$ where $N = \max\{n_i,\ldots,n_j\}$. But since there is no largest integer, 
+    $$\bigcap_{n\in\N}C_n = \emptyset.$$
+\end{proof}
+\begin{proof}
+  Replace the word ``compact'' by ``bounded'' in the above theorem. Then consider the sequence of 
+  bounded sets given by $$B_n = [1 - \frac{1}{n}, 1), n\in\N.$$ Then note that as above, the intersection
+  of every finite subcollection is nonempty, but the arbitrary intersection is empty (this is proved
+  via a variant of the standard $\delta-\varepsilon$ mumbo-jumbo that gets so much mileage in analysis,
+  but I'll omit it here).
+\end{proof}
+
+\begin{question}[2.16]
+  Regard $\Q$ as a metric space, with $d(p,q) = |p - q|$. Let $$ E = \{p\in\Q\mid 2 < p^2 < 3\}.$$
+Show that $E$ is closed and bounded in $\Q$, but that $E$ is not compact. Is $E$ open in $\Q$?
+\end{question}
+\begin{proof}
+  We have from prior results that $\sqrt{2}$ and $\sqrt{3}$ are $\notin\Q$. Obviously, $E$ is bounded,
+  since it sits inside the interval $(-42, 42)\cap\Q$. Let's first answer the questions about openness
+  and then the question about compactness. \\
+
+  We want to show that $E$ is open in $\Q$. Write 
+  $$E = \Q \cap [(-\sqrt{3}, -\sqrt{2}) \cup (\sqrt{3}, \sqrt{2})].$$ Then since $E$ is an intersection
+  of an open set in $\R$ with $\Q$, $E$ must be open in $\Q$. Now, since $\Q$ is dense in $\R$, the 
+  closure of $E$ in $\R$ is $[-\sqrt{3}, -\sqrt{2}] \cup [\sqrt{3}, \sqrt{2}]$. But the closure of 
+  $E$ in $\Q$ is $\Q \cap [(-\sqrt{3}, -\sqrt{2}) \cup (\sqrt{3}, \sqrt{2})]$, since we have that\
+  $\sqrt{2}, \sqrt{3} \notin \Q$. So since $E = \conj{E}$ in $\Q$, we have that $E$ is closed in $\Q$. \\
+
+  Let's prove the statement about compactness now. Take the the cover of $E$ given as follows:
+  $$B_n = \Q \cap [(-\sqrt{3} + \frac{1}{n}, -\sqrt{2} - \frac{1}{n}) \cup (\sqrt{2} + \frac{1}{n}, \sqrt{3} - \frac{1}{n})].$$
+  Note that $$E\subset\bigcup_{n\in\N}B_n,$$ but $E$ is not a subset of a union of any finite 
+  subcollection of $\{B_n\}$, say $\bigcup_i^j B_i$. Then let $N = \max\{n_i,\ldots,n_j\}$. So then
+  $\Q\cap (\sqrt{3} - \frac{1}{n}, \sqrt{3}) \not\subset \bigcup_i^j B_i$, and so $E\not\subset\bigcup_i^j B_i$.
+\end{proof}
+
+\section*{Other Problems}
+\begin{question}[1]
+  \begin{qparts}
+    \item Let $(X_1, d_1)$ and $(X_2, d_2)$ be metric spaces. Construct a metric on the Cartesian
+product $X_1 \times X_2$.
+    \item Let $X$ be the set of triangles in the Euclidean plane $E^2$. Construct a metric on $X$
+which captures the intuitive notion of when two triangles are close.  
+  \end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+  \begin{qparts}
+  \item Let $$d\left((x_1, y_1), (x_2,y_2)\right) = d_1(x_1, x_2) + d_2(y_1, y_2),$$ for $(x,y)\in X_1\times X_2$.
+    Now it just remains to check the three criteria for $d$ in order to determine whether or not it is 
+    a distance. It satisfies positivity since two positive numbers add to 0 iff both are 0, and both
+    $d_1, d_2$ satisfy positivity since they are distances. It is also obviously symmetric since both
+    $d_1, d_2$ are symmetric, again since they are both distances. \\
+
+    Now we must check the triangle inequality. Let $(x_1, y_1), (x_2, y_2), (x_3, y_3) \in X_1\times 
+    X_2$. Then 
+    \begin{align*}
+      d\left((x_1, y_1), (x_2, y_2)\right) + d\left((x_2, y_2), (x_3, y_3)\right) &= 
+      \left[d_1(x_1, x_2) + d_2(y_1, y_2)\right] + \left[d_1(x_2, x_3) + d_2(y_2, y_3)\right] \\
+      &= \left[d_1(x_1,x_2) + d_1(x_2, x_3)\right] + \left[d_2(y_1,y_2) + d_2(y_2, y_3)\right] \\
+      &\geq d_1(x_1, x_3) + d_2(y_1, y_3) \\
+      &= d((x_1, y_1), (x_3, y_3)),
+    \end{align*}
+    as desired. So, finally, we conclude that $d$ as defined is a metric.
+
+   \item We can construct the ``obvious'' but limited metric, which is to take the midpoint of each 
+     triangle (averaging the vertices) and then computing the usual distance in $\E^2$ on the resulting
+     pair of vectors. But if we want to truly capture the intuitive notion of close, we should make
+     some effort to associate the corresponding points together. \\
+
+     Let $\Sigma$ be the set of all permutations of $\{1,2,3\}$. Then for any two triangles $T_1 = 
+     (x_1, x_2, x_3)$ and $T_2 = (y_1, y_2, y_3)$, we have that 
+     $$d_T(T_1, T_2) = \min_{\sigma\in\Sigma}\sum_{i=1}^3d(x_i, y_{\sigma(i)}).$$
+
+     I don't really want to check that this is a metric, mainly because of verifying the triangle
+     inequality bit, but since it's in terms of the canonical $d$ it should be a metric.
+  \end{qparts}
+\end{proof}
+
+\begin{question}[3]
+  For each of the following statements write its negation and, for parts (a) and (b), state whether
+the negation is true or false. You need not provide a proof.
+\begin{qparts}
+  \item For every metric space $(X, d)$ there exist $p,q\in X$ such that $d(p,q) > 0.$
+  \item There exists a metric space $(X,d)$ such that every subset of $X$ is closed.
+  \item Let $f: [0,1]\to\R$. For all $x_0\in[0,1]$ and all $\varepsilon\in\R^{>0}$, there exists
+$\delta\in\R^{>0}$ such that if $|x - x_0| < \delta$ then $|f(x) - f(x_0)| < \varepsilon.$
+\end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+  \begin{qparts}
+  \item The negation of this statement is $$\exists (X,d) \text{ a metric space } \st \forall p,q\in
+    X, d(p,q) \leq 0.$$ We can amend the final statement to be $d(p,q) = 0$, since $d$ is positive in 
+    a metric space. \\
+    
+    Take the metric space $X = \{x\}$ equipped with the discrete metric (note that, since $X$ has
+    only one element, this metric is uniquely determined). So note that there do not exist $p,q\in X$
+    such that $d(p,q) > 0$, since $\forall p,q \in X, d(p,q) = 0$ since $p = q$. Thus, we have that the 
+    negation is true.
+    
+  \item The negation of this statement is $$\forall \text{ metric spaces }(X,d),\ \exists G\subset X
+    \st G \text{ is open.}$$ Taking the same example $(X,d)$ used above, we have that the negation is false.
+
+  \item The negation of this statement is $$\exists x\in[0,1], \varepsilon\in\R^{>0} \st \forall \delta
+    \in\R^{>0}, |x - x_0| < \delta \wedge |f(x) - f(x_0)| \geq \varepsilon.$$ The original statement 
+    is just a statement of continuity, so the truth value depends on the function $f$. For example,
+    $f(x) = x^2$ is continuous, so the original statement holds, but it's easy to construct a pathological
+    function that just takes the values $0$ and $\infty$ in order to falsify the original statement.
+  \end{qparts}
+\end{proof}
+
+\begin{question}[3]
+  What is wrong with the following argument which ``proves'' that for any positive integer $n$, if
+there is a room of people with at least one redhead, then everyone in the room is a redhead?
+\begin{displayquote}
+  The statement is clearly true for $n = 1$. Now given the truth of the statement for $n$, suppose a
+room has $n + 1$ people and includes a redhead. Suppose that not everyone is blessed with red hair.
+Then putting aside one of the non-redheads, we have a room with $n$ people in it, including a
+redhead.  By the induction hypothesis, all $n$ people are redheads. Now bring back the non-redhead
+who stepped aside and have some other person step aside. Again we have $n$ people in the room with
+all but one redhead. So by induction all $n$ are redheaded. Since the person who stepped aside is
+also redheaded, we have proved that all $n + 1$ people are redheaded. \\
+\end{displayquote} 
+\end{question}
+\begin{proof}
+  We will use the mechanism of the proof to induce a contradiction. Suppose we have three people in a
+  room, $a,b,c$, and $c$ is a redhead. Suppose the IH for $n=2$. Then have $a$ exit. Since only $b,c$
+  remain, then by the IH everyone in the room must be a redhead. In particular, $b$ must be a redhead.
+  But we assumed $b$ not to be a redhead, so we have arrived at a contradiction.
+\end{proof}
+\end{document}
