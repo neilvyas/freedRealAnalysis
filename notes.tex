@@ -103,14 +103,7 @@ So let's prove the theorem now.
   follows from there. So then both $a$ and $b$ are even, which is a contradiction. \\
 \end{proof}
 
-\section{Sequences}
-We say a sequence is a function from $\N\to\Q$. Consider $$a_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots$$ 
-Note that this is a function of the number of terms (in $\N$), and each term is in $\Q$. But this sequence
-is ``converging'' to $e$, which is not in $\Q$. Additionally, consider the following sequence:
-$$b_n = (1 + \frac{1}{n})^n.$$
-Note that both these sequences converge to $e$, but the second converges much faster.\\
 
-We will define the real numbers $\R$ in a similar manner, with these limit processes.
 
 %lecture 2
 \section{Relations}
@@ -546,4 +539,75 @@ to not include it with the tag ``I don't care.'' %\\
   covered by this finite subcover, and since the intersection of $E$ with every ball is finite, we 
   have that $E$ is finite. This contradicts our assumption that $E$ is infinite, and so we have the claim.
 \end{proof}
+
+%lecture 8
+%TODO: refactor the other theorems to be parts of this proof.
+\begin{theorem}
+  Let $K\subset\E^n$. Then the following are equivalent:
+  \begin{enumerate}
+    \item $K$ is closed and bounded;
+    \item $K$ is compact;
+    \item Every infinite $E\subset K$ has a limit point in $K$.  
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We proved each of the three implications separately.
+\end{proof}
+
+\begin{defn}
+  Let $(X,d)$ be a metric space. Then 
+  \begin{enumerate}
+    \item Subsets $A,B\subset X$ are \emph{separated} iff $A \cap \conj{B}$ and $\conj{A} \cap B$ are
+      both empty.
+    \item $X$ is \emph{connected} iff it is not the union of two separated subsets.  
+  \end{enumerate}
+\end{defn}
+Intuitively, separated sets don't abut each other, i.e. they share no limit points that one contains.
+
+\begin{theorem}
+  A subset $E\subset\R$ is connected iff $\forall x,y\in E$ with $x < y$ and $z\in\R$ such that 
+  $x < z < y$, then $z\in E$. That is, $x,y\in E, x < y \Rightarrow (x,y)\subset E$.
+\end{theorem}
+
+\section{Sequences}
+%material from lecture 2
+We say a sequence is a function from $\N\to\Q$. Consider $$a_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots$$ 
+Note that this is a function of the number of terms (in $\N$), and each term is in $\Q$. But this sequence
+is ``converging'' to $e$, which is not in $\Q$. Additionally, consider the following sequence:
+$$b_n = (1 + \frac{1}{n})^n.$$
+Note that both these sequences converge to $e$, but the second converges much faster.\\
+
+We will define the real numbers $\R$ in a similar manner, with these limit processes. \\
+
+\begin{defn}
+  Let $(X,d)$ be a metric space. A \emph{sequence} in $X$ is a function $p: \N\to X$, often denoted
+  as $p = \{p_n\}$, where $p_n = p(n)$.
+\end{defn}
+
+\begin{defn}
+  Let $\{p_n\} \subset X$ be a sequence. Then if $n_1< n_2< \ldots$ are positive integers, then 
+  $\{p_{n_i}\}$ is a \emph{subsequence} of $\{p_n\}$, where $i\to n_i$ is an increasing injection.
+\end{defn}
+
+\begin{defn}
+  Let $\{p_n\}\subset X$ be a sequence. Then $\{p_n\}$ \emph{converges} to $p\in X$ iff
+  $$\forall \varepsilon > 0, \exists N\in\N \st \forall n\geq N, d(p_n, p) < \varepsilon.$$
+\end{defn}
+
+\begin{defn}
+  Let $\{p_n\}\subset X$ be a sequence. Then $\{p_n\}$ is a \emph{Cauchy sequence} iff 
+  $$\forall \varepsilon > 0, \exists N\in\N \st \forall n,m \geq N, d(p_n, p_m) < \varepsilon.$$
+\end{defn}
+
+\begin{theorem}
+  Let $(X,d)$ be a metric space, $\{p_n\} \subset X$. Then
+  \begin{enumerate}
+    \item If $p, p' \in X$ with $p_n \to p$ and $p_n \to p'$, then $p = p'$.
+    \item If $\{p_n\}$ converges, then it is bounded.
+    \item If $\{p_n\}$ converges, then it is Cauchy.
+    \item If $\{p_n\}$ is Cauchy and $X$ is compact, then $\{p_n\}$ converges.
+    \item If $\{p_n\}$ is Cauchy and $X = \E^k$, then $\{p_n\}$ converges.
+    \item If $\{p_n\}$ is Cauchy and a subsequence converges, then $\{p_n\}$ converges.
+  \end{enumerate}
+\end{theorem}
 \end{document}
