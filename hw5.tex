@@ -1,0 +1,88 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\no{5}
+\class{Real Analysis I}
+
+\begin{document}
+\maketitle
+
+\section*{Rudin Problems}
+%Chapter 2 (page 44): 19*
+%Chapter 3 (page 78): 1, 2, 3, 20*, 23*, 24* (extra credit)
+\begin{question}[2.19]
+  \begin{qparts}
+   \item If $A$ and $B$ are disjoint closed sets, prove that they are separated.
+   \item Prove the same for disjoint open sets.
+   \item Fix $p\in X, \delta > 0.$ Then let $$A = \{q\in X \mid d(p,q) < \delta\};$$ let $B$ be the 
+   same but with $<$ replaced with $>$. Prove that $A$ and $B$ are separated.
+   \item Prove that every connected metric space with at least two points is uncountable. \emph{Hint:
+   use part (c).}
+  \end{qparts} 
+\end{question}
+
+\begin{question}[3.1]
+  Prove that the convergence of $\{s_n\}$ implies the convergence of $\{|s_n|\}$. Is the converse
+  true?
+\end{question}
+No, the converse is not true, i.e. we can have conditionally convergent sequences.
+\begin{proof}
+  
+\end{proof}
+
+\begin{question}[3.2]
+  Calculate $\lim_{n\to\infty}(\sqrt{n^2 + n} - n)$.
+\end{question}
+
+\begin{question}[3.3]
+  If $s_1 = \sqrt{2}$, and $$s_{n+1} = \sqrt{2 + \sqrt{s_n}},\ n\in\N,$$ prove that $\{s_n\}$ converges,
+  and that $s_n < 2$ for $n\in\N$.
+\end{question}
+
+\begin{question}[3.20]
+  Suppose $\{p_n\}$ is a Cauchy sequence in a metric spae $X$, and some subsequence $\{p_{n_l}\}$ 
+  converges to a point $p\in X$. Prove that the full sequence $\{p_n\}$ converges to $p$.
+\end{question}
+
+\begin{question}[3.23]
+  Suppose $\{p_n\}$ and $\{q_n\}$ are Cauchy sequences in a metric space $X$. Show that the sequence 
+  $\{d(p_n, q_n)\}$ converges. \emph{Hint:} For any $m,n$, $$d(p_n, q_n) \leq d(p_n, p_m) + d(p_m, q_m)
+    + d(q_m, q_n);$$ it follows that $$|d(p_n, q_n) - d(p_m, q_m)|$$ is small if $m$ and $n$ are large.
+\end{question}
+
+\begin{question}[3.24]
+  Let $X$ be a metric space.
+  \begin{qparts}
+  \item Call two Cauchy sequences $\{p_n\}, \{q_n\}$ in $X$ \emph{equivalent} iff $$\lim_{n\to\infty}
+    d(p_n, q_n) = 0.$$ Prove that this is an equivalence relation.
+  \item Let $X^*$ be the set of all equivalence classes so obtained. If $P, Q\in X^*, \{p_n\}\in P,
+    \{q_n\}\in Q$, define $$\Delta(P, Q) = \lim_{n\to\infty} d(p_n, q_n);$$ by Exercise 23, this limit
+    exists. Show that the number $\Delta(P,Q)$ is unchanged if $\{p_n\}$ and $\{q_n\}$ are replaced
+    by equivalent sequences, and hence that $\Delta$ is a distance function in $X^*$.
+  \item Prove that the resulting metric space $X^*$ is complete.
+  \item For each $p\in X$, there is a Cauchy sequence all of whose terms are $p$; let $P_p$ be the element
+    of $X^*$ which contains this sequence. Prove that $$\Delta(P_p, P_q) = d(p, q)$$ for all $p,q\in X$.
+    In other words, the mapping $\phi$ defined by $\phi(p) = P_p$ is an isometry of $X$ into $X^*$.
+  \item Prove that $\phi(X)$ is dense in $X^*$, and that $\phi(X) = X^*$ if $X$ is complete. By $(d)$,
+    we may identify $X$ and $\phi(X)$ and thus regard $X$ as embedded in the complete metric space $X^*$.
+    We call $X^*$ the \emph{completion} of $X$.
+\end{qparts}
+\end{question}
+
+\section*{Other Problems}
+\begin{question}[1]
+Evaluate the following limits (in R) or show that the limit does not exist.
+\begin{qparts}
+  \item $\lim_{n\to\infty}(-1)^n$
+  \item $\lim_{n\to\infty} \frac{n^2 - n}{n^3 + n}$
+  \item $\lim_{n\to\infty} n^{1/n}$
+\end{qparts}
+\end{question}
+
+\begin{question}[2]
+  Let $(X, d)$ be a metric space, $\{p_n\} \subset X$ a convergent sequence with $p_n \to p$, and 
+  $\{q_n\} \subset X$ a convergent sequence with $q_n \to q$. Prove that $d(p_n, q_n) \to d(p, q)$
+  (This last convergence takes place in $\R$).
+\end{question}
+
+\end{document}
