@@ -610,4 +610,72 @@ We will define the real numbers $\R$ in a similar manner, with these limit proce
     \item If $\{p_n\}$ is Cauchy and a subsequence converges, then $\{p_n\}$ converges.
   \end{enumerate}
 \end{theorem}
+%lecture 9
+\begin{proof}
+  I'll just provide sketches, since these are all easy and follow from the same core idea.
+  \begin{enumerate}
+    %uniqueness of limit
+  \item Suppose not, then $d(p, p') \neq 0$; since $\{p_n\}$ converges to both, we can get arbitrarily
+  close to both $p, p'$, which will allow us to violate the triangle inequality. \\
+
+  That is, suppose $d(p,p') = \varepsilon$. By convergence, we have $$\exists p_n \st d(p, p_n) < 
+  \frac{1}{3} \varepsilon,\ d(p_n, p') < \frac{1}{3}\varepsilon.$$ But then
+  \begin{align*}
+    d(p, p') &\leq d(p, p_n) + d(p_n, p') \\\
+             &< \frac{2}{3}\varepsilon,
+  \end{align*}
+  a contradiction.
+  %converges -> bounded
+  \item We need every element of the sequence to fit inside a ball. But from convergence, we know that
+    the sequence is bounded by $B_\varepsilon(p)$ for some finite $N$. Then there are at most $N$ points
+    that are outside of this ball, so take the max distance of those points from $p$ to be the radius
+    of a ball centered at $p$, which will then contain $\{p_n\}$.
+  %converges -> Cauchy
+  \item Just control the distance between two points by using the triangle inequality with $p$.
+  \end{enumerate} 
+\end{proof}
+
+\begin{theorem}
+  $p_n\to p$ iff $\forall \varepsilon > 0 , B_\varepsilon(p)$ contains all but finitely many elements
+  of $\{p_n\}$.
+\end{theorem}
+\begin{proof}
+  follows from the definition of convergence.
+\end{proof}
+
+\begin{theorem}
+  If $X$ is a compact metric space, $\{p_n\} \subset X$, then there is a subsequence $\{p_{n_i}\}$
+  which converges in $X$.
+\end{theorem}
+\begin{proof}
+  If $p$ has finite range, then pick a constant subsequence, which obviously converges. The constant 
+  subsequence exists by the pigeonhole principle. If $p$ has infinite range $\Img(p) = E \subset X$,
+  then $E$ is an infinite subset of a compact metric space, and so by (Thm 3.8), $E$ has a limit point
+  $p\in X$. Then choose $n_1 \st d(p_{n_1}, p) < 1,$ and inductively choose $$n_{i+1} \st n_{i+1} > n_i,
+  \ d(p_{n_{i + 1}}, p) < \frac{1}{i + 1}.$$ So then $\{p_{n_i}\}$ converges to $p$, as desired.
+\end{proof}
+
+\begin{corollary}
+If $X$ is compact, $\{p_n\}$ Cauchy,  then $\{p_n\}$ converges.
+\end{corollary}
+\begin{proof}
+ By the theorem, there exists a convergent subsequence. By a homework problem, since $\{p_n\}$ is 
+ Cauchy and there is a convergent subsequence, then $\{p_n\}$ converges.
+\end{proof}
+
+\begin{corollary}
+  If $\{p_n\} \subset \E^k$ is Cauchy, then $\{p_n\}$ converges.
+\end{corollary}
+\begin{proof}
+  I will provide the sketch of the proof. First, note that $\{p_n\}$ is bounded, by a prior result.
+  Then choose $R > 0, p\in\E^k  \st \{p_n\} \subset B_R(p) \subset \conj{B_R(p)}.$ Since $\conj{B_R(p)}$
+  is closed and bounded, it is compact. Hence, $\{p_n\}$ converges.
+\end{proof}
+
+\begin{defn}
+  A metric space is complete if every Cauchy sequence converges.
+\end{defn}
+
+
+
 \end{document}
