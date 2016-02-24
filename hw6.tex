@@ -1,0 +1,104 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\no{6}
+\class{Real Analysis}
+
+\begin{document}
+\maketitle
+
+\section*{Other Problems}
+\begin{question}[1]
+  Identify the completions of the following metric spaces in simple terms. You need only give an
+answer; no proof is necessary.
+\begin{qparts}
+  \item an open interval $(a,b) \subset \R$, where $a,b$ need not be finite.
+  \item a half-open interval $(a,b] \subset \R$
+  \item an open ball $B_r(p) \subset \E^n$
+  \item a deleted open ball $B'_r(p)$ for some $p\in\E^k, r > 0$
+  \item a closed ball $\conj{B_r(p)} \subset \E^n$
+  \item the set of rational points $\{(x,y) \in \E^2 \mid x,y \in \Q \}$
+  \item the set of integral points $\{(x,y) \in \E^2 \mid x,y \in \Z \}$
+  \item a complete metric space $(X, d)$
+  \item a compact metric space $(X, d)$ 
+\end{qparts} 
+\end{question}
+\begin{proof}\leavevmode
+\begin{qparts}
+  \item $[a,b]$ if neither $a$ nor $b$ is infinite, else open the interval for whichever ``endpoint''
+is not finite.
+  \item $[a,b]$
+  \item $\conj{B_r(p)}$
+  \item $\conj{B_r(p)}$
+  \item $\conj{B_r(p)}$
+  \item Since the rationals are dense in the reals, we have that the completion is really the whole 
+plane $\E^2$. 
+  \item Since the integers are not dense in the reals, there is a minimum distance between two distinct
+integral points in $\E^2$, and by the main mechanism of the proof from 2 (a), we have that it is complete.
+(Note that the method of the proof works even for non-finite metric spaces; really, all we need is a 
+lower bound on the distance between distinct points).
+  \item $(X,d)$
+  \item $(X,d)$
+\end{qparts}
+\end{proof}
+
+\begin{question}[2]
+  \begin{qparts}
+    \item Show that every finite metric space is complete.
+    \item Let $X$ be any set and $d$ the discrete metric. What are the Cauchy sequences in $X$? Under 
+what conditions is $X$ complete?
+  \end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+  \begin{qparts}
+     \item Suppose $(M, d)$ is a finite metric space. Since it is finite, there is some pair of ``closest
+points;'' that is, $$\exists \varepsilon > 0 \st \forall x_1, x_2 \in M, d(x_1, x_2) > \varepsilon.$$ 
+Note that this blows up if $|M| = 1$, so suppose WLOG $|M| > 1$; the single-point case is trivial anyway.
+Now, let $\{p_n\} \subset M$ be a Cauchy sequence. Then $$\exists N\in\N \st \forall m,n \geq N, 
+d(p_n, p_m) < \varepsilon.$$ But we had that no two points can be closer than $\varepsilon$ from before,
+so indeed in order for $\{p_n\}$ to be Cauchy, $p_m = p_n$ for $m,n \geq N$. Thus, since $\{p_n\}$ is 
+constant in $M$, it converges, and so $(M, d)$ is complete.
+
+    \item Since $x_1, x_2 \in X, x_1 \neq x_2 \Rightarrow d(x_1, x_2) = 1$, we just pick $\varepsilon
+< 1$ and thus have that, by a similar argument as in (a), the only Cauchy sequences are those that 
+are eventually constant. So then $X$ seems like it's pretty much always complete, since every Cauchy
+sequence is constant in $X$ and thus converges in $X$.
+  \end{qparts}
+\end{proof}
+
+\begin{question}
+  For each of the following statements, write its negation. Are the statements in (a) and (b) true?
+\begin{qparts}
+  \item For every metric space $(X,d)$ there exists a Cauchy sequence $\{p_n\} \subset X$ that converges.
+  \item There exists a metric space $(X, d)$ such that every sequence $\{p_n\} \subset X$ either has a 
+convergent subsequence or is unbounded. 
+  \item Let $f: [0,1]\to\R$. For all $x_0\in[0,1]$ and all $\varepsilon\in\R^{>0}$, there exists
+$\delta\in\R^{>0}$ such that if $|x - x_0| < \delta$ then $|f(x) - f(x_0)| < \varepsilon.$
+\end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+\begin{qparts}
+  \item The negation of this statement is
+$$\exists (X,d) \st \forall \{p_n\} \subset X \text{ that are Cauchy, } \{p_n\} \text{ diverges.}$$
+In this case, the original statement is true, since we can just take the constant sequence in any
+metric space with at least one element, and the degenerate case is trivial.  
+
+  \item The negation of this statement is 
+$$\forall (X, d), \exists \{p_n\} \subset X \st \{p_n\} \text{ does not have a convergent subsequence and
+is not unbounded.}$$
+The predicate is of tautological, since bounded $\Rightarrow$ convergent subsequence, and so if the
+sequence is unbounded the predicate is true, and if not, then it is bounded, and thus has a convergent subsequence,
+and thus the predicate is true. So the original statement is true because the predicate is always true.\\
+
+(NB: Maybe ``predicate'' should be replaced with ``consequent'' above.)
+  
+  \item The negation of this statement is $$\exists x\in[0,1], \varepsilon\in\R^{>0} \st \forall \delta
+    \in\R^{>0}, |x - x_0| < \delta \wedge |f(x) - f(x_0)| \geq \varepsilon.$$ The original statement 
+    is just a statement of continuity, so the truth value depends on the function $f$. For example,
+    $f(x) = x^2$ is continuous, so the original statement holds, but it's easy to construct a pathological
+    function that just takes the values $0$ and $\infty$ in order to falsify the original statement.
+\end{qparts} 
+\end{proof}
+
+
+\end{document}
