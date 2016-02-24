@@ -673,9 +673,105 @@ If $X$ is compact, $\{p_n\}$ Cauchy,  then $\{p_n\}$ converges.
 \end{proof}
 
 \begin{defn}
-  A metric space is complete if every Cauchy sequence converges.
+  A metric space is complete iff every Cauchy sequence converges.
 \end{defn}
 
+%lecture 10
+\begin{lemma}
+Let $\{a_n\}, \{b_n\} \subset \R, a,b \in \R,$ and suppose that 
+\begin{itemize}
+  \item $a_n \to a$;
+  \item $b_n \to b$;
+  \item $\forall n, a_n \leq b_n$.
+\end{itemize}
+Then $a \leq b$. (Note that we cannot use this method to conclude $a < b$, since in the limit $a_n$ and
+$b_n$ may coincide even if $a_n < b_n$.)
+\end{lemma}
+\begin{proof}
+  Suppose not, that is, suppose that $a > b$. Let $\delta = a-b$. Then by the definition of convergence,
+  $$\exists N\in\N \st \forall n \geq N, |a-a_n| < \frac{\delta}{2}, |b - b_n| < \frac{\delta}{2}.$$
+  Then 
+  \begin{align*}
+    b_n &< b + \frac{\delta}{2} \\
+        &= \frac{a + b}{2} \\
+        &= a - \frac{\delta}{2} \\
+        &< a_n,
+  \end{align*}
+  a contradiction. So we have that $a < b$.
+\end{proof}
+
+\begin{lemma}
+  If $\{a_n\} \subset \R$ and $|a_n| \to 0$, then $a_n \to 0$.
+\end{lemma}
+\begin{proof}
+  Given $\varepsilon > 0$, we have that $$\exists N\in\N \st \forall n \geq N, \varepsilon > ||a_n| - 
+  0| = |a_n - 0|,$$ and so by the definition of convergence $a_n \to 0$. Note that the converse is also
+  true, by the same proof.
+\end{proof}
+
+\begin{defn}
+  A sequence is \emph{monotone increasing} if\/ $\forall n, s_{n+1} \geq s_n$, and similarly for 
+  \emph{monotone decreasing}.
+\end{defn}
+\begin{lemma}
+  $\{s_n\}$ is monotone increasing iff $\{-s_n\}$ is monotone decreasing.
+\end{lemma}
+
+\begin{theorem}
+  Let $\{s_n\}$ be monotone. Then $\{s_n\}$ converges iff it is bounded.
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$ This follows from the general theorem for convergent sequences in a metric space. \\
+
+  $(\Leftarrow)$ Since $\{s_n\}$ is bounded above, there exists a least upper bound $s = \sup \{s_n\}$.
+  Now, we must show that $s_n \to s$, which we will do by the definition. Given $\varepsilon > 0$ and 
+  since $s$ is the least upper bound, we have that $$\exists N\in\N \st s_N > s - \varepsilon,$$ since
+  $s - \varepsilon$ is not an upper bound. Then by induction we have that $$\forall n \geq N, s \geq 
+  s_n \geq s_N > s-\varepsilon,$$ and so $|s - s_n| < \varepsilon$, as desired. \\
+
+  Now we must prove the induction we referenced earlier. We induct on the statement $$\forall N\in\N,
+  k = 0, 1, 2, \ldots, s_{N + k} \geq s_N,$$ which arises from monotonicity.
+  
+\end{proof}
+
+\begin{theorem}\leavevmode
+  Some useful limits.
+  \begin{enumerate}
+    \item If $p > 0$, then $\lim_{n\to\infty} \frac{1}{n^p} = 0$.
+    \item If $|x| > 1$, then $\lim_{n\to\infty} x^n = 0$.
+    \item $\lim_{n\to\infty} n^{(1/n)} = 1$.  
+  \end{enumerate}
+\end{theorem}
+\begin{proof}\leavevmode
+  \begin{enumerate}
+    \item 
+      \begin{align*}
+        &\frac{1}{n^p} < \varepsilon \\
+        &\Rightarrow 1 < \varepsilon n^p \\
+        &\Rightarrow \frac{1}{\varepsilon} < n^p \\
+        &\Rightarrow \left( \frac{1}{\varepsilon} \right)^{(1/p)} < n.
+      \end{align*}
+
+    \item It's enough to show the result for $0 \leq x < 1$, and the $x = 0$ case is trivial. So assume
+      $0 < x < 1$. Then let $x = \frac{1}{1 + y}$ for some $y > 0$. Then $y = \frac{1 - x}{x}$. Finally,
+      by the binomial formula we have that
+      \begin{align*}
+        x^n &= \frac{1}{(1 + y)^n} \\
+            &= \frac{1}{1 + ny + (\frac{n}{2}) y^2 + \ldots} \\
+            &\leq \frac{1}{1 + ny},
+      \end{align*}
+      and 
+      \begin{align*}
+        &\frac{1}{1 + ny} < \varepsilon \\
+        &\Rightarrow \frac{1}{\varepsilon} < 1 + ny \\
+        &\Rightarrow \frac{\frac{1}{\varepsilon} - 1}{y} < n,
+      \end{align*}
+      so $\frac{1}{1 + ny} \to 0$.
+
+    \item Set $x_n = n^{1/n} - 1$; we want to shoe that $x_n \to 0$. Note that $x_n > 0$.
+    
+  \end{enumerate}
+\end{proof}
 
 
 \end{document}
