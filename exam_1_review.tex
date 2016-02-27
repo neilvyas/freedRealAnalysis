@@ -1,0 +1,135 @@
+\documentclass{notes}
+\usepackage{mymath}
+
+\renewcommand{\emph}[1]{\textbf{#1}}
+
+\begin{document}
+\begin{center}
+  \textsf{\textbf{\Huge Exam 1 Review}}
+\end{center}
+\section{Sets and Fields}
+%cardinality
+\begin{defn}
+  An infinite set $X$ is \emph{countable} if we can give a bijection $\varphi: \N \to X$, and \emph{uncountable}
+if we can give an injection $\psi: \R \to X$.
+\end{defn}
+
+%algebraic definition
+\begin{defn}
+  A \emph{field} is a set $X$ together with two operations $+, \cdot: X\times X \to X$ that satisfy 
+the following properties:
+\begin{enumerate}
+  \item Associativity of\/ $(+)$
+  \item Existence of Additive Identity
+  \item Existence of Additive Inverses
+  \item Commutativity of\/ $(\cdot)$
+  \item Associativity of\/ $(\cdot)$
+  \item Existence of Multiplicative Identity
+  \item Existence of Multiplicative Inverses
+  \item Distributive Law: $$x \cdot (y + z) = (x \cdot y) + (x \cdot z)$$ 
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+  An \emph{ordering} is a relation $R$ with the following properties:
+\begin{enumerate}
+  \item Exactly one of $x = y, x < y, x > y$ holds;
+  \item Transitivity: $x < y, y < z \Rightarrow x < z$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+  An \emph{ordered field} is a field together with an ordering that is compatible with the structure
+of the field; that is, it satisfies 
+\begin{enumerate}
+  \item $y < z \Rightarrow x + y < x + z$
+  \item $x > 0, y > 0 \Rightarrow xy > 0$.  
+\end{enumerate}
+\end{defn}
+
+\subsection{$\R$ and $\Q$}
+\begin{defn}
+  The \emph{Archimedean property} for an ordered field $X$ is $$\forall x, y \in \R, x > 0 
+\Rightarrow \exists n \in \N \st nx > y.$$
+\end{defn}
+\begin{theorem}
+  Both $\Q$ and $\R$ satisfy the Archimedean property.
+\end{theorem}
+
+\begin{defn}
+  An \emph{upper bound} $\beta \in X$ for a set $E \subset X$ satisfies $\forall e \in E, e \leq \beta$.
+The definition for a \emph{lower bound} is analogous.
+\end{defn}
+\begin{defn}
+  The \emph{least upper bound} $\gamma$ of a set $E$, denoted $\gamma = \sup E$, satisfies $\forall
+\alpha < \gamma, \alpha \text{ is not an upper bound of } E.$ The definition for \emph{greatest 
+lower bound}, denoted $\inf E$, is analogous. A set has the least upper bound property if it has a
+least upper bound.
+\end{defn}
+\begin{theorem}
+  $\R$ satisfies the least upper bound property.
+\end{theorem}
+
+\begin{defn}
+  A set $X$ is \emph{dense} in another set $Y$ if $$\forall x,y \in Y, x < y, \exists r \in X \st 
+x < r < y.$$
+\end{defn}
+\begin{theorem}
+  $\Q$ is dense in $\R$.
+\end{theorem}
+
+\section{Metric spaces}
+\begin{defn}
+  A \emph{metric space} is a set $X$ equipped with a distance function $d: X\times X \to \R$, denoted
+$(X, d)$.
+\end{defn}
+
+\begin{defn}
+  A \emph{distance function} is a function $d: X \times X \to \R$ that satisfies
+\begin{enumerate}
+  \item \emph{positivity}: $d(p,q) \geq 0$.
+  \item \emph{symmetry}: $d(p,q) = d(q,p)$.
+  \item \emph{identity of indiscernibles}: $d(p,q) = 0 \iff p = q$
+  \item \emph{the triangle inequality}: $d(p,q) \leq d(p,r) + d(r, q)$.
+\end{enumerate}
+\end{defn}
+\subsection{Sets in Metric Spaces}
+%open closed bounded compact
+\begin{defn}
+  A point $p$ is an \emph{interior point} of $X$ iff $\exists \varepsilon > 0 \st B_\varepsilon(p)
+\subset X$.
+\end{defn}
+\begin{defn}
+  A point $p$ is a \emph{limit point} of a set $X$ iff every $\varepsilon > 0$ ball contains a 
+point of $X$.
+\end{defn}
+\begin{defn}
+  A set is \emph{open} iff every point is an interior point.
+\end{defn}
+Note that closed and open are not mutually exclusive. In particular, in any topological space $X$, both
+the empty set $\emptyset$ and the whole space $X$ are closed and open.
+%closure
+\begin{defn}
+  The \emph{closure} of a set $A$, denoted $\conj{A}$, is the union of the set with its limit points;
+mathematically, $\conj{A} = A \cup A'$.
+\end{defn}
+\begin{proposition}
+  The closure of a set is always closed.
+\end{proposition}
+
+\subsection{Sequences}
+\begin{defn}
+  A \emph{sequence} in $X$ is a function $p: \N \to X$, often written as $\{p_n\}$, where $p_n = p(n)$. 
+\end{defn}
+
+\begin{defn}
+  A sequence $\{p_n\} \subset X$ is a \emph{Cauchy sequence} iff $$\forall \varepsilon > 0, \exists 
+N\in\N \st \forall m,n \geq N, d(p_m, p_n) < \varepsilon.$$
+\end{defn}
+
+\begin{defn}
+  A sequence $\{p_n\} \subset X$ \emph{converges} to $p\in X$, denoted $p_n \to p$, iff 
+$$\forall \varepsilon > 0, \exists N\in\N \st \forall n \geq N, d(p_n, p) < \varepsilon.$$
+\end{defn}
+
+\end{document}
