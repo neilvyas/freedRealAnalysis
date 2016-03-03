@@ -1,0 +1,297 @@
+\documentclass{assignment}
+\usepackage{mymath}
+\usepackage{siunitx}
+
+\no{7}
+\class{Real Analysis I}
+
+\begin{document}
+\maketitle
+
+\section*{Rudin Problems}
+%3: 4,5,6,7,8,9,16
+\begin{question}[4]
+  Find the upper and lower limits of the sequence $\{s_n\}$ defined by $$s_1 = 0; \qquad 
+s_{2m} = \frac{s_{2m - 1}}{2}; \qquad s_{2m + 1} = \frac{1}{2} + s_{2m}.$$
+\end{question}
+\begin{proof}
+  Let's find closed-form expressions for both $s_{2m}$ and $s_{2m+1}$; from there, we can readily 
+  identify limits. The first few terms of this sequence are $$s_n = 0, 0, \frac{1}{2}, \frac{1}{4}, \ldots$$\\
+  
+  We claim that $$s_{2m} = \frac{2^{m - 1} - 1}{2^{m}}, \qquad s_{2m + 1} = \frac{2^m - 1}{2^m}.$$
+  We'll show both results using induction, starting with the first. Let $m = 1$; then $s_2 = 0 = 
+  (2^0 - 1)/2^1$, as desired. Now suppose that the claim holds for $m$; we want to show it for $m+1$.
+  Then 
+  \begin{align*}
+  s_{2(m+1)} &= \frac{s_{2(m+1) - 1}}{2} \\
+             &= \frac{s_{2m + 1}}{2} \\
+             &= \frac{1/2 + s_{2m}}{2} \\
+             &= \frac{1/2 + \frac{2^{m-1} - 1}{2^{m}}}{2} \note{(by the IH)} \\
+             &= \frac{\frac{2^{m} - 1}{2^{m}}}{2} \\
+             &= \frac{2^{m} - 1}{2^{m + 1}},
+  \end{align*}
+  as desired. Now, let's show the second result. Let $m = 1$; then $s_3 = \frac{1}{2} = \frac{2^1 - 1}{2^1},$
+  as desired. Now suppose that the claim holds for $m$; we want to show it for $m+1$. Then
+  \begin{align*}
+    s_{2(m+1) + 1} &= \frac{1}{2} + s_{2(m+1)} \\
+                   &= \frac{1}{2} + \frac{2^{m} - 1}{2^{m + 1}} \note{(by previous proof)} \\
+                   &= \frac{2^{m+1} - 1}{2^{m+1}},
+  \end{align*}
+  as desired. So now we have to take limits of each of these expressions. Thus
+  $$\lim_{m\to\infty} s_{2m} = \frac{1}{2}, \qquad \lim_{m\to\infty} s_{2m + 1} = 1,$$ and so 
+  $$\liminf_{n\to\infty} s_n = \frac{1}{2}, \qquad \limsup_{n\to\infty} s_n = 1.$$
+  \emph{(NB: In the second induction proof I didn't invoke the inductive hypothesis, so it's not
+    really induction, but since we proved the previous result we don't need induction and can just
+  prove it from that first result.)}
+\end{proof}
+
+\begin{question}[5]
+  For any two real sequences $\{a_n\}, \{b_n\}$, prove that $$\limsup_{n\to\infty}(a_n + b_n) \leq 
+\limsup_{n\to\infty}a_n + \limsup_{n\to\infty}b_n,$$ provided the sum on the right is not of the form
+$\infty - \infty$.
+\end{question}
+\begin{proof}
+  Suppose that $\limsup_{n\to\infty}a_n + \limsup_{n\to\infty}b_n \neq \infty - \infty$. Then let
+$$A_k = \sup_{n\geq k}a_n, \qquad B_k = \sup_{n\geq k}b_n, \qquad
+C_k = \sup_{n\geq k}c_n,$$ where $c_n = a_n + b_n$. It should be apparent that $C_k \leq A_k + B_k$.
+This is because $$\forall n\geq k, a_n \leq A_k, b_n \leq B_k \Rightarrow a_n + b_n \leq A_k + B_k,$$
+and so $C_k = \sup_{n\geq k} c_n \leq A_k + B_k$ by defn. So then we have
+\begin{align*}
+  \limsup_{n\to\infty} a_n + b_n &= \lim_{n\to\infty} C_n \\
+&\leq \lim_{n\to\infty} A_n + B_n \\
+&= \lim_{n\to\infty} A_n + \lim_{n\to\infty} B_n \\
+&= \limsup_{n\to\infty} a_n + \limsup_{n\to\infty} b_n,
+\end{align*}
+as desired.
+\end{proof}
+
+\begin{question}[6]
+  Investigate the behavior (convergence or divergence) of $\sum a_n$ if 
+\begin{qparts}
+  \item $a_n = \sqrt{n + 1} - \sqrt{n}$; 
+  \item $a_n = \frac{\sqrt{n + 1} - \sqrt{n}}{n}$; 
+  \item $a_n = (\sqrt[n]{n} - 1)^n$;
+  \item $a_n = \frac{1}{1+ z^n},$ for $z\in\C$.
+\end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+ \begin{qparts}
+ \item $$a_n = \sqrt{n+1} - \sqrt{n} = \left(\sqrt{n+1} - \sqrt{n}\right)\frac{\sqrt{n+1} + \sqrt{n}}{\sqrt{n+1}
+   - \sqrt{n}} = \frac{1}{\sqrt{n+1} + \sqrt{n}} \geq \frac{1}{2\sqrt{n+1}},$$ and we have that 
+ $$\sum_{n=1}^\infty \frac{1}{2\sqrt{n+1}} = \frac{1}{2}\sum_{n=1}^\infty\frac{1}{\sqrt{n+1}} = 
+ \frac{1}{2} \sum_{n=1}^\infty \frac{1}{n^{1/2}},$$ which diverges via $p$-series; since this is a
+ lower bound for $\sum a_n$, we have that $\sum a_n$ diverges.
+
+ \item Using some of the proof from (a), we have that $$a_n = \frac{1}{n(\sqrt{n+1} + \sqrt{n})}
+   \leq \frac{1}{2n^{(3/2)}},$$ and we have that $$\sum_{n=1}^\infty \frac{1}{2n^{(3/2)}} =
+   \frac{1}{2}\sum_{n=1}^\infty \frac{1}{n^{(3/2)}},$$ which converges by $p$-series; since this is
+   an upper bound for $\sum a_n$, we have that $\sum a_n$ converges.
+
+   \item This appears to be an ideal candidate for the root test, so let's just do it:
+     $$\lim_{n\to\infty} \sqrt[n]{|a_n|} = \lim_{n\to\infty}\sqrt[n]{\left| \left( \sqrt[n]{n} - 1
+     \right)^n \right|} = \lim_{n\to\infty} \sqrt[n]{n} - 1 = 0,$$ since $$\lim_{n\to\infty}
+     \sqrt[n]{n} = 1$$ by Theorem 3.20(c) in Rudin. So, by the root test, we have that $\sum a_n$
+     converges.
+ \end{qparts} 
+\end{proof}
+
+\begin{question}[7]
+  Prove that the convergence of $\sum a_n$ implies the convergence of $$\sum \frac{\sqrt{a_n}}{n},$$
+if $a_n \geq 0$.
+\end{question}
+\begin{proof}
+  By Theorem 3.24 in Rudin, we have that since $a_n \geq 0, \sum a_n$ converges, the partial sums of 
+  $\sum a_n$ form a bounded sequence. Since $\sum 1/n^2$ also satisfies the criteria for Theorem 3.24, 
+  we know that its partial sums form a bounded sequence. Then $$\frac{\sqrt{a_n}}{n} = 
+  \sqrt{\frac{a_n}{n^2}} \leq \frac{1}{2}\left( a_n + \frac{1}{n^2} \right) \Rightarrow 
+  \sum_{k=1}^n \frac{\sqrt{a_k}}{k} \leq \frac{1}{2}\left( \sum_{k=1}^n a_k + \sum_{k=1}^n \frac{1}{k^2} \right),$$
+  so the partial sums of the sequence of interest are a bounded sequence. Since $\sqrt{a_n} / n \geq 0$,
+  we have that the sequence of interest converges by Theorem 3.24.
+\end{proof}
+
+\begin{question}[8]
+  If $\sum a_n$ converges, and if $\{b_n\}$ is monotonic and bounded, prove that $\sum a_n b_n$ converges.
+\end{question}
+\begin{proof}
+  This question looks suspiciously like the statement of Theorem 3.48 in Rudin; in fact, the only 
+  things we need to show in order to invoke the theorem are that $b_n$ is decreasing and that $b_n
+  \to 0$. Since we only know that the given $\{b_n\}$ is monotonic and bounded, we have to do some
+  case analysis. But first, since $\{b_n\}$ is montonic and bounded, it converges by Theorem 3.14, 
+  so let's say that it converges to $b$. Note that if $\{b_n\}$ is constant then the result is
+  trivial.
+
+  \begin{qparts}
+    \item Suppose that $\{b_n\}$ is (monotone) decreasing; now we need to show that it goes to 0. But
+      we know that it doesn't go to 0, but $b$. So let $c_n = b_n - b$; since $\{b_n\}$ is decreasing,
+      we have that $c_n$ is monotone decreasing, and $c_n \to 0$. Thus, by Theorem 3.48, we have that
+      $\sum a_n c_n$ converges. But $$\sum a_n c_n = \sum a_n b_n + b\sum a_n \qquad \Rightarrow
+      \qquad \sum a_nb_n = \sum a_n c_n + b\sum a_n,$$ and since both terms on the LHS converge, we
+      have that $\sum a_n b_n$ converges, as desired.
+    \item Suppose that $\{b_n\}$ is (monotone) increasing. This time, let $c_n = b - b_n$. Note that
+      $c_n$ is, again, monotone decreasing, and that $c_n \to 0$; thus, $\sum a_n c_n$ converges.
+      Then $$\sum a_n c_n = \sum a_n b - \sum a_n b_n \qquad \Rightarrow \qquad \sum a_nb_n = b\sum
+      a_n  - \sum a_n c_n,$$ and since both terms on the RHS converge, we have that $\sum a_nb_n$
+      converges, as desired.
+  \end{qparts}
+\end{proof}
+
+
+\begin{question}[9]
+  Find the radius of convergence for each of the following power series:
+\begin{qparts}
+  \item $\sum n^3z^n,$ 
+  \item $\sum \frac{2^n}{n!}z^n$,
+  \item $\sum \frac{2^n}{n^2}z^n$,
+  \item $\sum \frac{n^3}{3^n}z^n$.
+\end{qparts}
+\end{question}
+
+\begin{question}[16]
+  Fix a positive number $\alpha$. Choose $x_1 > \sqrt{\alpha}$ and define $x_n$ by the recursive 
+formula $$x_{n+1} = \frac{1}{2}\left( x_n + \frac{\alpha}{x_n} \right).$$
+\begin{qparts}
+  \item Prove that $\{x_n\}$ decreases monotonically and that $\lim x_n = \sqrt{\alpha}.$
+  \item Put $\varepsilon_n = x_n - \sqrt{\alpha},$ and show that $$\varepsilon_{n+1} = 
+\frac{\varepsilon_n^2}{2x_n} < \frac{\varepsilon_n^2}{2\sqrt{\alpha}}$$ so that, setting $\beta = 
+2\sqrt{\alpha}$, $$\varepsilon_{n+1} < \beta \left( \frac{\varepsilon_1}{\beta} \right)^{2^n}.$$
+  \item This is a good algorithm for computing square roots, since the recursive formula is simple and
+the convergence is extremely rapid. For example, if $\alpha = 3$ and $x_1 = 2$, show that $\varepsilon_1
+/ \beta < \frac{1}{10}$ and that therefore $$\varepsilon_5 < \num{4e-16}, \qquad \varepsilon_6 < \num{4e-32}.$$
+\end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+  \begin{qparts}
+  \item Once we've shown that $\{x_n\}$ is monotone decreasing, it suffices to show that it is bounded
+  below by $\sqrt{\alpha}$ in order to get the result. (Actually, we need the Monotone convergence
+  theorem to get the result for free, so we'll have to actually evaluate the limit this time.)\\
+
+  Note that $$\forall a,b\in\R, (a-b)^2 \geq 0 \Rightarrow \frac{a^2 + b^2}{2} \geq ab,$$ and of
+  course this is tight iff $a=b$. So $$x_{n+1} = \frac{1}{2}\left( x_n + \frac{\alpha}{x_n} \right)
+  \geq \sqrt{x_n}\cdot \frac{\sqrt{\alpha}}{\sqrt{x_n}} = \sqrt{\alpha},$$ and $x_1 > \sqrt{\alpha}$
+  is given, so we have that $\{x_n\}$ is bounded below by $\sqrt{\alpha}$. \\
+
+  Now, let's show that $\{x_n\}$ is monotone decreasing.
+  \begin{align*}
+    x_n - x_{n+1} &= x_n - \frac{1}{2}\left( x_n + \frac{\alpha}{x_n} \right) \\
+                  &= \frac{1}{2} \left( x_n - \frac{\alpha}{x_n} \right) \\
+                  &= \frac{1}{2} \left( \frac{x_n^2 - \alpha}{x_n} \right) \\
+                  &\geq 0. \note{(since $x_n \geq \sqrt{\alpha}$)}
+  \end{align*}
+  Since we don't have the Monotone convergence theorem yet, we'll have to explicitly show that the
+  limit is $\sqrt{\alpha}$ (instead of just getting away with showing that it's the $\liminf$). So
+  since $\{x_n\}$ is bounded and monotone decreasing it must converge; say it converges to $x$. Then 
+  \begin{align*}
+    \lim_{n\to\infty}x_{n+1} = \lim_{n\to\infty} \frac{1}{2}\left( x_n + \frac{\alpha}{x_n}\right) 
+    &\Rightarrow x = \frac{1}{2}\left( x + \frac{\alpha}{x} \right) \\
+    &\Rightarrow \frac{x}{2} = \frac{\alpha}{2x} \\
+    &\Rightarrow x^2 = \alpha \\
+    &\Rightarrow x = \sqrt{\alpha}. \note{(since $x_n \geq \alpha$)}
+  \end{align*}
+
+  \item The first step is kind of obvious. We have that
+    \begin{align*}
+      \varepsilon_{n+1} &= x_{n+1} - \sqrt{\alpha} \\
+                        &= \frac{1}{2}\left( x_n + \frac{\alpha}{x_n} \right) - \sqrt{\alpha} \\
+                        &= \frac{x^2_n + \alpha}{2x_n} - \frac{2\sqrt{\alpha}x_n}{2x_n} \\
+                        &= \frac{x_n^2 - 2\sqrt{\alpha}x_n + \alpha}{2x_n} \\
+                        &= \frac{\varepsilon_n^2}{2x_n} \\
+                        &< \frac{\varepsilon_n^2}{2\sqrt{\alpha}}, \note{(since $x_n >
+    \sqrt{\alpha}$)}
+    \end{align*}
+    as desired. Let $\beta = 2\sqrt{\alpha}$. Then, applying this inequality $n$ times, we have that 
+    $$\varepsilon_{n+1} < \beta \left( \frac{\varepsilon_1}{\beta} \right)^{2^n},$$ as desired.
+
+  \item $$\frac{\varepsilon_1}{\beta} = \frac{2 - \sqrt{3}}{2\sqrt{3}} = \frac{1}{2\sqrt{3}(2 +
+    \sqrt{3})} = \frac{1}{6 + 4\sqrt{3}} < \frac{1}{10}.$$ So then we have that 
+      \begin{gather*}
+        \varepsilon_5 < \beta \left( \frac{\varepsilon_1}{\beta} \right)^{2^4} < (\sqrt{3})\num{2e-16} 
+        < \num{4e-16} \\
+        \varepsilon_6 < \beta \left( \frac{\varepsilon_1}{\beta} \right)^{2^5} < (\sqrt{3})\num{2e-16}
+        < \num{4e-32} \\
+      \end{gather*}
+
+\end{qparts}
+\end{proof}
+
+\section*{Other Problems}
+\begin{question}[1]
+  Suppose $\{s_n\}, \{t_n\}$ are sequences of real numbers and for some positive integer $N$ we have 
+$\forall n \geq N, s_n \leq t_n$. Prove that $\limsup_{n\to\infty} s_n \leq \limsup_{n\to\infty} t_n$
+and $\liminf_{n\to\infty} s_n \leq \liminf_{n\to\infty} t_n$.  
+\end{question}
+This seems kind of obvious, so I'm just going to do the obvious thing.
+\begin{proof}
+  By definition of $\sup$, we have that $$\forall k \geq N, \sup_{n\geq k} t_n \geq
+  \sup_{n\geq k} s_n,$$ since $t_k \geq s_k$. So indeed $\limsup_{n\to\infty}s_n \leq
+  \limsup_{n\to\infty}t_n,$ as desired. \\
+
+  By definition of $\inf$, we have that $$\forall k \geq N, \inf_{n\geq k} s_n \leq
+  \inf_{n\geq k} t_n,$$ since $s_k \leq t_k$. So indeed $\liminf_{n\to\infty}s_n \leq
+  \liminf_{n\to\infty}t_n,$ as desired.
+\end{proof}
+
+\begin{question}[2]
+  Prove that for $\{x_n\}, \{y_n\}, \{z_n\} \subset \R$ with $\forall n, x_n \leq y_n \leq z_n$, if
+$x_n \to a$ and $z_n \to a$, then $y_n \to a$.
+\end{question}
+This is the ``squeeze theorem'' from calculus! (But for sequences)
+\begin{proof}
+ Note that $$|y_n - a| < \varepsilon \iff a - \varepsilon < y_n < a + \varepsilon.$$ Now, since $x_n
+ \to a, z_n \to a,$ we have that 
+ \begin{gather*}
+   \forall \varepsilon > 0, \exists N_1, N_2 \in \N \st \forall n \geq N = \max(N_1, N_2), \\
+   |x_n - a| < \varepsilon, \qquad |z_n - a| < \varepsilon  \\ \iff \\
+   a - \varepsilon < x_n < a + \varepsilon, \qquad a - \varepsilon < z_n < a + \varepsilon.
+ \end{gather*}
+ But since $x_n \leq y_n \leq z_n$, we have that $$a - \varepsilon < x_n \leq y_n \leq z_n < a +
+ \varepsilon \Rightarrow |y_n - a| < \varepsilon,$$ as desired. So $y_n \to a$.
+\end{proof}
+
+\begin{question}[3]
+  Find a series $\sum_n a_n$ of real numbers which is convergent, so that $\sum_n |a_n|$ is not convergent,
+and $\sum_n a_n^r$ is convergent if $r > 1$.
+\end{question}
+\begin{proof}
+  The last statement suggests that we want $\forall n > N, a_n < 1$, for some $N$, while the second 
+statement suggests that we need to include some oscillation. So, it looks like the alternating version 
+of the harmonic series will do nicely. \\
+
+Let $$a_n = \frac{(-1)^{n+1}}{n}.$$ First, let's show that $\sum a_n$ converges. Actually, this is 
+done in Example 3.53 of Rudin. Now, note that $\sum|a_n| = \sum (1/n)$, which we know diverges by
+Theorem 3.28, since $p = 1$. Further, note that $\sum a_n^r = \sum (1 / n^r)$, which converges if 
+$r > 1$, again by Theorem 3.28. Thus, we have satisfied all conditions.
+\end{proof}
+\begin{question}[Theorem 3.28]
+  $$\sum \frac{1}{n^p} \text{ converges if } p > 1 \text{ and diverges if } p \leq 1.$$ 
+\end{question}
+
+\begin{question}[4]
+ (This is an open-ended exploration.) Let $a_n$ be a sequence of real numbers and consider the infinite
+product $$\prod_{n=1}^\infty (1 + a_n) = (1 + a_1)(1 + a_2)\dots$$ How can you make sense of it? What 
+does it mean for the infinite product to converge? Give examples of convergent and divergent infinite
+products. Can you find a necessary condition for convergence? \\
+
+Here is an interesting infinite product due to Wallis, 1655: $$\frac{\pi}{2} =
+ \frac{2 \cdot 2\cdot  4 \cdot 4 \cdot 6 \cdot 6 \dots}{1 \cdot 3 \cdot 3 \cdot 5 \cdot 5 \cdot 7 \dots}$$
+You can try it on a computer. Does it converge quickly? Do you know other infinite processes to generate 
+$\pi$ more quickly?
+\end{question}
+\begin{proof}
+  Graduate probability taught me to appreciate logs, so let's just take the log of this product to
+  turn it into a sum, which we're familiar with:
+  $$\ln \left( \prod_{n=1}^\infty (1 + a_n) \right) = \sum_{n=1}^\infty \ln(1+a_n).$$ There's some
+  nonsense to worry about here though, since $\ln$ isn't defined on all of $\R$ (and it isn't
+  entire on $\C$), but we'll gloss over that since we're just exploring. Let's say for now that the
+  infinite product's convergence or divergence depends on the convergence or divergence of the
+  series on the RHS.\\
+
+  We can get even cheekier and use Jensen's Inequality, since $e^x$ is convex in $x$, to get that 
+  $$\exp\left(\sum_{n=1}^\infty \ln(1 + a_n)\right) \leq \sum_{n=1}^\infty e^{\ln(1 + a_n)} = 
+  \sum_{n=1}^\infty (1 + a_n),$$ which is perhaps a less useful bound than I thought I could get...
+  \\
+
+  There's probably a way to get something like $\exp \left( \sum_{n=1}^\infty a_n \right)$ out of
+  it, though.
+
+\end{proof}
+\end{document}
