@@ -902,4 +902,67 @@ with this, but we'll leave that for a course in Complex Analysis.
   and this entire expression is an integer. But we had that $$q!(e - s_q) \in \left( 0, \frac{1}{q} \right),$$
   and there are no integers in this interval. So we have a contradiction.
 \end{proof}
+
+%lecture 12 (13?)
+\begin{theorem}[Root Test]
+  For a series $\sum a_n$, let $$\alpha = \limsup_{n\to\infty} \sqrt[n]{|a_n|}.$$ Then 
+  \begin{enumerate}
+    \item $\alpha > 1 \Rightarrow \sum a_n$ diverges; 
+    \item $\alpha < 1 \Rightarrow \sum a_n$ converges;
+    \item $\alpha = 1 \Rightarrow \sum a_n$ may converge or may diverge.
+  \end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+  $$x > \limsup_{n\to\infty} a_n \Rightarrow \exists N\in\N \st \forall n \geq N, a_n < x.$$
+\end{lemma}
+\begin{proof}
+  Just do it!
+\end{proof}
+
+\begin{proof}\leavevmode
+ \begin{enumerate}
+   \item Choose a subsequence $\sqrt[n_i]{|a_{n_i}|} \to \alpha$; we know this exists by definition of 
+     $\limsup.$ Then since $\alpha > 1$, by the definition of $\limsup$, $$\exists I\in\N \st \forall 
+     i \geq I, \sqrt[n_i]{|a_{n_i}|} > 1 \Rightarrow |a_{n_i}| > 1 \Rightarrow a_n \not\to 0.$$
+
+   \item Choose $\beta \st \alpha < \beta < 1$. Then 
+       $$\exists N\in\N \st \forall n \geq N, \sqrt[n]{|a_n|} < \beta \Rightarrow |a_n| < \beta^n.$$
+       So 
+       \begin{align*}
+         \sum_{n=1}^\infty |a_n| &= \sum_{n=1}^N |a_n| + \sum_{n=N+1}^\infty |a_n| \\
+                                 &\leq \sum_{n=1}^N |a_n| + \sum_{n=N+1}^\infty \beta^n \\
+                                 &\leq \sum_{n=1}^N |a_n| + \frac{1}{1-\beta},
+       \end{align*}
+       which is finite.
+
+   \item Consider $\sum (1/n)$; note that since $\sqrt[n]{n} \to 1$, we have that $\alpha = 1$, and we 
+   know that this series diverges. Now consider $\sum (1/n^2)$; we have that $n^{-(1/n) \cdot 2} \to 1$,
+   so $\alpha = 1$, but this series converges.
+ \end{enumerate} 
+\end{proof}
+
+\begin{theorem}[Ratio Test]
+  blah
+\end{theorem}
+
+\begin{defn}[Power Series]
+  Let $\{a_n\} \subset \R$. The \emph{power series with coefficients} $\{a_n\}$ is $$\sum_{n=1}^\infty
+  a_nx^n.$$
+\end{defn}
+
+\begin{theorem}
+  Let $$\alpha = \limsup_{n\to\infty}\sqrt[n]{|a_n|}, \qquad R = \frac{1}{\alpha}.$$ Then 
+  \begin{enumerate}
+    \item $|x| > R \Rightarrow \sum a_nx^n$ diverges; 
+    \item $|x| < R \Rightarrow \sum a_nx^n$ converges;
+    \item $|x| = R \Rightarrow \sum a_nx^n$ may converge or may diverge.
+  \end{enumerate} 
+\end{theorem}
+\begin{proof}
+  apply root test
+\end{proof}
+
+\section{Continuity and Limits}
+
 \end{document}
