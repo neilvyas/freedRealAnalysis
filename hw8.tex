@@ -1,0 +1,95 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\no{8}
+\class{Real Analysis I}
+
+\begin{document}
+\maketitle
+
+\begin{question}[Continuity]
+  A function $f: X\to Y$ is \emph{continuous} at $p\in X$ if 
+\begin{gather*}
+  \forall \varepsilon > 0, \exists \delta > 0 \st \forall x\in X \st d_X(x, p) < \delta, \\
+d_Y(f(x), f(p)) < \varepsilon.
+\end{gather*}
+\end{question}
+
+Let $n = n_p + n_n$ be the number of positive- and negative- data points to score, and let $p$ be the
+area under the ROC curve. Then the distribution for the number of classification errors is given by
+$$P(k \text{ errors} \mid p) = \binom{n_pn_n}{k} (k)^p(n_pn_k - k)^{1 - p}.$$
+
+\section*{Rudin Problems}
+% 4: 1, 2*, 2, 4*, 6*, 7
+\begin{question}[4.1]
+  Suppose $f$ is a real function defined on $\R^1$ which satisfies $$\lim_{h\to 0} \left[ f(x + h) -
+f(x - h) \right] = 0$$ for every $x\in\R^1$. Does this imply $f$ is continuous?
+\end{question}
+
+\begin{question}[4.2*]
+ If $f$ is a continuous mapping of a metric space $X$ into a metric space $Y$, prove that
+$$f(\conj{E}) \subset \conj{f(\conj{E})}$$ for every set $E \subset X$. Show, by an example, that
+$f(\conj{E})$ can be a proper subset of $\conj{f(\conj{E})}$. 
+\end{question}
+
+\begin{question}[4.3]
+ Let $f$ be a continuous real function on a metric space $X$. Let $Z(f)$ be the \emph{zero set} of
+$f$; that is, $$Z(f) = \{ p\in X \mid f(p) = 0 \}.$$ Prove that $Z(f)$ is closed. 
+\end{question}
+
+\begin{question}[4.4*]
+  Let $f,g$ be continuous mappings of a metric space $X$ into a metric space $Y$, and let $E$ be a
+dense subset of $X$. Prove that $f(E)$ is dense in $f(X)$. If $\forall p\in E, g(p)= f(p)$, prove
+that $g(p) = f(p)$ for all $p\in X$. (In other words, a continuous mapping is determined by its
+values on a dense subset of its domain.)
+\end{question}
+
+\begin{question}[4.6*]
+  If $f$ is defined on $E$, the \emph{graph} of $f$ is the set of points $(x, f(x))$ for $x\in E$.
+Suppose $E$ is compact, and prove that $f$ is continuous on $E$ iff its graph is compact.
+\end{question}
+
+\begin{question}[7]
+  If $E\subset X$ and if $f$ is a function defined on $X$, the \emph{restriction} of $f$ to $E$ is
+the function $g$ whose domain is $E$, such that $g(p) = f(p)$ for all $p\in E$. Define $f,g$ on
+$\R^2$ by $$\begin{cases} f(0,0) = g(0,0) = 0, \\ f(x,y) = \frac{xy^2}{(x^2 + y^4)}, \\ g(x,y) = 
+\frac{xy^2}{(x^2 + y^6)}. \end{cases}$$Prove that $f$ is bounded on $\R^2$, that $g$ is unbounded on
+every neighborhood of $(0,0)$, and that $f$ is not continuous at $(0,0)$; nevertheless, the
+restrictions of $f$ and $g$ to every straight line in $\R^2$ are continuous!
+\end{question}
+
+\section*{Other Problems}
+\begin{question}[1]
+ Give examples of metric spaces  $X,Y$, a continuous function $f: X\to Y$, and 
+\begin{qparts}
+  \item an open set $V\subset Y$ such that $f(f^{-1}(V)) \neq V$;
+  \item an open set $U\subset X$ such that $f^{-1}(f(U)) \neq U$;
+  \item is it important in this problem that $X, Y$ be metric spaces?  
+\end{qparts}
+\end{question}
+
+\begin{question}[2]
+  Consider the sequence of functions $\{f_n\}$ where each $f_n: [0,1] \to [0,1]$ and $f_n(x) = x^n$.
+Show that for each $x\in [0,1]$ the sequence of real numbers $\{f_n(x)\}$ converges and compute the 
+limit. Define the limit to be $f(x)$. Is $f$ continuous?
+\end{question}
+
+\begin{question}[3]
+  \begin{qparts}
+    \item Let $(X,d)$ be a metric space and $E\subset X$ a subset with the induced metric. Show that the 
+inclusion map $i: E \to X$ is continuous. 
+
+    \item Suppose $X, Y$ are metric spaces, $f: X \to Y$ a continuous map, and $E\subset X$ a subset
+which we endow with the induced metric. Show that the restriction of $f$ to $E$ is continuous.
+
+    \item Fix a point $p\in\E^3$ and let $S\subset \E^3$ be the surface defined by the equation 
+$$x^2 + y^3 + 3z^4 = 1.$$ Define $f:S \to R$ as $f(q) = d(p,q)$. Show that $f$ is continuous.
+  \end{qparts}
+\end{question}
+
+\begin{question}[4]
+  Give an example of a continuous function $f: \Q \to \R$ which does not admit a continuous extension
+$\conj{f}: \R \to \R$ (A continuous extension $\conj{f}$ satisfies $\forall q\in\Q, \conj{f}(q) = f(q)$).
+\end{question}
+
+\end{document}
