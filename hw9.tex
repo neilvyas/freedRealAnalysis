@@ -1,0 +1,110 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\no{9}
+\class{Real Analysis I}
+
+\begin{document}
+\maketitle
+\section*{Rudin Problems}
+\begin{question}[4.8]
+   Let $f$ be a real and continuous function on the bounded set $E \subset \R$. Prove that $f$ is 
+bounded on $E$. Suppose $E$ is compact, and prove that $f$ is continuous on $E$ if and only if its 
+graph is compact. 
+\end{question}
+\begin{proof}
+ This one's straightforward but tedious.
+\end{proof}
+
+\begin{question}[4.11*]
+ Suppose $f$ is a uniformly continuous mapping of a metric space $X$ into a metric space $Y$ and prove 
+that $\{f(x_n)\}$ is a Cauchy sequence in $Y$ for every Cauchy sequence $\{x_n\}$ in $X$. Use this
+result to give an alternate proof of the result in (13*).
+\end{question}
+\begin{proof}
+Let $\{x_n\}$ be a Cauchy sequence in $X$, and fix $\varepsilon > 0$. Then, since $f$ is uniformly
+continuous and $\{x_n\}$ is Cauchy, we have that $$\exists \delta > 0, N\in\N \st \forall m,n \geq N, 
+d_X(x_m, x_n) < \delta \Rightarrow d_Y(f(x_m), f(x_n)) < \varepsilon,$$ so we have that $\{f(x_n)\}$
+is Cauchy in $Y$, as desired. (We smushed two steps together here, but they're both obvious and
+correct, since they're just restatements of definitions.)
+\end{proof}
+
+\begin{question}[4.12*]
+ State more precisely and prove the following: \\
+A uniformly continuous function of a uniformly continuous function is uniformly continuous. 
+\end{question}
+ It sounds like we want a function $f: \mathcal{F} \to X$ for a space of uniformly continuous
+functions $\mathcal{F}$, but this sounds a little too complicated and I prefer simple solutions, so
+let's suppose what they really meant was
+\begin{center}
+\textit{The composition of uniformly continuous functions is uniformly continuous,} \\
+\end{center}
+which is really easy to prove.
+\begin{proof}
+Let $f,g$ be two uniformly continuous functions, and fix $\varepsilon > 0$. Since $f$ is uniformly
+continuous, $\exists \delta_1 > 0 \st d(x,y) < \delta_1 \Rightarrow d(f(x), f(y)) < \varepsilon.$
+Now, since $g$ is also uniformly continuous, $\exists \delta > 0 \st d(x,y) < \delta \Rightarrow
+d(g(x), g(y)) > \delta_1$. So now, we have that $d(x,y) < \delta \Rightarrow d(f(g(x)), f(g(y)) <
+\varepsilon,$ and so $f\circ g$ is uniformly continuous.
+\end{proof}
+
+\begin{question}[4.13*]
+  
+\end{question}
+
+\begin{question}[4.14*]
+ Let $I = [0,1]$ be the closed unit interval. Suppose $f$ is a continuous mapping of $I$ into $I$.
+Prove that $f(x) = x$ for at least one $x\in I$. 
+\end{question}
+There's actually a nice proof-without-words for this: draw the unit square with the graph of $y=x$,
+and then note that any continuous function must intersect it exactly once. 
+\begin{proof}
+  Let $g(x) = f(x) - x$. Suppose that $f(0) \neq 0$ and $f(1) \neq 1$, since otherwise we're
+done. Since $f$ maps the unit interval into itself, we have that $f(0) > 0$ and $f(1) < 1$, so we
+have that $g(0) > 0$ and $g(1) < 0$. Since $g$ is continuous, as it the sum of continuous functions,
+we can apply the IVT and conclude that $\exists x\in [0,1] \st g(x) = 0 \Rightarrow f(x) = x.$
+\end{proof}
+
+\begin{question}[4.18]
+ Let $f: \R \to \R$ be defined as 
+$$ f(x) = \begin{cases} 0 &\text{if $x\in\R\setminus\Q$} \\ \frac{1}{n} &\text{if $x = \frac{m}{n}$}
+\end{cases}$$
+ Prove $f$ is continuous at every irrational and that $f$ has a simple discontinuity at every 
+rational point. 
+\end{question}
+\begin{proof}
+Let $x\in\R$, fix $\varepsilon > 0$, and choose $N\in\N$ such that $1/N < \varepsilon$. For each
+$n\in\N,$ the set $$\{ q\in\Q \mid q = m/n,\ d(q,x) < 1 \}$$ has a finite amount of elements; 
+thus it is finite for $n\leq N$. So we can find a $\delta > 0$ such that $N_\delta(x)$ excludes these
+finitely many rational points. So $$\forall y \in N_\delta(x), f(y) \leq \frac{1}{N} < \varepsilon.$$
+Thus, the limit as we approach $x$ from any (both) side is 0, and so $f$ is continuous at every
+irrational point, since the function value equals its limits, and $f$ has a simple discontinuity at
+each rational point, since the function value does not equal its limits. \\
+\end{proof}
+
+\section*{Other Problems}
+\begin{question}[1]
+\begin{qparts}
+  \item If $f: (0,1) \to \R$ is uniformly continuous, then $f$ has a maximum value.
+  \item There exists $x\in\R$ such that $x^3 - 3x^2 + 2x - 5 = 0.$
+  \item There exists $x\in\R$ such that $x^4 + 2x^2 + 2 = 0.$
+\end{qparts}  
+\end{question}
+\begin{proof}\leavevmode
+\begin{qparts}
+  \item Using (8) from above, we have that since $(0,1)$ is bounded and $f$ is uniformly continuous, 
+the image of $f$ is bounded, so it has a maximum value. 
+  \item We'll use the Intermediate Value Theorem here. Since $f$ is a polynomial, it is continuous. 
+Note that $f(0) = -5$ and $f(4) = 19$, so by the IVT, since $f$ is continuous on $[0, 4]$ and $-5 < 
+0 < 19$, we have that $\exists x \in [0,4] \st f(x) = 0,$ as desired.
+  \item Obviously untrue since this function is always positive. Consider
+\begin{align*}
+  x^4 + 2x^2 + 2 &= \left( x^2 + 1 \right)^2 + 1 \\
+                 &\geq 1 \\
+                 &> 0,
+\end{align*}
+since $1 > 0$ and the square of a number is always positive.
+\end{qparts} 
+\end{proof}
+
+\end{document}
