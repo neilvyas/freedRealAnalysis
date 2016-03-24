@@ -1028,8 +1028,15 @@ Let's give another proof using a different characterization of continuous functi
   Suppose $X,Y$ are metric spaces with $X$ compact, and $f: X\to Y$ continuous, then $f$ is
   uniformly continuous.
 \end{theorem}
-\begin{proof}
-  
+\begin{proof} %proved in lecture 15
+ Suppose not; that is, suppose that $X$ is compact but $f$ is not uniformly continuous. Then
+ $$\exists \varepsilon > 0 \st \forall \delta > 0, \exists p,q\in X \st d(p,q) < \delta \text{ and }
+ d(f(p), f(q)) \geq \varepsilon.$$ Fix $\varepsilon > 0$. So we can find $\{p_n\}, \{q_n\} \subset
+ X$ such that $d(p_n, q_n) < 1/n = \delta$ and $d(f(p_n), f(q_n)) \geq \varepsilon$. Since $X$ is
+ compact, we have $\{p_{n_i}\} \to p$ for some $p\in X$. Thus, $\{q_{n_i}\} \to p$ for a convergent
+ subsequence $\{q_{n_i}\}$ (obvious via triangle inequality). So since $f$ is continuous, we must
+ have that $f(p_{n_i}) \to f(p)$ and $f(q_{n_i}) \to f(p)$, which is then a contradiction, since
+ this contradicts our assumption that $f$ is not uniformly continuous.
 \end{proof}
 
 When we try to interchange infinite processes - limits, summations, and integrals - we will need
@@ -1053,5 +1060,48 @@ then $$h(x) = \lim_{y\to 0} g(x,y) = \begin{cases} 0 &x = 0 \\ 1 &\text{ otherwi
   Suppose $X,Y$ metric spaces, with $X$ connected, and $f: X\to Y$ is continuous. Then $f(X)$ is
   connected.
 \end{theorem}
+\begin{proof}
+  Suppose not; that is, suppose that $f(X)$ is not connected. So write $f(X) = A\cup B$ where $A,B$
+  are such that $$\conj{A} \cap B = A \cap \conj{B} = \emptyset,$$ and $A,B$ non-empty. So then $X =
+  G \cup H$ where $G = f^{-1}(A), H = f^{-1}(B)$. Obviously, $G,H$ are non-empty; we need to show
+  that $\conj{G} \cap H = \emptyset.$ Since $f$ is continuous, $f^{-1}(\conj{A})$ is closed and
+  contains $G = f^{-1}(A)$. Thus, $\conj{G} \subset f^{-1}(\conj{A})$. So then $$\conj{G} \cap H
+  \subset f^{-1}(\conj{A}) \cap H = f^{-1}(A) \cap f^{-1}(B) \subset f(\conj{A} \cap B) =
+  \emptyset.$$ Similarly, we have that $G\cap\conj{H} = \emptyset,$ and so we have that $X$ is not
+  connected, which is a contradiction.
+\end{proof}
+
+\begin{corollary}[Intermediate Value Theorem]
+  For $a<b \in \R$, $f: [a,b] \to \R$, $c\in\R \st f(a) < c < f(b)$, $$\exists x\in [a,b] \st f(x) =
+  c.$$
+\end{corollary}
+
+\section{Differentiation}
+\begin{defn}[Difference Quotient]
+  We define the \emph{difference quotient} of a function $f$ at the point $p$ to be
+  \begin{gather*}
+    \phi: (a,b) \setminus \{p\} \to \R, \\
+    x \mapsto \frac{f(x) - f(p)}{x - p}
+  \end{gather*}
+\end{defn}
+
+\begin{defn}[Differentiability]
+  We say that $f$ is \emph{differentiable} at $p$ iff $$\lim_{x\to p} \phi(x)$$ exists. In that case,
+  we say that $f'(x) = \lim_{x\to p} \phi(x)$.
+\end{defn}
+
+\begin{theorem}
+  If $f$ is differentiable at $p$, then $f$ is continuous.
+\end{theorem}
+\begin{proof}
+  Note that $$f(x) = f(p) + \phi(x)(x-p),$$ so 
+  \begin{align*}
+    lim_{x\to p} f(x) &= \lim_{x\to p} \left[ f(p) + \phi(x)(x-p) \right] \\
+                      &= f(p) + \lim_{x\to p} \phi(x)(x-p) \\
+                      &= f(p),
+  \end{align*}
+  since $f$ is differentiable and thus the latter limit exists.
+\end{proof}
+
 
 \end{document}
