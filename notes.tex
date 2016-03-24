@@ -964,5 +964,94 @@ with this, but we'll leave that for a course in Complex Analysis.
 \end{proof}
 
 \section{Continuity and Limits}
+\subsection{Continuous Functions}
+\begin{theorem}[Compact sets to compact sets]
+  If $X,Y$ are metric spaces with $X$ compact, and $f: X \to Y$ is continuous, then $f(X) \subset Y$
+  is compact.
+\end{theorem}
+\begin{proof}
+  Suppose $\{V_\alpha\}_{\alpha\in A}$ is an open cover of $f(X)$. Now, we need to produce a finite
+  subcover. Since $f$ is continuous, each $f^{-1}(V_\alpha) \subset X$ is open, and also that
+  $\{f^{-1}(V_\alpha)\}_{\alpha\in A}$ is an open cover of $X$. Since $X$ is a compact metric space,
+  take a finite subcover indexed by $A' \subset A$. Applying $f$ to each set in this finite
+  subcover, we find that we have a finite subcover of $f(X)$. That is, 
+  \begin{align*}
+    X &= \bigcup_{\alpha\in A'} f^{-1}(V_\alpha); \\ 
+    f(X) &= \bigcup_{\alpha\in A'} f(f^{-1}(V_\alpha)) \\ 
+         &\subset \bigcup_{\alpha\in A'} V_\alpha.
+  \end{align*}
+\end{proof}
+
+Let's give another proof using a different characterization of continuous functions.
+\begin{proof}
+  Suppose $\{q_n\} \subset f(X)$ is a sequence. Choose $p_n \in X \st f(p_n) = q_n$ (pick a point in
+  the fibre); now we have a sequence in $X$. Since $X$ is compact, there exists a convergent
+  subsequence $p_{n_i} \to p$ for some $p\in X$. By continuity of $f$, we have that 
+  $$f(p_{n_i}) = q_{n_i} \to f(p) \in Y.$$ So we have that $f(X)$ is compact.
+\end{proof}
+
+\begin{corollary}
+  If $X$ is a compact metric space, $f: X \to \E^k$ is continuous, then $f(X)$ is closed and
+  bounded.
+\end{corollary}
+\begin{proof}
+  By the theorem, we have that $f(X)$ is compact, and by Heine-Borel we have that it must be closed
+  and bounded.
+\end{proof}
+
+\begin{corollary}
+  If $X$ is a compact metric space, $f:X \to \R$ is continuous, then $f$ achieves its supremum and
+  infimum.
+\end{corollary}
+\begin{proof}
+  $f(X) \subset \R$ is closed and bounded by the corollary. Then, since a closed subset of $\R$
+  contains its supremum and infimum, we have the result.
+\end{proof}
+
+\begin{theorem}
+  Suppose that $X,Y$ are metric spaces, with $X$ compact, and $f:X\to Y$ is a continuous bijection.
+  Then $f^{-1}: Y\to X$ is continuous. Note that this fails if $X$ is not compact.
+\end{theorem}
+\begin{proof}
+  We will show that $$C \subset X \text{ closed} \Rightarrow f(C) \subset Y \text{ closed.}$$
+  Suppose $C\subset X$ is closed. Then $C$ is compact, since it is a closed subset of a compact
+  metric space. So $f(C)$ is also compact, by the previous theorem. Thus, $f(C)$ is also closed.  
+\end{proof}
+
+\begin{defn}[Uniformity]
+  $f: X \to Y$ is \emph{uniformly continuous} if we can use the same tolerance for all points in the domain;
+  that is, $$\forall \varepsilon > 0, \exists \delta \st \forall p\in X, P(\varepsilon, \delta,
+  p),$$ where $P$ is the predicate from continuity.
+\end{defn}
+
+\begin{theorem}[Uniformity from Compact Domain]
+  Suppose $X,Y$ are metric spaces with $X$ compact, and $f: X\to Y$ continuous, then $f$ is
+  uniformly continuous.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
+When we try to interchange infinite processes - limits, summations, and integrals - we will need
+criteria like uniformity in order to ensure that the operation is well-founded. For example,
+consider 
+\begin{gather*}
+  f: (0, \infty) \times (0, \infty) \to \R, \\
+  f(x,y) = \frac{x}{y}; \\
+  \lim_{x\to 0} \left[ \lim_{y\to 0} f(x,y) \right] = \lim_{x\to 0} \infty = \infty, \\
+  \lim_{y\to 0} \left[ \lim_{x\to 0} f(x,y) \right] = \lim_{y\to 0} 0 = 0, 
+\end{gather*}
+so something about this function isn't ``nice'' enough to let us interchange the order of limits.
+Consider also
+\begin{gather*}
+  f: [0,1] \times (0, \infty) \to \R, \\
+  f(x,y) = x^y;
+\end{gather*}
+then $$h(x) = \lim_{y\to 0} g(x,y) = \begin{cases} 0 &x = 0 \\ 1 &\text{ otherwise.} \end{cases}$$
+
+\begin{theorem}
+  Suppose $X,Y$ metric spaces, with $X$ connected, and $f: X\to Y$ is continuous. Then $f(X)$ is
+  connected.
+\end{theorem}
 
 \end{document}
