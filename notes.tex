@@ -1077,6 +1077,8 @@ then $$h(x) = \lim_{y\to 0} g(x,y) = \begin{cases} 0 &x = 0 \\ 1 &\text{ otherwi
 \end{corollary}
 
 \section{Differentiation}
+\subsection{The Derivative}
+
 \begin{defn}[Difference Quotient]
   We define the \emph{difference quotient} of a function $f$ at the point $p$ to be
   \begin{gather*}
@@ -1103,5 +1105,93 @@ then $$h(x) = \lim_{y\to 0} g(x,y) = \begin{cases} 0 &x = 0 \\ 1 &\text{ otherwi
   since $f$ is differentiable and thus the latter limit exists.
 \end{proof}
 
+%lecture 16
+Now we have that, if $f$ is differentiable at $x$, then $$f(t) = f(x) + \left[ f'(x) + \varepsilon(t) \right]
+(t-x)$$ defines a function $\varepsilon: (a,b) \to \R$ with the property that $$\lim_{t\to x} \varepsilon(t)
+= 0.$$ Note that $$t\neq x, \varepsilon(t) = \frac{f(t) - f(x)}{t - x} - f'(x).$$
+
+\begin{theorem}[Combining differentiable functions]
+  Suppose $f,g: (a,b) \to \R$ are differentiable at $x \in (a,b)$. Then 
+  \begin{enumerate}
+    \item $f + g$ is differentiable at $x$ and $(f + g)'(x) = f'(x) + g'(x)$.
+    \item $(fg)'(x) = f'(x)g(x) + f(x)g'(x).$
+    \item If $g(x) \neq 0$ then $$\left( \frac{f}{g} \right)'(x) = \frac{g(x)f'(x) - f(x)g'(x)}{g(x)^2}.$$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}\leavevmode
+  \begin{enumerate}
+    \item 
+      \begin{align*}
+        \lim_{t\to x} \frac{(f+g)(t) - (f+g)(x)}{t -x} &= \lim_{t\to x} \frac{f(t) - f(x)}{t - x} + \lim_{t\to x} \frac{g(t) - g(x)}{t - x} \\
+        &= f'(x) + g'(x)
+      \end{align*}
+
+    \item Same thing but add and subtract a ``cross term'' $f(x)g(t)$.
+
+    \item Since $g$ is differentiable at $x$, it is continuous at $x$, so 
+      $$\exists \delta >0 \st t \in (x-\delta, x+\delta) \Rightarrow g(t) \neq 0.$$ Suppose $t$ is in 
+      this interval. Then 
+      \begin{align*}
+        \frac{\frac{f(t)}{g(t)} - \frac{f(x)}{g(x)}}{t-x} &= \frac{f(t)g(x) - f(x)g(t)}{(t-x)g(t)g(x)} \\
+                                        &= \frac{f(t)g(x) - f(x)g(x) - f(x)g(t) + f(x)g(x)}{(t-x)g(t)g(x)} \\
+                                        &= \frac{\frac{f(t) - f(x)}{t-x}g(x) - f(x)\frac{g(t)-g(x)}{t-x}}{g(t)g(x)},
+      \end{align*}
+      and taking all limits we see that we have the result.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Linearity]
+  Differentiation is a linear operator.  
+\end{theorem}
+\begin{proof}
+  Use (i) above and (ii) with $g = \lambda\in\R$.
+\end{proof}
+
+\begin{theorem}[The Chain Rule]
+  Suppose we have $f,g$ such that $g \circ f: (a,b) \to \R$ is defined. If $f$ is differentiable at  
+  $x$ and $g$ is differentiable at $f(x)$, then $$(g \circ f)'(x) = g'(f(x))f'(x).$$
+\end{theorem}
+\begin{proof}
+  From the definition of differentiability, we have that 
+  \begin{align*}
+    f(t) &= f(x) + \left[ f'(x) + \varepsilon_1(t)  \right](t-x) \\
+    g(t') &= g(x') + \left[ g'(x') + \varepsilon_2(t')  \right](t'-x'),
+  \end{align*}
+  where $x' = f(x)$ and both error terms vanish.
+  Thus we have that 
+  \begin{align}
+    g(f(t)) &= g \left( f(x) + \left[ f'(x) + \varepsilon_1(t) \right](t-x) \right) \\
+            &= g(f(x)) + \left[ g'(f(x)) + \varepsilon_2(t') \right] \left[ f'(x) + \varepsilon_1(t) \right] (t-x),
+  \end{align}
+  where $$t' = f(x) + \left[ f'(x) + \varepsilon_1(t) \right](t-x).$$ So then forming the difference quotient,
+  we have that 
+  \begin{align*}
+    \frac{g(f(t)) - g(f(x))}{t - x} &= \left[ g'(f(x)) + \varepsilon_2(t') \right] \left[ f'(x) + \varepsilon_1(t) \right].
+  \end{align*}
+  Now take limits, observing that $\lim_{t\to x}t' = f(x)$. And so 
+  $$\lim_{t\to x} \frac{g(f(t)) - g(f(x))}{t - x} = g'(f(x))f'(x),$$ as desired.
+\end{proof}
+
+\subsection{Extrema}
+\begin{defn}[Local Extrema]
+  Suppose $f$ is a real-valued function on a metric space $X$. Then $f$ has a \emph{local minimum} at 
+  $x$ if $$\exists \delta > 0 \st \forall t\in N_{\delta}(x), f(t) \geq f(x).$$ The definition of a 
+  \emph{local maximum} is analogous.
+\end{defn}
+
+\begin{theorem}
+  Suppose that $f$ has a local extrema at $x$, and that $f$ is differentiable at $x$. Then $f'(x) = 0$.
+\end{theorem}
+\begin{proof}
+  WLOG suppose that $f$ has a local minimum at $x$. Then choose $$\delta > 0 \st \forall t\in (x-\delta,
+  x+\delta), f(t) \geq f(x).$$ Then $$\phi(t) = \frac{f(t) - f(x)}{t - x} \begin{cases} \geq 0 
+  &\text{if } $t > x$ \\ \leq 0 &\text{if } $t < x$. \end{cases}$$ Now, taking limits as $t\to x$ from both
+    sides, we have that $f'(x) \geq 0$ and $f'(x) \leq 0$, so $f'(x) = 0$. 
+\end{proof}
+
+\begin{theorem}[The Mean Value Theorem]
+  Let $f: [a,b] \to \R$ be continuous and differentiable on the interval. Then $\exists x\in (a,b)$
+  such that $$f'(x) = \frac{f(b) - f(a)}{b-a}.$$
+\end{theorem}
 
 \end{document}
