@@ -1,0 +1,205 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\no{10}
+\class{Real Analysis I}
+
+\newcommand{\die}{\partial}
+\newcommand{\lhopital}{L'H\^opital}
+\begin{document}
+\maketitle
+
+\section*{Rudin Problems}
+\begin{question}[5.1]
+ Let $f$ be defined for $x\in\R$, and suppose that $$|f(x) - f(y)| \leq (x-y)^2$$ for all
+$x,y\in\R$. Prove that $f$ is constant. 
+\end{question}
+\begin{proof}
+  Note that we can rewrite the given condition as $$\left|\frac{f(x) - f(y)}{x - y}\right| \leq |x -
+y|.$$ So fix $y \in\R$, and let $x \to y$. We have then that 
+$$0 \leq \lim_{x\to y} \left|\frac{f(x) - f(y)}{x - y}\right| \leq \lim_{x\to y} |x - y| = 0,$$ and
+so we have that $f'(y) = 0$. Since $y$ was arbitrary, this holds over $\R$, and so for some $c\in\R$
+we have that
+$$\forall x\in\R, f'(x) = 0 \Rightarrow f(x) = c.$$
+\end{proof}
+
+\begin{question}[5.2]
+ Suppose $f'(x) > 0$ in $(a,b)$. Prove that $f$ is strictly increasing in $(a,b)$, and let $g$ be
+its inverse function. Prove that $g$ is differentiable, and that $$g'(f(x)) = \frac{1}{f'(x)} \qquad
+(a < x < b).$$ 
+\end{question}
+\begin{proof}
+  Since $f$ is differentiable in $(a,b)$ (and, thus, also continuous), we can apply Theorem 5.10
+from Rudin. So, for every $$x > y \in (a,b), \exists c\in (y, x) \st f(x) - f(y) = (x - y)f'(c).$$
+But $(x-y) > 0$, and we are given that $f'(x) > 0$, so indeed we have that $f(x) - f(y) > 0$ and so
+$f$ is strictly increasing in the interval $(a,b)$. \\
+
+Note that $x = g(f(x))$, since $g$ inverts $f$ in $(a,b)$. So then, taking derivatives of both sides
+and applying the chain rule, we have that 
+$$1 = g'(f(x))f'(x) \Rightarrow g'(f(x)) = \frac{1}{f'(x)},$$ as desired. Since $f'(x) > 0$, we have
+that $g'$ is defined everywhere in $(a,b)$.
+\end{proof}
+
+\begin{question}[5.4]
+ If $$C_0 + \frac{C_1}{2} + \dots + \frac{C_{n-1}}{n} + \frac{C_n}{n + 1} = 0,$$ where $C_0, \ldots,
+C_n$ are real constants, prove that the equation $C_0 + C_1x + \dots + C_{n-1}x^{n-1} + C_nx^n = 0$
+has at least one real root between 0 and 1.
+\end{question}
+  This proof is actually pretty fun. The equations given have a very juicy relationship betwen the
+constants and the whole thing is very reminiscent of formal derivatives of an $n$-degree polynomial,
+so let's just do that. 
+\begin{proof}
+  Let $$f(x) = \sum_{i=0}^n C_i \frac{x^{i+1}}{i+1} = C_0x + \frac{C_1}{2}x^2 + \dots$$ Note that
+$f$ is continuous and differentiable on $(0,1)$, since it is a polynomial. Further, note that $f(0)
+= 0$, obviously, and $f(1) = 0$ by the given condition. Now note that $$f'(x) = \sum_{i=0}^n C_i x_i
+= C_0 + C_1x + C_2x^2 + \dots$$ By the mean value theorem, we have that $\exists x\in (0,1)$ such
+that $$f'(x) = \frac{f(1) - f(0)}{1 - 0} = 0,$$ and so we have the result.
+\end{proof}
+
+\begin{question}[5.11]
+  Suppose $f$ is defined in a neighborhood of $x$, and suppose $f''(x)$ exists. Show that 
+$$\lim_{h\to 0} \frac{f(x+h) + f(x - h) - 2f(x)}{h^2} = f''(x).$$ Show by an example that the limit
+may exist even if $f''(x)$ does not. \emph{Hint:} use Theorem 5.13.
+\end{question}
+\begin{proof}
+ We're going to be young and reckless and just apply \lhopital's rule $(\die/\die h)$ straight off the bat, yielding 
+$$\lim_{h\to 0} \frac{f(x + h) + f(x - h) - 2f(x)}{h^2} = \lim_{h\to 0} \frac{f'(x+h) -
+f'(x-h)}{2h}$$
+Now, we're going to split $f''$ into the sum of two limits, which must be the same since $f''$
+exists. So we have that
+\begin{align*}
+ f''(x) &= \frac{1}{2}(f''(x) + f''(x)) \\
+&= \frac{1}{2}\left( \lim_{h\to 0} \frac{f'(x + h) - f'(x)}{h} + \lim_{h\to 0} \frac{f'(x - h) -
+f'(x)}{-h} \right) \\
+&= \frac{1}{2}\lim_{h\to 0} \frac{f'(x + h) - f'(x - h)}{h} \\
+&= \lim_{h\to 0} \frac{f'(x + h) - f'(x - h)}{2h},
+\end{align*}
+so we have the claim.
+\end{proof}
+An example is something like $f(x) = x|x|$ at $x = 0$. $f$ is defined for all $x\in\R$, and the
+limit is, indeed 0, but $f''$ is not defined. To see this, note that 
+\begin{align*}
+  \frac{d}{dx}x|x| &= \left( \frac{d}{dx}x \right)|x| + x \left( \frac{d}{dx}|x| \right) \\
+                   &= |x| + x \frac{x}{|x|} \\
+                   &= \frac{2x^2}{|x|},
+\end{align*}
+so then the expression we calculated above using \lhopital's rule, does, indeed, evaluate to zero,
+while $f''$ is not defined at $0$ because of the $\frac{1}{|x|}$ term.
+
+\begin{question}[5.13]
+ Suppose $a$ and $c$ are real numbers, $c > 0$, and $f$ is defined on $[-1, 1]$ by 
+$$f(x) = \begin{cases} x^a \sin(|x|^{-c}) &\text{(if $x\neq 0$)} \\ 0 &\text{(otherwise).}
+\end{cases}$$ Prove the following statements:
+\begin{qparts}
+  \item $f$ is continuous iff $a > 0$.
+  \item $f'(0)$ exists iff $a > 1$.
+  \item $f'$ is bounded iff $a \geq 1 + c$.
+  \item $f'$ is continuous iff $a > 1 + c$.
+  \item $f''(0)$ exists iff $a > 2 + c$.
+  \item $f''$ is bounded iff $a \geq 2(1 + c)$. 
+  \item $f''$ is continuous iff $a > 2(1 + c)$.
+\end{qparts}
+\end{question}
+
+\section*{Other Problems}
+\begin{question}[1]
+  Prove or disprove.
+  \begin{qparts}
+    \item If $f: [0,1] \to \R$ has a maximum at $x\in [0,1]$ then $f'(x) = 0$.
+    \item If $f: (a,b) \to \R$ is a continuous function defined on an open interval in the real
+line, then $f$ is differentiable.
+    \item If $f: (a,b) \to \R$ is a differentiable function defined on an open interval in the real
+line, then $f$ is continuous.
+  \end{qparts}
+\end{question}
+\begin{proof}\leavevmode
+ \begin{qparts}
+   \item \emph{False.} Consider $f(x) = x$ on $[0,1]$. Clearly, $f$ has a maximum at $x = 1$, but
+$f'(1) \neq 0$.
+   \item \emph{False.} Consider $f(x) = |x|$ on $(-1,1)$. Let's first show that $f$ is continuous on
+$(-1,1)$. Write $$f(x) = \begin{cases} -x &x < 0 \\ x & x \geq 0. \end{cases}$$ Since each piece is
+continuous, the only point we need to check is $x = 0$. But the limits from both sides clearly
+agree, since both are zero, so $f$ is continuous at $0$, and thus continuous on $\R$. Now, we just
+have to show that $f$ is not differentiable at $x = 0$. Forming the difference quotient at $x=0$, we
+have that 
+$$\lim_{h\to 0^+} \frac{|0 + h| - |0|}{h} = \lim_{h\to 0^+} \frac{|h|}{h} = 1,$$ but 
+$$\lim_{h\to 0^-} \frac{|0 + h| - |0|}{h} = \lim_{h\to 0^-} \frac{|h|}{h} = -1,$$ so $f$ is not
+differentiable at $x=0,$ since the limits don't agree.
+   \item \emph{True.} Just look this one up in the notes.
+ 
+ \end{qparts} 
+\end{proof}
+
+\begin{question}[2]
+  Suppose $X,Y$ are metric spaces and $f,g: X\to Y$ uniformly continuous functions. Is the product 
+$fg: X\to Y$ necessarily uniformly continuous? Prove or disprove. 
+\end{question}
+\begin{proof}
+  \emph{False.} Take $f = g = x$. We must show that $f,g$ are uniformly continuous; that is, we must
+show that $x\mapsto x$ is uniformly continuous. But this is trivial; in the criteria for uniform
+continuity, simply take $0 < \delta < \varepsilon$ and then note that $$d(f(x_1), f(x_2)) = d(x_1,
+x_2).$$ So both $f,g$ are uniformly continuous on $X = \R$. \\
+
+Now, $(fg)(x) = x^2,$ which is not uniformly continuous. To show this, we must show that 
+\begin{gather*}
+  \exists \varepsilon > 0 \st \forall \delta > 0, \exists x_1, x_2 \st \\
+  d(x_1, x_2) < \delta \text{ and } d(x_1^2, x_2^2) \geq \varepsilon.
+\end{gather*}
+Take $\varepsilon = 1$. Now, for any $\delta > 0$, take $x_1 = \frac{1}{\delta}$ and $x_2 = \delta +
+\frac{1}{\delta}$. Note that $d(x_1, x_2) < \delta$. But 
+\begin{align*}
+ |x_1^2 - x_2^2| &= \left|\left( \frac{1}{\delta} \right)^2 - \left( \delta + \frac{1}{\delta}
+\right)^2\right| \\
+                 &= |\delta^2 + 2| \\
+                 &= \delta^2 + 2 \\
+                 &> \varepsilon = 1,
+\end{align*}
+so $fg = x^2$ is not uniformly continuous.
+\end{proof}
+What follows is my initial stab at the problem:
+\begin{lemma}
+  If $f: X \to \R$ is uniformly continuous, then so is $f^2$, where $f^2(x) = f(x)^2.$
+\end{lemma}
+\begin{proof}
+  Suppose that $f$ is uniformly continuous on $X$. \emph{blah blah blah... this fails unless $f$ is
+also bounded.}
+\end{proof}
+\begin{proof}
+  By a prior result, we have that $f \pm g$ is uniformly continuous (from the notes; it's extremely
+easy to show though). So now note that $$fg = \frac{1}{2}\left[ (f+g)^2 - f^2 - g^2 \right].$$ By
+the lemma, since $f, g$ are uniformly continuous, so are $f^2, g^2$, and by the prior result, so is
+$(f + g)^2$. Applying the prior result again, we have that the RHS is uniformly continuous. So, we
+have the result... if $f$ is bounded.
+\end{proof}
+
+\begin{question}[3]
+  Recall how to apply Theorem 5.8 by finding all the maximum and minimum of the function $f:
+[0,3]\to \R$ defined by the formula $$f(x) = e^{x - 1}x(x-2).$$ How do we know \emph{a priori} that
+the maximum and minimum exist?
+\end{question}
+\begin{proof}
+  By Theorem 5.8, we need only find and check all critical points; that is, points where $f'(x) = 0$
+or undefined.. First, we need to find $f'(x)$, which we can do by applying the chain and product
+rules. So we have that 
+\begin{align*}
+  f'(x) &= e^{x-1}(x^2 - 2x) + e^{x-1}(2x - 2) \\
+        &= e^{x-1} ( x^2 - 2)
+\end{align*}
+In order to find the zeros of this function, we first note that it is a product and that the
+exponential term is always positive, so we need only find the roots of the other term; the roots of
+this function are $\pm\sqrt{2}$. Since we are restricted to the domain $[0,3]$, we consider only the
+principal root. I don't know what we're allowed to check for classification of extrema, so I'll just
+say that $f(\sqrt{2}) < f(\sqrt{2} \pm \delta)$ for some small $\delta > 0$, so it's a local minimum.\\
+
+Since $f'(x)$ is continuous on $\R$, the only discontinuities we need to check are at the boundaries
+of the domain. By the previous argument, we have that $f(0)$ and $f(3)$ are local maxima. 
+\end{proof}
+\begin{proof}
+  Since $f$ is defined on a compact interval $X = [0,3]\subset\R$ and is continuous, we have that 
+$f(X) \subset \R$ is compact and thus closed and bounded. Since $f(x)$ is bounded, it has an infimum
+and a supremum, and since it is closed, both are achieved. That is, we have $x_i, x_s \in [0,3]$
+such that $$f(x_i) = \inf f(X), \qquad f(x_s) = \sup f(X).$$ Note that we can use this to show the
+existence of arbitrary extrema by taking compact subsets of $X$. 
+\end{proof}
+
+\end{document}
