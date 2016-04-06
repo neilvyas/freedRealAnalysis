@@ -1193,5 +1193,71 @@ Now we have that, if $f$ is differentiable at $x$, then $$f(t) = f(x) + \left[ f
   Let $f: [a,b] \to \R$ be continuous and differentiable on the interval. Then $\exists x\in (a,b)$
   such that $$f'(x) = \frac{f(b) - f(a)}{b-a}.$$
 \end{theorem}
+\begin{proof}
+  BLAH
+\end{proof}
+
+%lecture 20
+\begin{theorem}[Intermediate Value property of $f'$]
+  Let $a<b\in\R$, $f:(a,b) \to \R$ a differentiable function. Suppose $x_1, x_2 \in (a,b)$ and
+  $\lambda\in\R$ such that $f'(x_1) < \lambda < f'(x_2).$ Then there exists $x$ between $x_1, x_2$
+  Note that this does \emph{not} imply that $f'$ is continuous.
+  such that $f'(x) = \lambda.$ 
+\end{theorem}
+
+\begin{lemma}
+  Suppose $g(x_1) < 0$. Then $\exists \delta_1 > 0$ such that $g(t) < g(x_1)$ for all $t\in (x_1,
+  x_1 + \delta_1)$.
+\end{lemma}
+\begin{proof}
+  If not, then in every interval $(x, x+\delta)$, there exists $t$ with $g(t) \geq g(x_1)$. Then 
+  $$\frac{g(t) - g(x_1)}{t - x_1} \geq 0,$$ and so the limit has to be $\geq 0$. So then we have
+  that $g'(x_1) \geq 0$, which is a contradiction. Thus, there must be some interval $(x,
+  x+\delta_1)$ such that the claim holds. \\
+
+  An analogous argument holds for $g(x_1) > 0$.
+\end{proof}
+\begin{proof}
+  Suppose WLOG that $x_1 < x_2$ (and $f'(x_1) < f'(x_2)$). Consider $g(t) = f(t) - \lambda t$
+  defined on $(a,b)$. $g$ is differentiable since $f$ is assumed to be differentiable. So we want to
+  find $x\in(x_1, x_2)$ such that $g'(x) = f'(x) - \lambda = 0$. If we can find an extrema of $g$ in
+  $(a,b)$, then we get that $g'(x) = 0$ for some $x$ for free. Since $[x_1, x_2]$ is compact and $g$
+  is continuous (since it is differentiable), it must have a global minimum on the interval. Since
+  $g'(x_1) < 0$, we have that there exists $\delta_1 > 0$ such that $g(t) < g(x_1)$ for $t\in (x_1,
+  x_1+ \delta_1)$ by the lemma. Similarly, there exists $\delta_2 > 0$ such that for $t\in (x_2 -
+  \delta_2, x_2)$, we have that $g(t) < g(x_2)$. Thus, the global minimum does not occur on the
+  endpoints, and so is in the interval $(x_1, x_2)$. Thus, we have the claim.
+\end{proof}
+
+\begin{theorem}[Extended Mean Value Theorem]
+  Suppose we have $f,g: [a,b] \to \R$ continuous and differentiable on the open interval $(a,b)$.
+  Then $\exists x\in (a,b)$ such that $$f'(x)[g(b) - g(a)] = g'(x)[f(b) - f(a)].$$ 
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
+\begin{theorem}[L'H\^opital's Rule]
+  Suppose that $f,g: (a,b) \to \R$ are differentiable, $g'(t) \neq 0$ for all $t\in(a,b)$,
+  $$\lim_{t\to a} f(t) = \lim_{t\to a}g(t) = 0,$$ and $$\lim_{t\to a} \frac{f'(t)}{g'(t)}$$ exists
+  and is equal to some value $A$. Then $$\lim_{t\to a} \frac{f(t)}{g(t)} = A.$$ 
+\end{theorem}
+\begin{proof}
+  Fix $\varepsilon > 0$. Then we must find $\delta > 0$ such that for $t\in (a, a + \delta)$, 
+  $$\left| \frac{f(t)}{g(t)} - A \right| < \varepsilon.$$
+  Choose $c\in (a,b)$ such that for $t\in (a,c)$, we have that 
+  $$\frac{f'(t)}{g'(t)} < A + \frac{\varepsilon}{2}.$$
+  Now take $a < x < y < c.$ Then, by the extended mean value theorem, we have $t\in (x,y)$ such that 
+  $$\frac{f(y) - f(x)}{g(y) - g(x)}  = \frac{f'(t)}{g'(t)} < A + \frac{\varepsilon}{2}.$$
+  Now, take $x\to a$. We find that 
+  $$\frac{f(y)}{g(y)} \leq A + \frac{\varepsilon}{2} < A + \varepsilon.$$ 
+  And so for $y\in(a,c)$, we have that 
+  $$\frac{f(y)}{g(y)} - A < \varepsilon.$$ We repeat the argument for the other side of the
+  inequality and the intersect the interval to satisfy the claim.
+\end{proof}
+
+\begin{theorem}[Taylor's Theorem]
+  
+\end{theorem}
 
 \end{document}
