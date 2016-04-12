@@ -1233,6 +1233,10 @@ Now we have that, if $f$ is differentiable at $x$, then $$f(t) = f(x) + \left[ f
   Suppose we have $f,g: [a,b] \to \R$ continuous and differentiable on the open interval $(a,b)$.
   Then $\exists x\in (a,b)$ such that $$f'(x)[g(b) - g(a)] = g'(x)[f(b) - f(a)].$$ 
 \end{theorem}
+Perhaps it's more intuitive to say that $$\frac{f'(x)}{g'(x)} = \frac{f(b) - f(a)}{g(b) - g(a)}$$ for
+some $x\in (a,b)$. That is, the ratio of the instantaneous changes is equal to the ratio of the
+average change (divide top and bottom of the RHS by $(b-a)$) for two functions $f,g$ somewhere in
+the interval.
 \begin{proof}
   
 \end{proof}
@@ -1256,8 +1260,39 @@ Now we have that, if $f$ is differentiable at $x$, then $$f(t) = f(x) + \left[ f
   inequality and the intersect the interval to satisfy the claim.
 \end{proof}
 
+Another proof.
+\begin{proof}
+  Note that, by the intermediate value property of derivatives, we have that since $g'(x) \neq 0$,
+  either $g' > 0$ or $g' < 0$. So, $g$ is strictly increasing or decreasing, respectively. Fix
+  $\varepsilon > 0$; we must find $\delta > 0$ such that, for all $t\in (a, a + \delta)$, we have
+  that $$\left| \frac{f(t)}{g(t)} - A \right| < \varepsilon.$$ The rest of the proof follows as
+  above (edit these together).
+\end{proof}
+
 \begin{theorem}[Taylor's Theorem]
-  
+  Suppose that $f: (a,b) \to \R$ is $n$ times differentiable for $n\in\N$. Fix $\alpha, \beta\in
+  (a,b)$ and suppose $\alpha\neq\beta$. Then let
+  \begin{align*}
+    P(t) &= \sum_{k=0}^{n-1} \frac{f^{(k)}(\alpha)}{k!}(t-\alpha)^k \\
+         &= f(\alpha) + f'(\alpha)(t-\alpha) + \frac{f''(\alpha)}{2!}(t-\alpha)^2 + \dots +
+    \frac{f^{(n-1)}(\alpha)}{(n-1)!}(t-\alpha)^{n-1}.
+  \end{align*}
+  Then $\exists x$ between $\alpha, \beta$ such that $$f(\beta) = P(\beta) +
+  \frac{f^{(n)}(x)}{n!}(\beta-\alpha)^n,$$ where the second term is the error. 
 \end{theorem}
+\begin{proof}
+  Define $M$ such that $f(\beta) - P(\beta) - M(\beta - \alpha)^n = 0$, and define $g:(a,b)\to\R$ as
+  $$g(t) = f(t) - P(t) - M(t-\alpha)^n.$$ Note that since $f$ is $n$-times differentiable and the
+  other terms are polynomials, we have that $g$ is $n$-times differentiable. So then note that
+  $g(\alpha) = 0$, and $g'(\alpha) = 0$, and so on until $g^{(n-1)}(\alpha) = 0$. Further, by the
+  definition of $M$, we have that $g(\beta) = 0$. Finally, note that 
+  $$g^{(n)}(t) = f^{(n)}(t) - n!M.$$ Note that we have the result if $g^{(n)} = 0$, so then we seek
+  $x$ between $\alpha, \beta$ such that $g^{(n)} = 0.$ Since we have that $g$ is $n$-times
+  differentiable, and so $g, \ldots, g^{(n-1)}$ are continuous, and that each vanishes at $\alpha$,
+  we can repeatedly apply the MVT to find an $x$ such that $g^{(n)} = 0$ (formally, this is via
+  induction).
+\end{proof}
+
+\section{Integration}
 
 \end{document}
