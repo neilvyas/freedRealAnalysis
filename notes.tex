@@ -1189,12 +1189,27 @@ Now we have that, if $f$ is differentiable at $x$, then $$f(t) = f(x) + \left[ f
     sides, we have that $f'(x) \geq 0$ and $f'(x) \leq 0$, so $f'(x) = 0$. 
 \end{proof}
 
-\begin{theorem}[The Mean Value Theorem]
-  Let $f: [a,b] \to \R$ be continuous and differentiable on the interval. Then $\exists x\in (a,b)$
-  such that $$f'(x) = \frac{f(b) - f(a)}{b-a}.$$
+\begin{theorem}[The Generalized Mean Value Theorem]
+  Let $f,g: [a,b] \to \R$ be continuous on the interval and differentiable in $(a,b)$. Then $\exists x\in
+  (a,b)$ such that $$f'(x)\big[(g(b) - g(a)\big] = g'(x)\big[f(b) - f(a)\big].$$
 \end{theorem}
 \begin{proof}
-  BLAH
+  Consider the function $h: [a,b] \to \R$ defined by
+  $$h(t) = f(t)\big[(g(b) - g(a)\big] - g(t)\big[f(b) - f(a)\big].$$
+  We must find $x\in (a,b)$ such that $h'(x) = 0$. Observe that $h$ is continuous on $[a,b]$ and
+  differentiable on $(a,b)$. Since $[a,b]$ is compact, $h$ attains a maximum and minimum value on the
+  interval. Now use the fact that $h(a) = h(b)$.
+  If $h$ is constant, any $x\in (a,b)$ satisfies $h'(x) = 0$. If $\exists t\in (a,b)$ such that
+  $h(t) > h(a)$, then the maximum is attained at some $x\in (a,b)$, and $h'(x) = 0$. The analogous
+  argument for a minimum also applies.
+\end{proof}
+
+\begin{corollary}[The Mean Value Theorem]
+  Let $f: [a,b] \to \R$ be continuous and differentiable on the interval. Then $\exists x\in (a,b)$
+  such that $$f'(x) = \frac{f(b) - f(a)}{b-a}.$$
+\end{corollary}
+\begin{proof}
+  Take $g$ to be the identity function above.
 \end{proof}
 
 %lecture 20
