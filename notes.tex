@@ -1297,5 +1297,169 @@ Another proof.
 \end{proof}
 
 \section{Integration}
+\subsection{Defining the Riemann Integral}
 
+\begin{defn}
+  A \emph{partition} $P$ of $[a,b]$ is a finite set $\{x_1, \dots, x_{n-1}\}$ of real numbers such
+  that $a < x_1 < \dots < x_{n-1} < b$. Further let $x_0 = a, x_n = b$.
+\end{defn}
+Note that the set of partitions (over all $n$) is the union of the ``upper'' $(n-1)$-simplices, that
+is, open regions of the $(n-1)$-dimensional $(a,b)$-cube where each successive coordinate is bigger
+than the previous. \\
+
+Let $f: [a,b] \to \R$ be a \emph{bounded} function; that is, there exist $m, M\in\R$ such that 
+$$m \leq f(x) < M, \quad x\in[a,b].$$
+Let $P = \{x_1 < \dots < x_{n-1}\}$ be a partition. Then for $i=1, \dots, n$, set 
+\begin{gather*}
+  m_i = \inf \{f(x) \mid x\in [x_{i-1}, x_i] \}, \\
+  M_i = \sup \{f(x) \mid x\in [x_{i-1}, x_i] \}. \\
+\end{gather*}
+Now, define 
+$$L(P, f) = \sum_{i=1}^n m_i (x_i - x_{i-1}), \qquad U(P, f) = \sum_{i=1}^n M_i (x_i - x_{i-1}).$$
+We say that $L, U: (\mathcal{P}, f) \to \R$, where $\mathcal{P}$ is the set of all partitions $P$ of
+$[a,b]$.  So since $m \leq m_i \leq M_i \leq M$ for all $i$, we have that 
+$$m(b-a) \leq L(P, f) \leq U(P, f) \leq M(b-a).$$
+In particular, note that for \emph{any} partition, we have that $L(-, f)$ is bounded above, and
+$U(-, f)$ is bounded below. So, now define
+\begin{align*}
+  (i)\qquad  \underline{\int_a^b} f(x)\ dx &= \sup_{P\in\mathcal{P}} L(P, f) \\
+  (ii)\qquad  \overline{\int_a^b} f(x)\ dx &= \inf_{P\in\mathcal{P}} U(P, f).
+\end{align*}
+This is legal since, by the above note, we have that both
+$$\sup_{P\in\mathcal{P}} L(P, f), \qquad \inf_{P\in\mathcal{P}} U(P, f)$$
+eixst.  Then we say that 
+\begin{defn}[The Riemann Integral]
+  $f$ is \emph{Riemann integrable} if $(i)$ and $(ii)$ agree, and we define the integral to be the
+  common value.
+\end{defn}
+
+\begin{defn}[Refinements]
+  Let $P_1, P_2$ both be partitions of $[a,b]$. Then we say 
+  \begin{enumerate}
+    \item A partition $P^*$ is a \emph{refinement} of another partition $P$ iff $P \subset P^*$;
+    \item $P^*$ is a \emph{common refinement} of $P_1, P_2$ if $P_1 \subset P^*, P_2 \subset P^*$.
+  \end{enumerate}
+\end{defn}
+\begin{proposition}
+  Any two partitions $P_1, P_2$ have a minimal common refinement $P^*$, and $$P^* = P_1 \cup P_2.$$
+\end{proposition}
+\begin{proof}
+  Show that any other common refinement contains $P^*$.
+\end{proof}
+
+\begin{lemma}
+  If $P^*$ is a refinement of $P$, then we have that 
+  $$L(P, f) \leq L(P^*, f) \leq U(P^*, f) \leq U(P, f).$$
+\end{lemma}
+\begin{proof}
+ Straightforward but tedious. Consider refining by a single point, then induct. 
+ Here's the kernel of the proof.
+ \begin{align*}
+   L(P,f) &= \sum_{i\neq k} m_i(x_i - x_{i-1}) + m_k(x_k - x_{k-1}) \\
+          &\leq \sum_{i\neq k} m_i(x_i - x_{i-1}) + m^-(y - x_{k-1}) + m^+(x_k - y) \\
+          &= L(P^*, f).
+ \end{align*}
+\end{proof}
+\begin{corollary}
+ $$ \underline{\int_a^b} f(x)\ dx \leq \overline{\int_a^b} f(x)\ dx. $$
+\end{corollary}
+\begin{proof}
+  Suppose that $P_1, P_2 \in \mathcal{P}$ and $P^*$ is a common refinement. By the lemma, we have
+  that 
+  $$L(P_1, f) \leq L(P^*, f) \leq U(P^*) \leq U(P_2, f).$$
+  Note that we've just shown that $L < U$ for any choice of partitions. So then, we have that
+  $$\underline{\int_a^b} f(x)\ dx \leq U(-, f),$$ for any choice of partition. Then, take the $\inf$
+  on the right side to get the result.
+\end{proof}
+This strategy of proof is common for proving relations on posets (partially ordered sets).
+
+\begin{theorem}[Criterion for Riemann Integrability]
+  $f$ is Riemann integrable iff 
+  $$\forall \varepsilon > 0, \exists P\in \mathcal{P} \st U(P,f) - L(P,f) < \varepsilon.$$
+\end{theorem}
+%lecture 22 (?)
+\begin{proof}
+  $(\Rightarrow)$ Suppose $f$ is Riemann integrable. Fix $\varepsilon > 0$. Then choose partitions 
+  $P_1, P_2$ so that 
+  $$U(P_1, f) - \overline{\int_a^b}f < \frac{\varepsilon}{2}, \qquad 
+  \underline{\int_a^b}f - L(P_2, f) < \frac{\varepsilon}{2}.$$ (Note that we can do this by
+  definition of the upper and lower integrals as $\sup$, $\inf$ respectively.) So adding the
+  inequalities, and noting that the upper and lower integrals are the same since $f$ is integrable,
+  we have that 
+  $$U(P_1, f) - L(P_2, f) < \varepsilon.$$
+  Let $P^*$ be a common refinement of $P_1, P_2$. Then by the lemma, we have that 
+  $$U(P^*, f) - L(P^*, f) < \varepsilon,$$ as desired. \\
+
+  $(\Leftarrow)$ Suppose that the given criterion holds for $\varepsilon > 0$. That is, $\exists
+  P\in\mathcal{P} \st U(P, f) - L(P, f) < \varepsilon.$ So then, by definition of the upper and
+  lower integrals, we have that 
+  $$0 \leq \overline{\int_a^b}f - \underline{\int_a^b}f \leq U(P, f) - L(P, f) < \varepsilon.$$ 
+  Since this holds for all $\varepsilon > 0$, we have that the upper and lower integrals are equal
+  and so $f$ is Riemann integrable.
+\end{proof}
+
+\begin{theorem}
+  Let $f: [a,b] \to \R$ be a (bounded) function. Then 
+  \begin{enumerate}
+    \item If $f$ is \emph{continuous}, it is Riemann integrable. 
+    \item If $f$ is \emph{monotone}, it is Riemann integrable.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}\leavevmode
+ \begin{enumerate}
+   \item Since $[a,b]$ is compact, we have that $f$ is uniformly continuous. Fix $\varepsilon > 0$.
+     Then we choose $\delta > 0$ such that $$|t - u| < \delta \Rightarrow |f(t) - f(u)| <
+     \frac{\varepsilon}{b-a}.$$ Choose a partition $P\in\mathcal{P}$ so that, for $i=1, \ldots, n$,
+     we have that $x_i - x_{i-1} < \delta.$ Then set $$m_i = \inf_{[x_{i-1}, x_i]}f, \qquad M_i =
+     \sup_{[x_{i-1}, x_i]}f.$$ So then, since each of the above intervals is compact, we have that
+     $m_i, M_i$ are attained, say at $x_i^m, x_i^M$. Note that $m_i, M_i$ are close, since we have
+     that $$|x_i^M - x_i^m| \leq x_i - x_{i-1} < \delta.$$ So then 
+     \begin{align*}
+       U(P, f) - L(P, f) &= \sum_{i=1}^n (M_i - m_i)(x_i - x_{i-1}) \\
+                         &< \sum_{i=1}^n \frac{\varepsilon}{b-a}(x_i - x_{i-1}) \\
+                         &= \frac{\varepsilon}{b-a} \sum_{i=1}^n (x_i - x_{i-1}) \\
+                         &= \varepsilon,
+     \end{align*}
+     and so by the theorem we have that $f$ is Riemann integrable.
+
+  \item Suppose WLOG that $f$ is monotone increasing. Given $\varepsilon > 0$, choose $n\in\N$ such
+    that $$n > \frac{[f(b) - f(a)][b-a]}{\varepsilon}.$$ Now, set 
+    $$P = \left\{ a + \frac{b-a}{n}, a + 2\frac{b-a}{n}, \ldots, a + (n-1)\frac{b-a}{n} \right\}.$$ 
+    So then 
+    \begin{align*}
+      U(P, f) - L(P, f) &= \sum_{i=1}^n f(x_i) - f(x_{i-1} \left( \frac{b-a}{n} \right) \\
+                        &= [f(b) - f(a)] \left( \frac{b-a}{n} \right) \\
+                        &< \varepsilon,
+    \end{align*}
+    so by the theorem we have that $f$ is Riemann integrable.
+ \end{enumerate} 
+\end{proof}
+
+\begin{theorem}[Continuous function of an integrable function is integrable]
+  Let $f:[a,b] \to \R$ be bounded (below by $m$, and above by $M$) and Riemann integrable. Suppose
+  that $\phi:[m, M] \to \R$ is continuous. Then if $f$ is Riemann integrable, so is $\phi\circ f$.
+\end{theorem}
+\begin{proof}
+in Rudin.  
+\end{proof}
+
+\begin{theorem}[Properties of Integration]\leavevmode
+ \begin{enumerate}
+   \item \emph{linearity}
+     $f_1 + f_2$ is integrable, and 
+   \item \emph{monotonicity}
+     If $f_1(x) \leq f_2(x)$, then $$\int_a^b f_1(x)\ dx \leq \int_a^b f_2(x)\ dx.$$
+   \item \emph{continuous triangle inequality}
+     $$\left| \int_a^bf(x)\ dx \right| \leq \int_a^b |f(x)|\ dx.$$
+   \item \emph{upper bound}
+ \end{enumerate} 
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+\begin{aside}{Linear Algebra}
+  Let $\mathcal{V}$ be the (infinite-dimensional) vector space of bounded functions on $[a,b]$. Then 
+the set of Riemann integrable functions is a subspace and integration is a linear operator on that
+subspace.
+\end{aside}
 \end{document}
