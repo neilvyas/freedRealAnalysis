@@ -1,0 +1,100 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\no{12}
+\class{Real Analysis I}
+
+\begin{document}
+\maketitle
+%ch 6: 1,2,4,7,8
+\section*{Rudin Problems}
+\begin{question}[6.1]
+ Suppose $\alpha$ increases on $[a,b], a \leq x_0 \leq b, \alpha$ is continuous at $x_0, f(x_0) =
+1$, and $f(x) = 0 $ if $x \neq x_0$. Prove that $f\in\mathcal{R}{\alpha}$ and that $\int f\ d\alpha
+= 0$. 
+\end{question}
+
+\begin{question}[6.2]
+ Suppose $f \geq 0$, $f$ is continuous on $[a,b]$, and $\int_a^b f(x)\ dx = 0$. Prove that $f(x) =
+0$ for all $x\in[a,b]$. 
+\end{question}
+
+\begin{question}[6.4]
+ If $f(x) = 0$ for all $x\in\R\setminus\Q$, $f(x) = 1$ for all $x\in\Q$, prove that $f \notin
+\mathcal{R}$ on $[a,b]$ for any $a < b$.
+\end{question}
+
+\begin{question}[6.7]
+ Suppose $f$ is a real function on $(0,1]$ and $f\in\mathcal{R}$ on $[c, 1]$ for every $c > 0$.
+Define $$\int_0^1 f(x)\ dx = \lim_{c\to 0}\int_c^1 f(x)\ dx,$$ if this limit exists and is finite.
+\begin{qparts}
+  \item If $f\in\mathcal{R}$ on $[0,1]$, show that this definition of the integral agrees with the
+old one.
+  \item Construct a function $f$ such that the above limit exists, although it fails to exist with
+$|f|$ in place of $f$.
+\end{qparts} 
+\end{question}
+
+\begin{question}[6.8]
+  
+\end{question}
+
+\section*{Other Problems}
+\begin{question}[1]
+  For any nonnegative integer $n$ prove from the definition that 
+$$\int_0^1 x^n\ dx$$ exists. Can you also compute the integral without using the fundamental theorem
+of calculus?
+\end{question}
+\begin{theorem}
+  Let $f: [a,b] \to \R$ be a (bounded) function. Then 
+  \begin{enumerate}
+    \item If $f$ is \emph{continuous}, it is Riemann integrable. 
+    \item If $f$ is \emph{monotone}, it is Riemann integrable.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Proved in class.
+\end{proof}
+\begin{proof}
+  Note that existence is trivial. Fix $n \in\N$. Take $f: [0,1] \to \R$, $f(x) = x^n$. Since $f$ is
+a polynomial, it is continuous on the interval, and so by the theorem we have that it is Riemann
+integrable.
+\end{proof}
+
+\begin{question}[2]
+  Prove or disprove each statement. You may have to use some statements you know from calculus.
+\begin{qparts}
+  \item If $f:[0,1] \to \R$ is Riemann integrable, then $f$ is continuous.
+  \item IF $f:[a,b]\to\R$ is differentiable at all interior points of $[a,b]$, then $\int_a^b f\ dx$
+exists.
+  \item For $n = 0, 1, 2, \dots$ define $f_n: [0,1]\to \R$ by the formula $f_n(x) = \frac{x^n}{n!}$.
+Then $$\int_0^1 \sum_{n=0}^\infty f_n(x)\ dx = \sum_{n=0}^\infty \int_0^1  f_n(x)\ dx.$$
+\end{qparts}
+\end{question}
+\begin{theorem}[Criterion for Riemann Integrability]
+  $f$ is Riemann integrable iff 
+  $$\forall \varepsilon > 0, \exists P\in \mathcal{P} \st U(P,f) - L(P,f) < \varepsilon.$$
+\end{theorem}
+\begin{proof}
+  Proved in class.
+\end{proof}
+\begin{proof}\leavevmode
+  \begin{qparts}
+   \item False. Let $f$ be identically 0 on the interval except that $f(1/2) = 1$. Obviously, $f$
+is not continuous. Now we want to find a partition $P$ such that the theorem holds. Note that the
+lower sum $L(P, f) = 0$ for all $P$. Fix $\varepsilon > 0$. Then we need to ensure that $U(P,f) <
+\varepsilon$. But this is easy. Take $0 < \delta < \varepsilon$, and then $P = \{1/2(1  - \delta),
+1/2(1  + \delta) \}$. So then $U(P,f) = \delta < \varepsilon,$ as desired. So $f$ is Riemann
+integrable but not continuous.
+   \item If $f$ is differentiable on $(a,b)$, then it is continuous at all points in $(a,b)$.
+With some judicious handwaving involving compactness of $[0,1]$, we have that $f$ is continuous on
+$[a,b]$, and so by the first theorem from class, we have that $f$ is Riemann integrable.
+  \end{qparts}
+\end{proof}
+
+\begin{question}[3]
+  Consider $$f(x) = \begin{cases} 1/q, &x = p/q. p, q \geq 0 \text{ relatively prime;} \\
+                                  0, &x \in \R \setminus \Q. \end{cases}$$
+  Compute the lower and upper integrals on $[0,1]$. Is $f$ integrable? 
+\end{question}
+\end{document}
