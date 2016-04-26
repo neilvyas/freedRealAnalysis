@@ -1446,12 +1446,15 @@ in Rudin.
 \begin{theorem}[Properties of Integration]\leavevmode
  \begin{enumerate}
    \item \emph{linearity}
-     $f_1 + f_2$ is integrable, and 
+     $f_1 + f_2$ is integrable, and $\int_a^b f_1 + f_2 = \int_a^b f_1 + \int_a^b f_2;$ \\
+     $cf$ is Riemann integrable, and $\int_a^b cf = c\int_a^b f.$
    \item \emph{monotonicity}
      If $f_1(x) \leq f_2(x)$, then $$\int_a^b f_1(x)\ dx \leq \int_a^b f_2(x)\ dx.$$
    \item \emph{continuous triangle inequality}
+     If $|f|$ is integrable, then
      $$\left| \int_a^bf(x)\ dx \right| \leq \int_a^b |f(x)|\ dx.$$
-   \item \emph{upper bound}
+   \item \emph{upper bound} If $|f| \leq M$, then 
+     $$\left| \int_a^b f  \right| \leq M(b-a).$$
  \end{enumerate} 
 \end{theorem}
 \begin{proof}
@@ -1462,4 +1465,90 @@ in Rudin.
 the set of Riemann integrable functions is a subspace and integration is a linear operator on that
 subspace.
 \end{aside}
+
+\begin{proposition}[Splitting]
+  Suppose $f:[a,b] \to \R$ is Riemann integrable and take $x\in(a,b).$ Then we have that
+  $f\mid_{[a,x]}$ and $f\mid_{[x,b]}$ are Riemann integrable, and 
+  $$\int_a^b f = \int_a^x f + \int_x^b.$$
+\end{proposition}
+\begin{proof}
+  Fix $\varepsilon > 0$. Then we have that $\exists P \in\mathcal{P}$ such that $U(P, f) - L(P,f) <
+  \varepsilon.$ Assume $x\in P$; if not, then add it to have a refinement of $P$, which only
+  strengthens the following argument. So, WLOG, suppose $x\in P$. Then write $P = P_1 \cup P_2$ with
+  $P_1 \subset (a,x), P_2 \subset (x,b)$. Then we have that 
+  $$U_a^b(P, f) = U_a^x(P_1,f) + U_x^b(P_2, f), = L_a^b(P, f) \leq L_a^x(P_1,f) + L_x^b(P_2,
+  f).$$
+  So then 
+  \begin{align*}
+    \varepsilon &> U_a^b(P,f) - L_a^b(P,f) \\
+                &= \left[ U_a^x(P_1, f) - L_a^x(P_2, f) \right] + \left[ U_x^b(P_2, f) - L_x^b(P_2,
+  f) \right].
+  \end{align*}
+  Since each term is positive, we have that each is less than $\varepsilon$, so, indeed, both
+  restrictions are Riemann integrable. \\
+
+  The rest is left as an exercise for the reader.
+\end{proof}
+
+\subsection{Integration and Differentiation}
+\begin{theorem}
+  Suppose $f: [a,b] \to \R$ is Riemann integrable. Define $F: [a,b] \to \R$ by $$F(x) = \int_a^x
+  f(t)\ dt.$$ Then 
+  \begin{enumerate}
+    \item $F$ is uniformly continuous;
+    \item If $f$ is continuous at some point $x$, then $F$ is differentiable at $x$ with $F'(x) =
+      f(x).$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}\leavevmode
+  \begin{enumerate}
+  \item Since $f$ is Riemann integrable, $f$ is bounded, that is, for $x\in[a,b]$, $|f(x)| \leq M$. So for
+  $x < y, x,y\in [a,b$, we have that 
+    \begin{align*}
+      |F(y) - F(x)| &= \left|\int_a^y f - \int_a^x f \right| \\
+                  &= \left| \int_x^y f \right|  \note{(via splitting)} \\
+                  &\leq M |y - x|.
+    \end{align*}
+  So given $\varepsilon > 0$, take $\delta = \varepsilon / M$. So then if $|y-x| < \delta$, we have
+  that $$|F(y) - F(x)| \leq M|y-x| < M\delta = \varepsilon.$$
+
+   \item Given $\varepsilon > 0$, since $f$ is continuous at $x_0$, we can choose $\delta > 0$ such
+     that $|t - x_0| < \delta$ implies $f(t) - f(x_0)| < \varepsilon.$ Fix $t\in(a,b)$ such that $|t -
+     x_0| < \delta$. So then
+     \begin{align*}
+       \left| \frac{F(t) - F(x_0)}{t - x_0} - f(x_0) \right| &= \left| \frac{1}{t - x_0}
+       \int_{x_0}^t f(s)\ ds - f(x_0) \right| \\
+       &= \left| \frac{1}{t - x_0} \int_{x_0}^t f(s) - f(x_0)\ ds \right| \\
+       &\leq \frac{1}{|t - x_0|} \int_{x_0}^t |f(s) - f(x_0)|\ ds \\
+       &\leq \frac{1}{|t - x_0|} \varepsilon |t - x_0| \\
+       &= \varepsilon,
+     \end{align*}
+    as desired.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[The Fundamental Theorem of Calculus]
+  Suppose $f:[a,b] \to \R$ is Riemann integrable, $F: [a,b] \to \R$ is continuous and
+  differentiable on the open interval $(a,b)$, and $F'(x) = f(x)$. Then 
+  $$\int_a^b f = F(b) - F(a).$$
+\end{theorem}
+\begin{proof}
+  Fix $\varepsilon > 0$. Choose a partition $P\in\mathcal{P}$ such that $U(P,f) - L(P,f) <
+  \varepsilon.$ Apply the MVT to $F$ on each interval $[x_{i-1}, x_i]$ to produce $t_i$ such that 
+  \begin{align*}
+    F'(x_i) - F(x_{i-1}) &= F'(t_i) [x_i - x_{i-1}] \\
+                         &= f(t_i)[x_i - x_{i-1}].
+  \end{align*}
+  Furhtermore, take $$m_i = \inf_{[x_{i-1}, x_i]} f, \qquad M_i \sup_{[x_{i-1}, x_i]} f,$$ then $m_i
+  \leq f(t_i) \leq M_i.$ So then 
+  $$L(P, f) = \sum_{i=1}^n m_i (x_{i-1} - x_i) \leq \sum_{i=1}^n f(t_i) (x_{i-1} - x_i) \ leq
+  \sum_{i=1}^n M_i (x_{i-1} - x_i) = U(P,f),$$
+  and 
+  $$\sum_{i=1}^n f( t_i) (x_{i-1} - x_i) = \sum_{i=1}^n F(x_i) - F(x_{i-1}) = F(b) - F(a).$$
+  Also, we have that 
+  $$L(P,f) \leq \int_a^b f \leq U(P,f),$$ 
+  so then 
+  $$0 \leq \left| \int_a^b f - [F(b) - F(a)] \right| < \varepsilon.$$ Since $\varepsilon > 0$ was
+  arbitrary, we're done.
+\end{proof}
 \end{document}
