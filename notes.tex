@@ -1551,4 +1551,73 @@ subspace.
   $$0 \leq \left| \int_a^b f - [F(b) - F(a)] \right| < \varepsilon.$$ Since $\varepsilon > 0$ was
   arbitrary, we're done.
 \end{proof}
+
+\subsection{Curves}
+\begin{defn}
+  Let $P = \{ x_1, \ldots, x_n \}$ be a partition of $[a,b]$, and define
+  $$\Lambda(P, \gamma) = \sum_{i=1}^n |\gamma(x_i) - \gamma_(x_{i-1})|.$$
+\end{defn}
+
+\begin{lemma}
+  If $P^*$ refines $P$, then $\Lambda(P^*, \gamma) \geq \Lambda(P, \gamma).$
+\end{lemma}
+\begin{proof}
+  Suppose $P^* = P \cup \{y\}$, with $x_{i-1} < y < x_i.$ Then 
+  \begin{align*}
+    \Lambda(P^*, \gamma) &= \sum_{y\neq i} |\gamma(x_j) - \gamma(x_{j-1})| + |\gamma(y) -
+    \gamma(x_{i-1})| + |\gamma(x_i) - \gamma(y)| \\
+                         &\geq \sum_{j=1}^n |\gamma(x_j) - \gamma(x_{j-1})| \\
+                         &= \Lambda(P, \gamma).
+  \end{align*}
+  Now, induct on the cardinality of $P^*$.
+\end{proof}
+
+\begin{defn}[Rectifiable]
+  $\gamma$ is \emph{rectifiable} if $\{\Lambda(P, \gamma)\}_{P\in \mathcal{P}}$ is bounded above. If 
+  so, define 
+  $$L(\gamma) = \sup_{P\in\mathcal{P}} \Lambda(P, \gamma).$$
+\end{defn}
+
+\begin{theorem}[Arc Length]
+  Suppose $\gamma: [a,b] \to \E^k$ is continuously differentiable. Then $\gamma$ is rectifiable and 
+  $$L(\gamma) = \int_a^b |\gamma'|.$$
+\end{theorem}
+\begin{proof}
+  Let $P = \{x_1, \ldots, x_n \}$ be a partition. Then by the Fundamental theorem, we have that 
+  $$\int_{x_{i-1}}^{x_i} \gamma' = \gamma(x_i) - \gamma(x_{i-1}).$$
+  Now, take norms and sum, yielding
+  \begin{align*}
+    \Lambda(P, \gamma) &= \sum_{i=1}^n |\gamma(x_i) - \gamma(x_{i-1})| \\
+                       &= \sum_{i=1}^n |\int_{x_{i-1}}^{x_i} \gamma'| \\ 
+                       &\leq \sum_{i=1}^n \int_{x_{i-1}}^{x_i} |\gamma'| \\
+                       &= \int_a^b |\gamma'|,
+  \end{align*}
+  so the set in question is bounded, and so $\gamma$ is rectifiable. Further, we have that 
+  $$L(\gamma) \leq \int_a^b |\gamma'|,$$
+  so it remains to prove the inequality in the other direction to show that it is tight. Given
+  $\varepsilon > 0$, use the uniform continuity of $\gamma'$ to choose $\delta > 0$ such that for 
+  $s,t\in [a,b], |s-t| < \delta,$ we have that $|\gamma(s) - \gamma(t)| < \varepsilon / 2$. Let $P =
+  \{x_1, \ldots, x_n \}$ such that $x_i - x_{i-1} < \delta$. Fix $i$. If $t\in[x_{i-1}, x_i],$ we
+  have that 
+  $$|\gamma'(t)| \leq |\gamma'(x_i)| + \frac{\varepsilon}{2}.$$
+  So then
+  \begin{align*}
+    \int_{x_{i-1}}^{x_i} |\gamma'(t)|\ dt &\leq \int_{x_{i-1}}^{x_i} |\gamma'(x_i)|\ dt +
+    \frac{\varepsilon}{2} (x_i - x_{i-1}) \\
+    %&= |\gamma'(x_i)|(x_i - x_{i-1}| + \frac{\varepsilon}{2}(x_i - x_{i-1}) \\
+    &= \left|\int_{x_{i-1}}^{x_i} \gamma'(x_i)\ dt\right| + \frac{\varepsilon}{2} (x_i - x_{i-1}) \\
+    &= \left|\int_{x_{i-1}}^{x_i} \gamma'(x_i) + \gamma'(t) - \gamma'(t)\ dt\right| +
+    \frac{\varepsilon}{2}(x_i - x_{i-1}) \\
+    &\leq \left|\int_{x_{i-1}}^{x_i} \gamma'(t)\ dt\right| + \left|\int_{x_{i-1}}^{x_i} \gamma'(x_i) - \gamma'(t)\ dt\right| +
+    \frac{\varepsilon}{2}(x_i - x_{i-1}) \\
+    &\leq |\gamma(x_i) - \gamma(x_{i-1})| + \varepsilon(x_i - x_{i-1}).
+  \end{align*}
+  Summing over $i$, we have that 
+  $$\int_a^b |\gamma'| \leq \Lambda(P, \gamma) + \varepsilon(b-a) \leq L(\gamma) + \varepsilon(b-a).$$
+  Since this is true for all $\varepsilon$, we have that 
+  $$L(\gamma) \geq \int_a^b |\gamma'|,$$
+  as desired.
+\end{proof}
+
+\subsection{Exchange of Limits}
 \end{document}
