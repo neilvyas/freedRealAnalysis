@@ -1469,7 +1469,7 @@ subspace.
 \begin{proposition}[Splitting]
   Suppose $f:[a,b] \to \R$ is Riemann integrable and take $x\in(a,b).$ Then we have that
   $f\mid_{[a,x]}$ and $f\mid_{[x,b]}$ are Riemann integrable, and 
-  $$\int_a^b f = \int_a^x f + \int_x^b.$$
+  $$\int_a^b f = \int_a^x f + \int_x^b f.$$
 \end{proposition}
 \begin{proof}
   Fix $\varepsilon > 0$. Then we have that $\exists P \in\mathcal{P}$ such that $U(P, f) - L(P,f) <
@@ -1619,5 +1619,217 @@ subspace.
   as desired.
 \end{proof}
 
+\subsection{Convergence}
+To understand when exchanging limits, or limiting operations, is permissable, we have to understand 
+the distinction between \emph{uniform} and \emph{pointwise convergence}.
+
+For example, take the sequence of functions 
+$$f_n(x) = \begin{cases} \min(1, nx) &x \geq 0; \\ \max(-1, nx) &x < 0. \end{cases}$$
+It's clear that for all $n$, $f_n$ is continuous, but the pointwise limit of $f_n$, 
+$$f(x) = \begin{cases} 1 &x > 0 \\ 0 &x = 0 \\ -1 &x< 0 \end{cases}$$
+is clearly not continuous.
+
+\begin{defn}[Pointwise Convergence]
+  We say that $f_n \to f$ \emph{pointwise} iff 
+  \begin{gather*}
+    \forall x\in X, \varepsilon > 0, \exists N\in\N \st \\
+    n \geq N \Rightarrow |f(x) - f_n(x)| < \varepsilon.
+  \end{gather*}
+\end{defn}
+
+\begin{defn}[Uniform Convergence]
+  We say that $f_n \to f$ \emph{uniformly} iff 
+  \begin{gather*}
+    \forall \varepsilon > 0, \exists N\in\N \st \forall x\in X,\\
+    n \geq N \Rightarrow |f(x) - f_n(x)| < \varepsilon.
+  \end{gather*}
+\end{defn}
+
+\begin{theorem}
+  $f_n \to f$ uniformly $\Rightarrow f_n \to f$ pointwise.
+\end{theorem}
+
+\begin{theorem}
+  If $f_n$ are continuous, and $f_n \to f$ uniformly, then $f$ is continuous.
+\end{theorem}
+\begin{proof}
+  Fix $\varepsilon > 0$. Then we want to show that 
+  $$\forall x, \exists \delta > 0 \st d(x - y) < \delta \Rightarrow |f(x) - f(y)| < \varepsilon.$$
+  Fix $x$. Since $f_n\to f$ uniformly, there exists $N\in\N$ such that if $n\geq N$, we have that 
+  $|f(x) - f_n(x)| < (\varepsilon / 3)$. Since $f_n$ is continuous (at x), $\exists \delta > 0$ such
+  that $$d(x,y) < \delta \Rightarrow |f_n(x) - f_n(y)| < \frac{\varepsilon}{3}.$$ So now, let $y$ be 
+  such that $d(y,x) < \delta$. Then we have that 
+  \begin{align*}
+    |f(x) - f(y)| &= |f(x) - f_n(x) + f_n(x) - f_n(y) + f_n(y) - f(y)| \\
+                  &\leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + |f_n(y) - f(y)| \\ 
+                  &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} \\
+                  &= \varepsilon.
+  \end{align*}
+  So we have that $f$ is continuous. Note that it's also now obvious that if $f_n$ is also uniformly 
+  continuous, then $f$ is uniformly continuous.
+\end{proof}
+
+\begin{theorem}[``Cauchy'' Condition]
+  $f_n \to f$ uniformly if 
+  \begin{gather*}
+  \forall \varepsilon > 0, \exists N \in\N \st \forall x\in X, \\
+  n,m \geq N \Rightarrow |f_n(x) - f_m(x)| < \varepsilon.
+  \end{gather*}
+\end{theorem}
+\begin{proof}
+  $(\Leftarrow)$ Suppose that $f_n$ is ``uniformly Cauchy.'' Then, in particular, we have that 
+  $\forall x\in X, f_n(x)$ is Cauchy. Since $\R$ is complete, we have that $f_n(x) \to f(x)$, for
+  some $f(x) \in \R$. That is, these pointwise limits define a function $f$, and further, $f_n\to f$
+  uniformly. \\
+
+  Given $\varepsilon > 0$, choose $N\in\N$ such that, for all $n,m \geq N$, we have that 
+  $|f_n(x) - f_m(x)| < \varepsilon / 2$ for all $x\in X$. Now, fix $n,m \geq N$. So then
+  $$\lim_{n\to\infty} |f_n(x) - f_m(x)| = \lim_{n\to\infty} |f(x) - f_m(x)| \leq
+  \frac{\varepsilon}{2} < \varepsilon,$$
+  and so $f_n \to f$ uniformly.
+\end{proof}
+\begin{corollary}
+  Suppose $\{f_k\}$ is a sequence of functions and $\{M_k\}\subset\R^{>0}$ such that 
+  \begin{enumerate}
+    \item $|f_k(x)| < M_k$ for all x;
+    \item  $\sum_{k=1}^\infty M_k $ converges.
+  \end{enumerate}
+  Then $\sum_{k=1}^\infty f_k$ converges uniformly.
+\end{corollary}
+\begin{proof}
+  Since $\sum M_k$ converges, the sequence of partial sums is Cauchy. So given $\varepsilon > 0$, 
+  there exists $N\in\N$ such that if $n,m \geq N$ we have that 
+  $$\sum_{k=m}^n M_k < \varepsilon.$$
+  So for any $x$ we have that 
+  \begin{align*}
+    \left| \sum_{k=1}^n f_n(x) \right| &\leq \sum_{k=1}^n |f_n| \\
+                                       &\leq \sum_{k=m}^n M_n \\
+                                       &< \varepsilon.
+  \end{align*}
+  So by the lemma, we have that $\sum f_k$ converges uniformly. Further, by the theorem, this function 
+  is continuous.
+\end{proof}
+
+\begin{theorem}[Sup Norm]
+  Let $C(X)$ be the space of bounded continuous functions $f: X \to \R$. Let
+  \begin{gather*}
+    d: C(X) \times C(X) \to \R^{\geq 0} \\
+    f,g \mapsto \sup_{x\in X} |f(x) - g(x)|.
+  \end{gather*}
+  Then $d$ is called the \emph{sup norm}, and is a distance function (and also a norm, if we
+  take $g = 0$).
+\end{theorem}
+%lecture 25
+\begin{proof}
+  We must show that 
+  \begin{enumerate}
+    \item $||f|| = 0 \iff f = 0$ identically, 
+    \item $||cf|| = |c|\cdot ||f||$, 
+    \item $||f_1 + f_2|| \leq ||f_1|| + ||f_2||$.
+  \end{enumerate}
+  So then we have that 
+  \begin{enumerate}
+    \item Trivial in both directions, just from definition.
+    \item Also trivial.
+    \item Let $x\in X$. Then we have that $f_1(x) \leq \sup |f_1|$ and similarly for $f_2$. So then we
+      have that 
+      \begin{align*}
+        ||f_1 + f_2|| &= \sup |f_1 + f_2| \\
+                      &\leq \sup \left( |f_1| + |f_2| \right) \\
+                      &\leq \sup \left( \sup |f_1| + \sup|f_2| \right) \\
+                      &= \sup |f_1| + \sup |f_2|\\
+                      &= ||f_1|| + ||f_2||,
+      \end{align*}
+      as desired.
+  \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+  Let $\{f_n\} \subset C(X).$ Then 
+  \begin{enumerate}
+    \item $f_n \to f$ uniformly iff $f_n \to f$ in $\left( C(X), d \right)$ where $d$ is the sup
+      norm.
+    \item $C(X)$ is complete.
+  \end{enumerate}
+\end{corollary}
+\begin{proof}\leavevmode
+  \begin{enumerate}
+    \item Left as an exercise.
+  \end{enumerate}
+\end{proof}
+
 \subsection{Exchange of Limits}
+\begin{theorem}
+  Let $f_n: [a,b] \to \R$ be Riemann Integrable, and $f_n \to f$ uniformly on $[a,b]$. Then we have
+  that $f$ is Riemann Integrable and 
+  $$\int_a^b f = \int_a^b \lim_{n\to\infty} f_n = \lim_{n\to\infty} \int_a^b f_n.$$ 
+\end{theorem}
+\begin{proof}
+  Define $$\varepsilon_n = \sup_{x\in[a,b]} |f(x) - f_n(x)|.$$ Note that $f_n \to f$ uniformly iff 
+  $\varepsilon_n \to 0$. So then, by definition of $\sup$, we have that for each $n$, 
+  $$f_n(x) - \varepsilon_n \leq f(x) \leq f_n(x) + \varepsilon_n.$$
+  Thus
+  $$\int_a^b f_n - \varepsilon_n \leq \underline{\int_a^b} f \leq \overline{\int_a^b} f \leq
+  \int_a^b f_n + \varepsilon_n,$$
+  and so 
+  $$0 \leq \overline{\int_a^b}f - \underline{\int_a^b}f \leq 2\varepsilon_n (b-a).$$
+  Taking the limit in $n$, since $\varepsilon_n\to 0$, we have that $f$ is Riemann Integrable. \\
+
+  Now, let's compute the value of the integral. So
+  \begin{align*}
+    \left| \int_a^b f - \int_a^b f_n \right|  &\leq \int_a^b |f - f_n| \\
+                                              &\leq \int_a^b \varepsilon_n \\
+                                              &= \varepsilon_n (b-a).
+  \end{align*}
+  Again taking $n\to\infty$, we have that 
+  $$\int_a^b f = \lim_{n\to\infty} \int_a^b f_n,$$ as desired.
+\end{proof}
+\begin{corollary}
+  $$\int_a^b: C([a,b]) \to \R$$ is continuous.
+\end{corollary}
+\begin{proof}
+  Basically follows from the condition that continuous functions take convergent sequences to
+  convergent sequences and the theorem.
+\end{proof}
+\begin{example}
+  Show that $$g(y) = \int_0^2 \frac{dx}{1 + yx^4}$$ is a continuous function in $y$.
+\end{example}
+\begin{proof}
+  Write $g$ as a composition
+  \begin{align*}
+    [0,2] &\to C([0,1]) &&\to \R \\
+    y &\mapsto \left(x \mapsto \frac{1}{1+yx^4}\right) &&\mapsto \int_0^1 \frac{dx}{1 + yx^4}.
+  \end{align*}
+  Since each of these pieces is continuous, the whole composition is continuous.
+\end{proof}
+\begin{example}
+  Compute $g(1)$, where $g$ is as above.
+\end{example}
+\begin{proof}
+  Any analytic techniques short of using complex analysis won't work if you want a closed form
+  solution. But, we can do it by breaking it down into sums.
+  \begin{align*}
+    \frac{1}{1 + x^4} &= 1 - x^2 + x^8 - x^{12} + \dots \\
+                      &= \sum_{n=0}^\infty (-1)^n x^{4n},
+  \end{align*}
+  so if we can exchange limits we do
+  \begin{align*}
+    \int_0^1 \sum_{n=0}^\infty (-1)^n x^{4n}\ dx &= \sum_{n=0}^\infty \int_0^1 (-1)^n x^{4n}\ dx \\
+                                                 &= \sum_{n=0}^\infty \frac{(-1)^n}{1 + 4n},
+  \end{align*}
+  but this series doesn't converge uniformly so we can't recklessly do this (however, it does yield
+  the correct answer!). The issue is that we don't have (uniform) convergence at $x = 1$, but do
+  have uniform convergence on any interval $(0, 1-\varepsilon)$ for all $\varepsilon > 0$. So, using
+  the theorem, we have the result for any such interval; that is, $\forall \varepsilon > 0$, 
+  $$\int_0^{1-\varepsilon} \frac{dx}{1 + x^4} = \sum_{n=0}^\infty (-1)^n \frac{(1 - \varepsilon)^{4n
+  + 1}}{4n + 1}.$$  So, now we just need to send $\varepsilon\to 0$, and make some estimates:
+  \begin{align*}
+    \left| \sum_{n=0}^m (-1)^n \frac{1}{4n + 1} - \sum_{n=0}^m (-1)^n
+    \frac{(1-\varepsilon)^{4n+1}}{4n + 1} \right| &= \left| \sum_{n=0}^m \frac{(-1)^n}{4n+1}\left( 1
+  - (1-\varepsilon)^{4n+1}\right) \right| \\
+  &\leq \left| \sum_{n=0}^m \frac{(-1)^n}{4n+1}(4n+1)\varepsilon \right| \\
+  &\leq \varepsilon.
+  \end{align*}
+  And we're done.
+\end{proof}
 \end{document}
