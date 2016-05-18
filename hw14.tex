@@ -1,0 +1,130 @@
+\documentclass{assignment}
+\usepackage{mymath}
+
+\class{Real Analysis I}
+\no{14}
+
+\begin{document} 
+\maketitle
+%Chapter 7 (page 165): 1*, 2*, 4, 7, 9*, 14*
+\section*{Rudin Problems}
+\begin{question}[7.1*]
+  Prove that every uniformly convergent sequence of bounded functions is uniformly bounded.
+\end{question}
+\begin{proof}
+  Let $\{f_n\}$ be a uniformly convergent sequence of bounded functions. That is, $|f_n(x)| \leq
+M_n$ for all $x,n$. We want to find $M$ such that $|f_n(x)|$ for all $n,x$. Since $\{f_n\}$
+converges uniformly, it satisfies the Cauchy criterion. That is, there exists some $N\in\N$ such
+that $\forall m,n \geq N, |f_m(x) - f_n(x)| < 1$. So, we have that 
+$$|f_m(x)| \leq |f_n(x)| + |f_m(x) - f_N(x)| \leq M_n + 1,$$
+and so, taking $M = 1 + \max(M_1, \ldots, M_n)$, we have that $|f_n(x)| \leq M$ for all $n,x$.
+\end{proof}
+
+\begin{question}[7.2*]
+ If $\{f_n\}$ and $\{g_n\}$ converge uniformly on a set $E$, prove that $\{f_n + g_n\}$ converges
+uniformly on $E$. If, in addition, $\{f_n\}$ and $\{g_n\}$ are sequences of bounded functions, prove
+that $\{f_ng_n\}$ converges uniformly on $E$.
+\end{question}
+\begin{proof}
+  Suppose $\{f_n\}, \{g_n\}$ converge uniformly on $E$ to $f,g$. Fix $\varepsilon > 0$. Then there
+exist $N_1, N_2$ such that $|f_n(x) - f(x)| < (\varepsilon / 2)$ for $n > N_1$ and $|g_n(x) - g(x)|
+< (\varepsilon / 2)|$ for $n > N_2$; let $N = \max(N_1, N_2)$ and $n > N$. So then, by uniformity,
+we have that $\forall x$, 
+$$|(f_n + g_n)(x) - (f + g)(x)| \leq |f_n(x) - f(x)| + |g_n(x) - g(x)| < \varepsilon,$$
+and so $\{f_n + g_n\}$ converges uniformly.
+\end{proof}
+\begin{proof}
+  Suppose also that $f_n, g_n$ are bounded. By the previous result, both these sequences are
+uniformly bounded; that is, there exists $M$ such that $|f_n(x)| \leq M$ and $|g_n(x)| \leq M$ for
+all $n,x$. We also have that $|f(x)| \leq M$ and $|g(x)| \leq M$ as well. Fix $\varepsilon > 0$,
+choose $N$ such that 
+$$|f_n(x) - f(x)| \leq \frac{\varepsilon}{2M}, \qquad |g_n(x) - g(x)| \leq \frac{\varepsilon}{2M}.$$
+Then, for all $n > N$, we have that 
+\begin{align*}
+  |f_n(x)g_n(x) - f(x)g(x)| &\leq |f_n(x)g_n(x) - f_n(x)g(x)| + |f_n(x)g(x) - f(x)g(x)| \\
+&\leq M|g_n(x) - g(x)| + M|f_n(x) - f(x)| \\
+&< M \frac{\varepsilon}{2M} + M \frac{\varepsilon}{2M} \\
+&= \varepsilon.
+\end{align*}
+\end{proof}
+
+\begin{question}[7.4]
+ Consier $$f(x) = \sum_{n=1}^\infty \frac{1}{1+n^2x}.$$ For what values of $x$ does the series
+converge absolutely? On what intervals does it fail to converge uniformly? Is $f$ continuous
+wherever the series converges? Is $f$ bounded? 
+\end{question}
+\begin{proof}
+ Obviously, we don't have convergence for $x = (-1 / n^2)$, since then the series is undefined; we
+also don't have convergence for $x = 0$. The series converges absolutely for all other $x$. Note
+that for $\delta > 0$, we have that the series converges uniformly on the interval $[\delta,
+\infty)$, using the Wiererstrass $M$-test and the fact that 
+$$\frac{1}{1 + n^2x} \leq \frac{1}{n^2x} \leq \frac{1}{n^2\delta}.$$
+For the interval $(-\infty, -\delta] \setminus \{x = -(1/n^2)\}$, we observe that for $n \geq
+\sqrt{\frac{2}{\delta}}$ we have that 
+$$\left| \frac{1}{1+n^2x} \right| \leq \frac{1}{n^2}\cdot \frac{1}{\delta - (1/n^2)} \leq
+\frac{2}{n^2\delta}.$$
+
+We will use a simple observation to show that the series does not converge uniformly on any interval
+with 0 as an endpoint. Observe that 
+$$f \left( \frac{1}{m^2} \right) \geq \sum_{n=1}^m \frac{1}{1 + n^2(1/m^2)} \geq \frac{m}{2}.$$
+Each term of $f_n$ is bounded on $[0, \infty)$. If the series converged uniformly on this interval,
+then by (7.1) we would have that it is bounded. But by the observation, we have that for any bound
+$M = (m/2)$ we can find $x = (1/m^2) \in [0, \infty)$ so that $f(x) \geq M$. We've also just shown
+that the limiting function is not bounded. 
+
+By uniformity, we have that $f$ is continuous wherever it is defined on the interval $(-\infty,
+-\delta] \cup [\delta, \infty)$. 
+\end{proof}
+
+\begin{question}[7.7]
+ For $n=1,2,3, \ldots, x$ real, put $$f_n(x) = \frac{x}{1 + nx^2}.$$ Show that $\{f_n\}$ converges
+uniformly to a function $f$, and that the equation $$f'(x) = \lim_{n\to\infty} f'_n(x)$$ is correct
+if $x\neq 0$, but false if $x=0$.
+\end{question}
+\begin{proof}
+  By the Cauchy-Schwarz inequality, we have that, for $x \neq 0$,
+$$|f_n(x)| \leq \frac{|x|}{2\sqrt{n}|x|} = \frac{1}{2\sqrt{n}},$$
+and so we have that $f_n(x) \to 0$ uniformly. We have that $$f'_n(x) = \frac{1 - nx^2}{(1 +
+nx^2)^2},$$ which goes to zero if $x\neq 0$. But, if $x = 0$, then $\forall n, f'_n(0) = 1$, and $1
+\neq 0,$ as desired.
+\end{proof}
+
+\begin{question}[7.9*]
+ Let $\{f_n\}$ be a sequence of continuous functions which converges uniformly to a function $f$ on
+a set $E$. Prove that $$\lim_{n\to\infty}f_n(x_n) = f(x)$$ for every sequence of points $x_n \in E$
+such that $x_n\to x$, and $x\in E$. Is the converse of this true? 
+\end{question}
+\begin{proof}
+  Fix $\varepsilon > 0$. Since $f$ converges uniformly, choose $N_1$ such that $|f_n(x) - f(x)| <
+(\varepsilon / 2)$ for all $n > N_1$. Since $f_n$ are continuous, find $\delta > 0$ such that if 
+$|x - y| < \delta, |f(x) - f(y)| < (\varepsilon / 2)$. Finally, since $x_n\to x$, choose $N_2$ such 
+that $|x_n - x| < \delta$ for all $n > N_2$. Now, set $N = \max(N_1, N_2)$, and fix $n > N$. So
+then, we have that 
+$$|f_n(x_n) - f(x)| \leq |f_n(x_n) - f(x_n)| + |f(x_n) - f(x)| < \varepsilon,$$
+so we have the result.
+\end{proof}
+The converse is not true in general. Let's define 
+$$f_n(x) = \begin{cases} \sin^2 \pi x &n \leq |x| \leq n + 1 \\ 0 &n \geq |x|. \end{cases}$$
+So we can see that $f_n \to 0$, but not uniformly, since for all $n$, 
+$$f_n\left(n + \frac{1}{2}\right) = \sin^2 \pi \left( n + \frac{1}{2} \right) = 1 \neq 0,$$
+as desired. Now, take $x_n \to x$, and take $N = \max(|x|, |x_1|, \ldots)$. So then we have that,
+for $n > N$, $f_n(x_n) = 0$, and so $f_n(x_n) \to f(x)$.
+
+\begin{question}[7.14*]
+ Going to skip this one. 
+\end{question}
+
+\section*{Other Problems}
+\begin{question}[1]
+  Define the exponential function as the usual power series
+$$e^x = \sum_{n=1}^\infty \frac{x^n}{n!}.$$
+Prove that the function on the RHS is continuous. Prove also that it is differentiable and that it
+is its own derivative.
+\end{question}
+\begin{proof}
+  A sketch - we can show it's uniformly convergent on any bounded interval, and so it is continuous.
+By the same observation, we can guarantee that differentiation term-by-term is correct, and thus
+show that the RHS is equal to its own derivative.
+\end{proof}
+\end{document}
+
