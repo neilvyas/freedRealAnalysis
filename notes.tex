@@ -1832,4 +1832,60 @@ is clearly not continuous.
   \end{align*}
   And we're done.
 \end{proof}
+
+%last lecture
+\section*{Some Top}
+\begin{defn}[Manifold]
+  A space $M$ is a \emph{manifold} if, for all $p\in M$, we have a local coordinate system. That is, 
+  \begin{gather*}
+    \forall p\in M, \exists p\in U\subset M \st \\
+    \exists  x^1, \ldots, x^n: M \to \R^n \st \text{ condition}.
+  \end{gather*}
+  The \emph{dimension} of the manifold is the smallest such $n$.
+\end{defn}
+So a manifold is any space that can be covered by locally linear sets.
+\begin{example}
+  Take $M = \{x\in \R^2 \mid ||x|| = 1\}$. Then we can use two parameters, $\theta, \phi$ with
+  spherical coordinates to move around. Note that we cannot cover the entire surface with just one
+  ``sheet,''  that is, one parameterization, so we need at least two.
+\end{example}
+
+\begin{defn}[Loop Closing]
+  A loop in $M$ is \emph{trivial} if it bounds a disk. A manifold $M$ is \emph{simply connected} if
+  every loop is trivial.
+\end{defn}
+\begin{example}
+  Consider a Torus vs a Sphere.
+\end{example}
+
+\begin{theorem}[Poincar\'e Conjecture]
+  Every (compact, connected) simply connected 3-manifold is homeomorphic to the 3-sphere. 
+\end{theorem}
+\begin{proof}
+  Obvious. See Perelman.
+\end{proof}
+
+\begin{theorem}[1-dim Analogue]
+ Any 1-dimensional connected, compact manifold is homeomorphic to $S^1$.
+\end{theorem}
+\begin{lemma}
+  Suppose $f:[a,b] \to \R$ is continuously differentiable, and that $f$ is strictly increasing on
+  $[a, x_0]$ and strictly decreasing on $[x_0, b]$. Then there exists a continuously differentiable
+  strictly increasing function $g$ and constant $c$ such that 
+  $$g(x) = \begin{cases} f(x) &x\in[a, x_0 - \varepsilon] \\ c - f(x) &x\in [x_0 + \varepsilon, b].
+  \end{cases}$$
+\end{lemma}
+\begin{proof}
+  A sketch. Give a function $h$ which is the positive-ization of $f'$; that is, it is always
+  positive and agrees with the value of $f'$ except in $N_\varepsilon(x_0)$. Then set 
+  $$g(x) = \int_a^x h(s)ds + f(a).$$
+\end{proof}
+\begin{proof}
+  A sketch. Let $M^1$ be a 1-dimensional connected manifold. Then we need to exhibit a function
+  $\phi: M^1 \to S^1$ that is bijective and differentiable, with a differentiable inverse. Note that
+  since $M^1$ is a 1-dimensional manifold, we have that near every point we have a function $f:
+  U\subset M^1 \to \R$.
+\end{proof}
 \end{document}
+
+
